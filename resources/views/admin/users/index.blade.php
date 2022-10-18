@@ -9,6 +9,14 @@
     <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/vendors/css/tables/datatable/rowGroup.bootstrap5.min.css') !!}">
     <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css') !!}">
     <!-- END: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/vendors/css/forms/select/select2.min.css') !!}">
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/vendors/css/animate/animate.min.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/vendors/css/extensions/sweetalert2.min.css') !!}">
+    <!-- END: Vendor CSS-->
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/css/plugins/extensions/ext-component-sweet-alerts.css') !!}">
+    <!-- END: Page CSS-->
 @endpush
 @section('content')
 <div class="content-wrapper p-0">
@@ -22,7 +30,7 @@
                         </h4>
                         <div class="pull-right">
                             <div class="input-group-prepend pull-right">
-                                @can('user-create')
+                                @can('crear-usuarios')
                                 <a href="{{ route("users.create") }}" class="dropdown-item mb-1">
                                     <i data-feather='user-plus'></i>
                                     Nuevo Usario
@@ -85,11 +93,24 @@
                                                     </td>
                                                     <td>
                                                     <a class="btn btn-sm btn-info" href="{{ route('users.show',$user->id) }}">Ver</a>
+                                                    @can('editar-usuarios')
                                                     <a class="btn btn-sm  btn-primary" href="{{ route('users.edit',$user->id) }}">Editar</a>
+                                                    @endcan
+                                                    @can('asignar-especialidad-usuario')
+                                                        @foreach($user->getRoleNames() as $v)
+                                                            @if($v==='Admin')
+                                                                <button class="btn btn-sm btn-warning" type="button" onclick="f_especialidades({{$user->id}})"> Especialidad </button>
+                                                                @php
+                                                                    break;
+                                                                @endphp
+                                                            @endif
+                                                        @endforeach
+                                                    @endcan
+                                                    @can('eliminar-usuarios')
                                                         {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
                                                             <button type="submit" class="btn btn-sm  btn-danger">Eliminar</button>
-
                                                         {!! Form::close() !!}
+                                                    @endcan
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -105,7 +126,39 @@
         </div>
     </div>
 </div>
+<!-- modal -->
+<div class="modal fade" id="modal-especialidades" >
+    <div class="modal-dialog" style="max-width: 50%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="nombremateria" >Especialidades</h4>
+                <button type="button" class="close btn-primary" data-dismiss="modal" aria-hidden="true">X</button>
+            </div>
+            <form onSubmit="return false" id="formAdd" action="{{ route('espec.user.save') }}">
+                {{ csrf_field() }}
+                <div class="modal-body">
+                    <div class="alert alert-danger print-error-msg" style="display:none">
+                        <ul></ul>
+                    </div>
+                    <div class="form-group row m-b-15">
+                        <label class="col-md-2 col-sm-2 col-form-label" for="message">Especialidades: </label>
+                        <div class="col-md-8 col-sm-8">
+                            <select class="select2 form-control" id="especialidades" name="especialidades[]" multiple="multiple"  type="number" >
 
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" id="id_usuario" name="usuario" value="0">
+                    <a href="javascript:;" class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
+                    <button class="btn btn-success" type="submit">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- end modal -->
 
 @endsection
 
@@ -128,7 +181,17 @@
     <script src="{!! asset('app-assets/vendors/js/tables/datatable/dataTables.select.min.js') !!}"></script>
     <script src="{!! asset('app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js') !!}"></script>
     <!-- END: Page Vendor JS-->
-
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{!! asset('app-assets/vendors/js/forms/select/select2.full.min.js') !!}"></script>
+    <!-- END: Page Vendor JS-->
+    <!-- BEGIN: Page JS-->
+    <script src="{!! asset('app-assets/js/scripts/forms/form-select2.js') !!}"></script>
+    <!-- END: Page JS-->
+    <!-- BEGIN: Page JS-->
+    <script src="{!! asset('app-assets/vendors/js/extensions/sweetalert2.all.min.js') !!}"></script>
+    <script src="{!! asset('app-assets/vendors/js/extensions/polyfill.min.js') !!}"></script>
+    <script src="{!! asset('app-assets/js/scripts/extensions/ext-component-sweet-alerts.js') !!}"></script>
+    <!-- END: Page JS-->
 @endpush
 @push('scripts-page')
 <script>
@@ -144,7 +207,79 @@
             }
             });
     });
-
-
+    function f_especialidades(id){
+        <?php echo "var especilidades='$especialidad';" ?>
+        <?php echo "var espec_user='$espec_user';" ?>
+        var espec=JSON.parse(especilidades);
+        var esp_users=JSON.parse(espec_user);
+        let html='';
+        $('#especialidades').html(html);
+        for(var i in espec){
+            var ban=0;
+            for(var j in esp_users){
+                if(id===esp_users[j].user_id && espec[i].id===esp_users[j].especialidad_id){
+                    ban=1;
+                    break;
+                }
+            }
+            if(ban===1){
+                html+='<option value="'+espec[i].id+'" selected="selected" >'+espec[i].nombre+'</option>';
+            }else{
+                html+='<option value="" >'+espec[i].nombre+'</option>';
+            }
+        }
+        var id_us = document.getElementById("id_usuario");
+        id_us.value = id;
+        $('#especialidades').html(html);
+        $('#modal-especialidades').modal('toggle');
+    }
+    $(document).on("submit" ,"#formAdd", function(e){
+        $.ajaxSetup({
+            header: $('meta[name="_token"]').attr('content')
+        });
+        e.preventDefault(e);
+        $.ajax({
+            type: 'POST',
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            dataType: 'json',
+            cache: false,
+        }).done(function (data) {
+            if (data.errors) {
+                printErrorMsg(data,1);
+            } else {
+                if(data[0]==='OK'){
+                    Swal.fire({
+                        icon: "success",
+                        title: "Registrado Correctamente"
+                    });
+                    $('#modal-especialidades').modal('hide');
+                }else{
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: data[0]
+                    });
+                }
+                $(".print-error-msg").css('display','none');//ocultar div de errores
+            }
+        });
+    });
+    function printErrorMsg (msg,accion) {
+        if(accion==1){
+            $(".print-error-msg").find("ul").html('');
+            $(".print-error-msg").css('display','block');
+            $.each( msg.errors, function( key, value ) {//mostrar la lista de errores
+                $(".print-error-msg").find("ul").append('<li>'+value+'</li>');
+            });
+        }
+        else{
+            $(".print-error-msg-edit").find("ul").html('');
+            $(".print-error-msg-edit").css('display','block');
+            $.each( msg.errors, function( key, value ) {//mostrar la lista de errores
+                $(".print-error-msg-edit").find("ul").append('<li>'+value+'</li>');
+            });
+        }
+    }
 </script>
 @endpush

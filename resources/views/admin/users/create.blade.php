@@ -32,7 +32,7 @@
         <!-- Pick-A-Date Picker start -->
         <section id="pick-a-date">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body col-md-8 offset-xl-2">
                     {!! Form::open(array('route' => 'users.store','method'=>'POST')) !!}
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
@@ -101,7 +101,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Roles:</strong>
-                            <select class="select2 form-control" name="roles[]" id="roles" multiple="multiple" aria-placeholder="Seleccione Rol de Usuario">
+                            <select class="select2 form-control" name="roles[]" id="roles" multiple="multiple" aria-placeholder="Seleccione Rol de Usuario" onchange="getValue(this);">
                                 @if ($roles)
 
                                     @foreach($roles as $role)
@@ -160,9 +160,6 @@
 @endpush
 @push('scripts-vendor')
 <script>
-    $('#pd-months-year').datepicker({
-    startDate: '-71y', //2021 -1950
-    endDate: '-10y' //2021-2011
-    });
+
 </script>
 @endpush

@@ -22,7 +22,7 @@
                         </h4>
                         <div class="pull-right">
                             <div class="input-group-prepend pull-right">
-                                @can('role-create')
+                                @can('crear-roles')
                                 <a href="{{ route("roles.create") }}" class="dropdown-item mb-1">
                                     <i data-feather='user-plus'></i>
                                     Nuevo Rol
@@ -57,10 +57,10 @@
                                                     <td>{{ $role->name }}</td>
                                                     <td>
                                                         <a class="btn btn-info" href="{{ route('roles.show',$role->id) }}">Ver</a>
-                                                        @can('role-edit')
+                                                        @can('editar-roles')
                                                             <a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}">Editar</a>
                                                         @endcan
-                                                        @can('role-delete')
+                                                        @can('eliminar-roles')
                                                             {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
                                                                 {!! Form::submit('Eliminar', ['class' => 'btn btn-danger']) !!}
                                                             {!! Form::close() !!}

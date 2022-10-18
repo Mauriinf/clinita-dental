@@ -58,4 +58,21 @@ class EspecialidadController extends Controller
     public function show($id){
         return Especialidad::find($id);
     }
+    public function guardar_especialidad_usuario(Request $request){
+        $validator = Validator::make($request->all(), [
+            'especialidades' => 'required',
+        ]);
+        if (!$validator->fails()) {
+            $respuesta=Array();
+            $user_esp = Especialidad::delete_user_espec($request->usuario);//eliminar especialidades
+            foreach($request->especialidades as $row){
+                $user = Especialidad::create_user_espec($request->usuario,$row);
+            }
+            array_push($respuesta,'OK');
+            return ($respuesta);
+        }else{
+            return response()->json($validator->errors()->all());
+        }
+
+    }
 }

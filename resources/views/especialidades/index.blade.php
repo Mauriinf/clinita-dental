@@ -28,7 +28,7 @@
                         </h4>
                         <div class="pull-right">
                             <div class="input-group-prepend pull-right btnagregar">
-                                @can('user-create')
+                                @can('crear-especialidad')
                                 <a href="javascript:void(0)" onclick="mostrarform(true)" class="btn btn-sm btn-primary">
                                     <i data-feather='plus'></i>
                                     Nuevo

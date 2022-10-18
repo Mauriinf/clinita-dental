@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Especialidad;
 use Spatie\Permission\Models\Role;
 use DB;
 use Hash;
@@ -14,10 +15,10 @@ class UserController extends Controller
 {
     function __construct()
     {
-         $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);
-         $this->middleware('permission:user-create', ['only' => ['create','store']]);
-         $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:lista-usuarios|crear-usuarios|editar-usuarios|eliminar-usuarios', ['only' => ['index','store']]);
+         $this->middleware('permission:crear-usuarios', ['only' => ['create','store']]);
+         $this->middleware('permission:editar-usuarios', ['only' => ['edit','update']]);
+         $this->middleware('permission:eliminar-usuarios', ['only' => ['destroy']]);
     }
     public function index(Request $request)
     {
@@ -25,7 +26,9 @@ class UserController extends Controller
 //return abort(401);
        // }
         $data = User::all();
-        return view('admin.users.index',compact('data'));
+        $especialidad = Especialidad::all();
+        $espec_user=json_encode(Especialidad::especialidades_user());
+        return view('admin.users.index',compact(['data','especialidad','espec_user']));
     }
 
     /**

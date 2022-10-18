@@ -38,4 +38,5 @@ Route::group(['middleware' => ['auth']], function() {
     //delete
     Route::delete('/especialidades/{especialidad}', [EspecialidadController::class,'destroy']);
     Route::get('/especialidades/{id}/show',[EspecialidadController::class,'show']);
+    Route::post('/especialidades/usuario/save',[EspecialidadController::class,'guardar_especialidad_usuario'])->name('espec.user.save');
 });

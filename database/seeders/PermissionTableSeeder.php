@@ -14,18 +14,29 @@ class PermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
-           'role-list',
-           'role-create',
-           'role-edit',
-           'role-delete',
-           'user-list',
-           'user-create',
-           'user-edit',
-           'user-delete'
+           'lista-roles',
+           'crear-roles',
+           'editar-roles',
+           'eliminar-roles',
+           'lista-usuarios',
+           'crear-usuarios',
+           'editar-usuarios',
+           'eliminar-usuarios',
+           'lista-especialidad',
+           'crear-especialidad',
+           'editar-especialidad',
+           'eliminar-especilidad',
+           'asignar-especialidad-usuario',
+           'lista-cita',
+           'crear-cita',
+           'editar-cita',
+           'eliminar-cita'
         ];
 
         foreach ($permissions as $permission) {
              Permission::create(['name' => $permission]);
         }
+        //php artisan db:seed --class=PermissionTableSeeder
+        //php artisan db:seed --class=CreateAdminUserSeeder
     }
 }
