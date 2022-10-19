@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bloque;
 use App\Models\BloqueDia;
+use App\Models\Dia;
 use Illuminate\Http\Request;
 
 class BloqueDiaController extends Controller
 {
     public function index()
     {
-        $bloque_dia = BloqueDia::recuperar_agenda();
-        return view('admin.bloque_dia.index', compact('bloque_dia'));
+        $bloque_dia = (object)BloqueDia::get_agenda();
+
+        $dias = Dia::all();
+        $bloques = Bloque::all();
+
+        return view('admin.bloque_dia.index', compact('bloque_dia', 'dias', 'bloques'));
     }
 
     public function create()

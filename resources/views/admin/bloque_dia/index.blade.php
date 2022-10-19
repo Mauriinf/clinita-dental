@@ -45,26 +45,25 @@
                                         <table class="table table-striped table-bordered table-td-valign-middle dt-responsive" id="dt-ListaEspec">
                                             <thead class="thead">
                                                 <tr>
-                                                    <th>Nº</th>
-                                                    <th>Usuario</th>
-                                                    <th>Dia</th>
-                                                    <th>Inicio</th>
-                                                    <th>Fin</th>
-                                                    <th>Estado</th>
+                                                    <th>Lunes</th>
+                                                    <th>Martes</th>
+                                                    <th>Miercoles</th>
+                                                    <th>Jueves</th>
+                                                    <th>Viernes</th>
+                                                    <th>Sabado</th>
+                                                    <th>Domingo</th>
                                                 </tr>
                                             </thead>
                                             <tbody >
-                                                @foreach ($bloque_dia as $bdia)
-                                                <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $$bdia->usuario }}</td>
-                                                    <td>{{ $$bdia->nombre_dia }}</td>
-                                                    <td>{{ $$bdia->inicio }}</td>
-                                                    <td>{{ $$bdia->fin }}</td>
-                                                    <td>{{ $$bdia->estado }}</td>
-                                                </tr>
+                                            @foreach ($bloques as $bloque)
+                                            <tr>
+                                                @foreach ($dias as $dia)
+                                                <td>
+                                                    {{ $bloque->inicio }}
+                                                </td>
                                                 @endforeach
-                                                
+                                            </tr>
+                                            @endforeach    
                                             </tbody>
                                         </table>
                                     </div>

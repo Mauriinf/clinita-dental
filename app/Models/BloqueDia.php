@@ -15,17 +15,17 @@ class BloqueDia extends Model
         'id_usuario', 'estado', 'id_dia', 'id_bloque'
     ];
 
-    public static function recuperar_agenda(){
+    public static function get_agenda(){
         $resultados = DB::select(
             DB::raw("
-            SELECT u.paterno || ' ' || u.materno || ', ' || u.nombres as usuario, d.nombre_dia, b.inicio, b.fin, bdia.estado
-            FROM bloque_dia bdia
+                SELECT u.paterno || ' ' || u.materno || ', ' || u.nombres as usuario, d.nombre_dia, b.inicio, b.fin, bdia.estado
+                  FROM bloque_dia bdia
             INNER JOIN users u
-            ON bdia.id_usuario = u.id
+                    ON bdia.id_usuario = u.id
             INNER JOIN dia d
-            ON bdia.id_dia = d.id
+                    ON bdia.id_dia = d.id
             INNER JOIN bloque b
-            ON bdia.id_bloque = b.id
+                    ON bdia.id_bloque = b.id
             ORDER BY b.inicio ASC
         "));
         return $resultados;
