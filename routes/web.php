@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BloqueDiaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -25,7 +26,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
-    Route::delete('roles_mass_destroy', 'Admin\RolesController@massDestroy')->name('roles.mass_destroy');
+    Route::delete('roles_mass_destroy', 'Admin\RoleController@massDestroy')->name('roles.mass_destroy');
     Route::resource('users', UserController::class);
     Route::resource('permissions', PermissionController::class);
     Route::delete('permissions_mass_destroy', 'Admin\PermissionsController@massDestroy')->name('permissions.mass_destroy');
@@ -39,4 +40,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::delete('/especialidades/{especialidad}', [EspecialidadController::class,'destroy']);
     Route::get('/especialidades/{id}/show',[EspecialidadController::class,'show']);
     Route::post('/especialidades/usuario/save',[EspecialidadController::class,'guardar_especialidad_usuario'])->name('espec.user.save');
+
+    Route::resource('/bloque-dia', BloqueDiaController::class);
 });
+
+
