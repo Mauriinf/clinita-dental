@@ -14,7 +14,7 @@ class CreateDiaTable extends Migration
     public function up()
     {
         Schema::create('dia', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('nombre_dia');
             $table->string('estado');
             $table->timestamps();

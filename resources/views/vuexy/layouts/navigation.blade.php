@@ -51,7 +51,10 @@
                     <i data-feather='grid'></i><span class="menu-title text-truncate" data-i18n="Chat"></span>Especialidades
                 </a>
             </li>
-            <li class=" nav-item "><a class="d-flex align-items-center" href=""><i data-feather='user-plus'></i><span class="menu-title text-truncate" data-i18n="Chat"> </span></a>
+            <li class=" nav-item {{ $activePage == 'citas' ? ' active' : '' }} ">
+                <a class="d-flex align-items-center" href="{{ route('citas.create') }}">
+                    <i data-feather='calendar'></i><span class="menu-title text-truncate" data-i18n="Chat"></span>Reserva Citas
+                </a>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="app-todo.html"><i data-feather="check-square"></i><span class="menu-title text-truncate" data-i18n="Todo">Todo</span></a>
             </li>

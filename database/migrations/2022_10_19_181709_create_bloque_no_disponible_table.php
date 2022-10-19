@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBloqueDiaTable extends Migration
+class CreateBloqueNoDisponibleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateBloqueDiaTable extends Migration
      */
     public function up()
     {
-        //relacion de la tabla dia y bloque y usuario(doctor)
-        Schema::create('bloque_dia', function (Blueprint $table) {
+        Schema::create('bloque_no_disponible', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_usuario');//doctor
-            $table->string('estado');
-            $table->integer('id_dia');
-            $table->integer('id_bloque');
+            $table->date('fecha');
+            $table->unsignedBigInteger('id_bloque');
+            $table->foreign('id_bloque')->references('id')->on('bloque');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateBloqueDiaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bloque_dia');
+        Schema::dropIfExists('bloque_no_disponible');
     }
 }

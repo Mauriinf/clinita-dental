@@ -26,7 +26,7 @@ class UserController extends Controller
 //return abort(401);
        // }
         $data = User::all();
-        $especialidad = Especialidad::all();
+        $especialidad = Especialidad::select()->where('estado','=','1')->get();
         $espec_user=json_encode(Especialidad::especialidades_user());
         return view('admin.users.index',compact(['data','especialidad','espec_user']));
     }

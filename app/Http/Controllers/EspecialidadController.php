@@ -9,6 +9,14 @@ use App\Models\Especialidad;
 use Illuminate\Support\Facades\Validator;
 class EspecialidadController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:lista-especialidad|crear-especialidad|editar-especialidad|eliminar-especilidad', ['only' => ['index','store']]);
+         $this->middleware('permission:crear-especialidad', ['only' => ['create','store']]);
+         $this->middleware('permission:editar-especialidad', ['only' => ['edit','store']]);
+         $this->middleware('permission:eliminar-especialidad', ['only' => ['destroy']]);
+         $this->middleware('permission:asignar-especialidad-usuario', ['only' => ['guardar_especialidad_usuario']]);
+    }
     public function index()
     {
         $especialidades=Especialidad::all();

@@ -14,9 +14,10 @@ class CreateDiaNoDisponibleTable extends Migration
     public function up()
     {
         Schema::create('dia_no_disponible', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->date('fecha');
-            $table->integer('id_dia');
+            $table->unsignedBigInteger('id_dia');
+            $table->foreign('id_dia')->references('id')->on('dia');
             $table->timestamps();
         });
     }

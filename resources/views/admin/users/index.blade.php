@@ -62,7 +62,7 @@
                                                     <th>Email</th>
                                                     <th>Teléfono</th>
                                                     <th>Roles</th>
-                                                    <th >Action</th>
+                                                    <th >Acción</th>
                                                 </tr>
                                             </thead>
                                             <tbody >
@@ -98,7 +98,7 @@
                                                     @endcan
                                                     @can('asignar-especialidad-usuario')
                                                         @foreach($user->getRoleNames() as $v)
-                                                            @if($v==='Admin')
+                                                            @if($v==='Doctor')
                                                                 <button class="btn btn-sm btn-warning" type="button" onclick="f_especialidades({{$user->id}})"> Especialidad </button>
                                                                 @php
                                                                     break;
@@ -132,7 +132,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="nombremateria" >Especialidades</h4>
-                <button type="button" class="close btn-primary" data-dismiss="modal" aria-hidden="true">X</button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form onSubmit="return false" id="formAdd" action="{{ route('espec.user.save') }}">
                 {{ csrf_field() }}
