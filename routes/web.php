@@ -42,4 +42,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/especialidades/usuario/save',[EspecialidadController::class,'guardar_especialidad_usuario'])->name('espec.user.save');
     //CITAS
     Route::get('crear/cita', [CitaController::class,'create'])->name('citas.create');
+    Route::get('/especialidades/{especialidad}/doctores', [UserController::class,'doctores'])->name('doctores.list');
+    Route::get('/calendario/horas', [CitaController::class,'horas']);
 });

@@ -225,7 +225,7 @@
             if(ban===1){
                 html+='<option value="'+espec[i].id+'" selected="selected" >'+espec[i].nombre+'</option>';
             }else{
-                html+='<option value="" >'+espec[i].nombre+'</option>';
+                html+='<option value="'+espec[i].id+'" >'+espec[i].nombre+'</option>';
             }
         }
         var id_us = document.getElementById("id_usuario");

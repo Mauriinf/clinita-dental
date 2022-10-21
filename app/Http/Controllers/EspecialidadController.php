@@ -37,7 +37,7 @@ class EspecialidadController extends Controller
         ];
             $validator = Validator::make($Request->all(),$roles,$mensajes );
 
-            if ($validator->passes()) {
+        if ($validator->passes()) {
                 if ($Request->input('id')!=0) {
                     $especialidad = Especialidad::find($Request->input('id'));
                     $especialidad->nombre=$Request->input('name');

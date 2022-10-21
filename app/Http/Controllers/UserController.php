@@ -7,10 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Especialidad;
 use Spatie\Permission\Models\Role;
-use DB;
 use Hash;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     function __construct()
@@ -142,5 +142,36 @@ class UserController extends Controller
         User::find($id)->delete();
         return redirect()->route('users.index')
                         ->with('success','Uusario eliminado con éxito');
+    }
+    public function doctores( $especialidad){
+        $id_especialidad = $especialidad;
+        $doctores = DB::table('users')
+        ->join('model_has_roles','users.id','=','model_has_roles.model_id')
+        ->join('roles','model_has_roles.role_id','=','roles.id')
+        ->join('especialidad_user','users.id','=','especialidad_user.user_id')
+        ->join('especialidades','especialidad_user.especialidad_id','=','especialidades.id')
+        ->select(
+            'users.id',
+            'users.nombres',
+            'users.paterno',
+            'users.materno',
+            'users.ci',
+            'users.username',
+            'users.email',
+            'users.telefono',
+            'users.direccion',
+            'users.fec_nac',
+            'users.estado'
+            )
+        ->where('roles.name','=','Doctor')
+        ->where('users.estado','=','1')
+        ->where('especialidades.id','=',$id_especialidad)
+        ->get();
+        $html='';
+        foreach($doctores as $row)
+        {
+            $html.= "<option value='". $row->id."'>".$row->nombres." ".$row->paterno." ".$row->materno."</option>";
+        }
+        echo $html;
     }
 }

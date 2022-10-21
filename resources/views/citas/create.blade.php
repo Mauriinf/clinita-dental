@@ -66,44 +66,59 @@
                                     </div>
                                     @role('Admin')
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <label for="paciente">Paciente</label>
-                                        <select class="select2 form-select" data-live-search="true" name="paciente_id" required data-style="btn-inverse">
-                                        <option value="">Seleccionar Paciente</option>
-                                            @foreach ($pacientes as $paci)
-                                                <option value="{{ $paci->id }}" @if(old('paciente_id') == $paci->id) selected @endif>{{ $paci->nombres }}</option>
-                                            @endforeach
-                                        </select>
+                                        <div class="mb-1">
+                                            <label for="paciente">Paciente</label>
+                                            <select class="select2 form-select" data-live-search="true" name="paciente_id" required data-style="btn-inverse">
+                                            <option value="">Seleccionar Paciente</option>
+                                                @foreach ($pacientes as $paci)
+                                                    <option value="{{ $paci->id }}" @if(old('paciente_id') == $paci->id) selected @endif>{{ $paci->nombres }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                     @endrole
                                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                                        <label for="especialidad">Especialidad</label>
-                                        <select name="especialidad_id" id="especialidad" class=" select2 form-select form-control" required>
-                                          <option value="">Seleccionar especialidad</option>
-                                          @foreach ($especialidades as $specialty)
-                                            <option value="{{ $specialty->id }}" @if(old('especialidad_id') == $specialty->id) selected @endif>{{ $specialty->nombre }}</option>
-                                          @endforeach
-                                        </select>
+                                        <div class="mb-1">
+                                            <label for="especialidad">Especialidad</label>
+                                            <select name="especialidad_id" id="especialidad" class=" select2 form-select form-control" required>
+                                            <option value="">Seleccionar especialidad</option>
+                                            @foreach ($especialidades as $specialty)
+                                                <option value="{{ $specialty->id }}" @if(old('especialidad_id') == $specialty->id) selected @endif>{{ $specialty->nombre }}</option>
+                                            @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                                        <label for="email">Médico</label>
-                                         <select name="doctor_id" id="doctor" required class="select2 form-select" data-live-search="true" data-style="btn-inverse">
-                                           @foreach ($doctores as $doctor)
-                                             <option value="{{ $doctor->id }}" @if(old('doctor_id') == $doctor->id) selected @endif>{{ $doctor->paterno }} {{ $doctor->materno }} {{ $doctor->nombres }}</option>
-                                           @endforeach
-                                         </select>
+                                        <div class="mb-1">
+                                            <label for="email">Médico</label>
+                                            <select name="doctor_id" id="doctor" required class="select2 form-select" data-live-search="true" data-style="btn-inverse">
+
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <label for="dni">Fecha</label>
+                                        <div class="mb-1">
+                                          <label for="dni">Fecha</label>
                                           <div class="input-group input-group-alternative">
 
                                             <input class="form-control flatpickr-disabled-range" placeholder="Seleccionar fecha"
                                               id="date" name="scheduled_date" type="text"
                                               value="{{ old('scheduled_date', date('Y-m-d')) }}"
-                                              data-date-format="yyyy-mm-dd"
-                                              data-date-start-date="{{ date('Y-m-d') }}"
-                                              data-date-end-date="+30d">
+                                              data-date-format="yyyy-mm-dd">
                                           </div>
-
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="mb-2">
+                                            <label for="address">Hora de atención</label>
+                                            <div class="row"  id="horas" >
+                                                <div class="alert alert-info" role="alert">
+                                                    <div class="alert-body">
+                                                    Seleccione un médico y una fecha, para ver sus horas disponibles.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <button class="btn  btn-primary" type="submit"><i class="fa fa-save"></i> Guardar </button>
@@ -137,5 +152,5 @@
     <!-- BEGIN: Page JS-->
     <script src="{!! asset('app-assets/js/scripts/forms/pickers/form-pickers.js') !!}"></script>
     <!-- END: Page JS-->
-
+    <script src="{{ asset('js/citas/crear.js') }}"></script>
 @endpush
