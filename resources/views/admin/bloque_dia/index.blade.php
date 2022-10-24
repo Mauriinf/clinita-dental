@@ -42,7 +42,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="table-responsive listaregistros">
-                                        <table class="table table-striped table-bordered table-td-valign-middle dt-responsive" id="dt-ListaEspec">
+                                        <table class="table table-bordered table-td-valign-middle dt-responsive">
                                             <thead class="thead">
                                                 <tr>
                                                     <th>Lunes</th>
@@ -58,7 +58,7 @@
                                             @foreach ($bloques as $bloque)
                                             <tr>
                                                 @foreach ($dias as $dia)
-                                                <td>
+                                                <td class="bloque" data-dia="{{ $dia->id }}" data-bloque="{{ $bloque->id }}">
                                                     {{ $bloque->inicio }}
                                                 </td>
                                                 @endforeach
@@ -104,21 +104,6 @@
     <script src="{!! asset('app-assets/vendors/js/extensions/polyfill.min.js') !!}"></script>
     <script src="{!! asset('app-assets/js/scripts/extensions/ext-component-sweet-alerts.js') !!}"></script>
     <!-- END: Page JS-->
-    <script src="{{ asset('js/especialidad.js') }}"></script>
+    <script src="{{ asset('js/bloquedia.js') }}"></script>
     <script src="{{ asset('js/sonrident.js') }}"></script>
-@endpush
-@push('scripts-page')
-<script>
-                //dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex mr-0 mr-sm-3"l><"d-block d-lg-inline-flex"B>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>',
-$(document).ready( function () {
-    $('#dt-ListaEspec').DataTable({
-        dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex mr-0 mr-sm-3"l><"d-block d-lg-inline-flex"B>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>',
-        language: {
-            "url": "/app-assets/js/scripts/tables/spanish.json"
-        },
-
-    });
-});
-
-</script>
-@endpush
+    @endpush
