@@ -17,70 +17,70 @@
                     <div class="d-flex flex-wrap">
                         <div class="user-info-title">
                             <i data-feather="user" class="mr-1"></i>
-                            <span class="card-text user-info-title font-weight-bold mb-0">Nombres</span>
+                            <span class="card-text user-info-title font-weight-bold mb-0">Nombres: </span>
                         </div>
                         <p class="card-text mb-0">{{ $user->nombres }}</p>
                     </div>
                     <div class="d-flex flex-wrap my-50">
                         <div class="user-info-title">
-                            <i data-feather="check" class="mr-1"></i>
-                            <span class="card-text user-info-title font-weight-bold mb-0">Ap. Paterno:</span>
+                            <i data-feather="user" class="mr-1"></i>
+                            <span class="card-text user-info-title font-weight-bold mb-0">Ap. Paterno: </span>
                         </div>
                         <p class="card-text mb-0">{{ $user->paterno }}</p>
                     </div>
                     <div class="d-flex flex-wrap my-50">
                         <div class="user-info-title">
-                            <i data-feather="star" class="mr-1"></i>
-                            <span class="card-text user-info-title font-weight-bold mb-0">Ap. Materno:</span>
+                            <i data-feather="user" class="mr-1"></i>
+                            <span class="card-text user-info-title font-weight-bold mb-0">Ap. Materno: </span>
                         </div>
                         <p class="card-text mb-0">{{ $user->materno }}</p>
                     </div>
                     <div class="d-flex flex-wrap my-50">
                         <div class="user-info-title">
-                            <i data-feather="flag" class="mr-1"></i>
-                            <span class="card-text user-info-title font-weight-bold mb-0">C.I.:</span>
+                            <i data-feather="info" class="mr-1"></i>
+                            <span class="card-text user-info-title font-weight-bold mb-0">C.I.: </span>
                         </div>
                         <p class="card-text mb-0">{{ $user->ci }}</p>
                     </div>
                     <div class="d-flex flex-wrap">
                         <div class="user-info-title">
-                            <i data-feather="phone" class="mr-1"></i>
-                            <span class="card-text user-info-title font-weight-bold mb-0">Fecha Nacimiento:</span>
+                            <i data-feather="calendar" class="mr-1"></i>
+                            <span class="card-text user-info-title font-weight-bold mb-0">Fecha Nacimiento: </span>
                         </div>
                         <p class="card-text mb-0">{{ $user->fec_nac }}</p>
                     </div>
                     <div class="d-flex flex-wrap">
                         <div class="user-info-title">
-                            <i data-feather="phone" class="mr-1"></i>
-                            <span class="card-text user-info-title font-weight-bold mb-0">Dirección:</span>
+                            <i data-feather="map-pin" class="mr-1"></i>
+                            <span class="card-text user-info-title font-weight-bold mb-0">Dirección: </span>
                         </div>
                         <p class="card-text mb-0">{{ $user->direccion }}</p>
                     </div>
                     <div class="d-flex flex-wrap">
                         <div class="user-info-title">
                             <i data-feather="phone" class="mr-1"></i>
-                            <span class="card-text user-info-title font-weight-bold mb-0">Teléfono:</span>
+                            <span class="card-text user-info-title font-weight-bold mb-0">Teléfono: </span>
                         </div>
                         <p class="card-text mb-0">{{ $user->telefono }}</p>
                     </div>
                     <div class="d-flex flex-wrap">
                         <div class="user-info-title">
-                            <i data-feather="phone" class="mr-1"></i>
-                            <span class="card-text user-info-title font-weight-bold mb-0">Userame:</span>
+                            <i data-feather="user-check" class="mr-1"></i>
+                            <span class="card-text user-info-title font-weight-bold mb-0">Userame: </span>
                         </div>
                         <p class="card-text mb-0">{{ $user->username }}</p>
                     </div>
                     <div class="d-flex flex-wrap">
                         <div class="user-info-title">
-                            <i data-feather="phone" class="mr-1"></i>
-                            <span class="card-text user-info-title font-weight-bold mb-0">Email:</span>
+                            <i data-feather="mail" class="mr-1"></i>
+                            <span class="card-text user-info-title font-weight-bold mb-0">Email: </span>
                         </div>
                         <p class="card-text mb-0">{{ $user->email }}</p>
                     </div>
                     <div class="d-flex flex-wrap">
                         <div class="user-info-title">
-                            <i data-feather="phone" class="mr-1"></i>
-                            <span class="card-text user-info-title font-weight-bold mb-0">Estado:</span>
+                            <i data-feather="toggle-left" class="mr-1"></i>
+                            <span class="card-text user-info-title font-weight-bold mb-0">Estado: </span>
                         </div>
                         <p class="card-text mb-0">
                             @if ($user->estado===1)
@@ -95,7 +95,8 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Roles:</strong>
+                    <i data-feather="shield" class="mr-1"></i>
+                    <strong>Roles: </strong>
                     @php
                         $badges=['primary','danger','warning','info','success','dark','primary','danger','warning','info','warning','info','success','dark'];
                         $j=0;

@@ -44,4 +44,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('crear/cita', [CitaController::class,'create'])->name('citas.create');
     Route::get('/especialidades/{especialidad}/doctores', [UserController::class,'doctores'])->name('doctores.list');
     Route::get('/calendario/horas', [CitaController::class,'horas']);
+    Route::post('/guardar/citas', [CitaController::class,'store']);
+    Route::get('citas', [CitaController::class,'index'])->name('citas.index');
+    Route::delete('/citas/{cita}', [CitaController::class,'destroy']);
+    Route::get('/citas/{id}/show',[CitaController::class,'show']);
 });

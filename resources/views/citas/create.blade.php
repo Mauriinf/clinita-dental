@@ -1,4 +1,4 @@
-@extends('vuexy.layouts.default', ['activePage' => 'citas'])
+@extends('vuexy.layouts.default', ['activePage' => 'citas-crear'])
 @section('title','Agendar Cita')
 @push('css-vendor')
     <!-- BEGIN: Vendor CSS-->
@@ -45,66 +45,80 @@
                         <div class="card-header">
                             <h4 class="card-title">Nueva Cita</h4>
                         </div>
-                        @if ($errors->any())
-                            <div class="alert alert-danger" role="alert">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
                         <div class="card-body">
-                            <form action="" method="post">
+                            <form action="{{ url('guardar/citas') }}" method="post">
                                 @csrf
+                                <input type="hidden" id="hora" name="hora"/>
                                 <div class="row">
                                     <div class="col-lg-12 col-xl-12 col-md-12 col-12">
                                         <div class="mb-1">
                                             <label for="descripcion">Descripción</label>
-                                            <input type="text" class="form-control" id="description" name="description" placeholder="Describe brevemente la consulta" required/>
+                                            <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Describe brevemente la consulta" value="{{ old('descripcion') }}" required/>
+                                            @if ($errors->has('descripcion'))
+                                                <span class="help-block alert alert-danger">
+                                                    <strong>{{ $errors->first('descripcion') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                     @role('Admin')
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="mb-1">
                                             <label for="paciente">Paciente</label>
-                                            <select class="select2 form-select" data-live-search="true" name="paciente_id" required data-style="btn-inverse">
+                                            <select class="select2 form-select" data-live-search="true" name="paciente"  data-style="btn-inverse" required>
                                             <option value="">Seleccionar Paciente</option>
                                                 @foreach ($pacientes as $paci)
-                                                    <option value="{{ $paci->id }}" @if(old('paciente_id') == $paci->id) selected @endif>{{ $paci->nombres }}</option>
+                                                    <option value="{{ $paci->id }}" @if(old('paciente') == $paci->id) selected @endif>{{ $paci->nombres }}</option>
                                                 @endforeach
                                             </select>
+                                            @if ($errors->has('paciente'))
+                                                <span class="help-block alert alert-danger">
+                                                    <strong>{{ $errors->first('paciente') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                     @endrole
                                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
                                         <div class="mb-1">
                                             <label for="especialidad">Especialidad</label>
-                                            <select name="especialidad_id" id="especialidad" class=" select2 form-select form-control" required>
+                                            <select name="especialidad" id="especialidad" class=" select2 form-select form-control" required>
                                             <option value="">Seleccionar especialidad</option>
                                             @foreach ($especialidades as $specialty)
-                                                <option value="{{ $specialty->id }}" @if(old('especialidad_id') == $specialty->id) selected @endif>{{ $specialty->nombre }}</option>
+                                                <option value="{{ $specialty->id }}" >{{ $specialty->nombre }}</option>
                                             @endforeach
                                             </select>
+                                            @if ($errors->has('especialidad'))
+                                                <span class="help-block alert alert-danger">
+                                                    <strong>{{ $errors->first('especialidad') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
                                         <div class="mb-1">
                                             <label for="email">Médico</label>
-                                            <select name="doctor_id" id="doctor" required class="select2 form-select" data-live-search="true" data-style="btn-inverse">
+                                            <select name="doctor" id="doctor" required class="select2 form-select" data-live-search="true" data-style="btn-inverse">
 
                                             </select>
+                                            @if ($errors->has('doctor'))
+                                                <span class="help-block alert alert-danger">
+                                                    <strong>{{ $errors->first('doctor') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="mb-1">
                                           <label for="dni">Fecha</label>
                                           <div class="input-group input-group-alternative">
+                                            <input type="text" id="date" class="form-control flatpickr-basic" placeholder="YYYY-MM-DD" value="{{ old('fecha_cita', date('Y-m-d')) }}" data-date-format="Y-m-d"/>
 
-                                            <input class="form-control flatpickr-disabled-range" placeholder="Seleccionar fecha"
-                                              id="date" name="scheduled_date" type="text"
-                                              value="{{ old('scheduled_date', date('Y-m-d')) }}"
-                                              data-date-format="yyyy-mm-dd">
+                                            @if ($errors->has('fecha_cita'))
+                                                <span class="help-block alert alert-danger">
+                                                    <strong>{{ $errors->first('fecha_cita') }}</strong>
+                                                </span>
+                                            @endif
                                           </div>
                                         </div>
                                     </div>
@@ -117,6 +131,11 @@
                                                     Seleccione un médico y una fecha, para ver sus horas disponibles.
                                                     </div>
                                                 </div>
+                                                @if ($errors->has('id_bloque'))
+                                                    <span class="help-block alert alert-danger">
+                                                        <strong>{{ $errors->first('id_bloque') }}</strong>
+                                                    </span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

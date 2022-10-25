@@ -81,11 +81,12 @@ function cargarHoras() {
                             html+=`<div class="input-group">
                                         <div class="input-group-text">
                                             <div class="form-check">
-                                                <input type="radio" value="${value.id_bloque_dia}" class="form-check-input" name="hora" id="interval${iRadio}" />
+                                                <input type="radio" value="${value.id_dia_bloque}" class="form-check-input" name="id_bloque" id="interval${iRadio}" onclick="asignar_valor('${value.inicio}')" />
                                                 <label class="form-check-label" for="interval${iRadio++}">${value.inicio} - ${value.fin}</label>
                                             </div>
                                         </div>
                                     </div>`;
+                            iRadio++;
                     });
                     html+=`</div></div>`;
                     html+=`<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
@@ -95,11 +96,12 @@ function cargarHoras() {
                             html+=`<div class="input-group">
                                         <div class="input-group-text">
                                             <div class="form-check">
-                                                <input type="radio" value="${value.id_bloque_dia}" class="form-check-input" name="hora" id="interval${iRadio}" />
+                                                <input type="radio" value="${value.id_dia_bloque}" class="form-check-input" name="id_bloque" id="interval${iRadio}" onclick="asignar_valor('${value.inicio}')" />
                                                 <label class="form-check-label" for="interval${iRadio++}">${value.inicio} - ${value.fin}</label>
                                             </div>
                                         </div>
                                     </div>`;
+                            iRadio++;
                     });
                     html+=`</div></div> `;
                     html+=`<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
@@ -109,11 +111,12 @@ function cargarHoras() {
                             html+=`<div class="input-group">
                                         <div class="input-group-text">
                                             <div class="form-check">
-                                                <input type="radio" value="${value.id_bloque_dia}" class="form-check-input" name="hora" id="interval${iRadio}" />
+                                                <input type="radio" value="${value.id_dia_bloque}" class="form-check-input" name="id_bloque" id="interval${iRadio}" onclick="asignar_valor('${value.inicio}')" />
                                                 <label class="form-check-label" for="interval${iRadio++}">${value.inicio} - ${value.fin}</label>
                                             </div>
                                         </div>
                                     </div>`;
+                            iRadio++;
                     });
                     html+=`</div></div>`;
                     $("#horas").html(html);
@@ -121,4 +124,13 @@ function cargarHoras() {
             }
         }
     });
+}
+function eliminar(id)
+{
+	var cadena = new FormData($("#delete-form")[0]);
+
+ eliminardata(cadena,'/citas/'+id);
+}
+function asignar_valor(hora){
+    document.getElementById("hora").value =hora;
 }

@@ -43,17 +43,22 @@
             </li>
             <li class=" nav-item {{ $activePage == 'users' ? ' active' : '' }} ">
                 <a class="d-flex align-items-center" href="{{ route('users.index') }}">
-                    <i data-feather='users'></i><span class="menu-title text-truncate" data-i18n="Chat"></span>Usuarios
+                    <i data-feather='users'></i><span class="menu-title text-truncate" data-i18n="Usuarios"></span>Usuarios
                 </a>
             </li>
             <li class=" nav-item {{ $activePage == 'espec' ? ' active' : '' }} ">
                 <a class="d-flex align-items-center" href="{{ route('espec.index') }}">
-                    <i data-feather='grid'></i><span class="menu-title text-truncate" data-i18n="Chat"></span>Especialidades
+                    <i data-feather='grid'></i><span class="menu-title text-truncate" data-i18n="Especialidad"></span>Especialidades
+                </a>
+            </li>
+            <li class=" nav-item {{ $activePage == 'citas-crear' ? ' active' : '' }} ">
+                <a class="d-flex align-items-center" href="{{ route('citas.create') }}">
+                    <i data-feather='calendar'></i><span class="menu-title text-truncate" data-i18n="crear"></span>Reserva Citas
                 </a>
             </li>
             <li class=" nav-item {{ $activePage == 'citas' ? ' active' : '' }} ">
-                <a class="d-flex align-items-center" href="{{ route('citas.create') }}">
-                    <i data-feather='calendar'></i><span class="menu-title text-truncate" data-i18n="Chat"></span>Reserva Citas
+                <a class="d-flex align-items-center" href="{{ route('citas.index') }}">
+                    <i data-feather='clock'></i><span class="menu-title text-truncate" data-i18n="Citas"></span>Mis Citas
                 </a>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="app-todo.html"><i data-feather="check-square"></i><span class="menu-title text-truncate" data-i18n="Todo">Todo</span></a>

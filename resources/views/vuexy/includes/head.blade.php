@@ -31,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/css/plugins/charts/chart-apex.css') !!}">
     <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/css/plugins/extensions/ext-component-toastr.css') !!}">
     <!-- END: Page CSS-->
-
+    @stack('css-page')
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/style.css') !!}">
     <!-- END: Custom CSS-->
