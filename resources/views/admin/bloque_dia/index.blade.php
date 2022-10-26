@@ -57,9 +57,9 @@
                                             <tbody >
                                             @foreach ($bloques as $bloque)
                                             <tr>
-                                                @foreach ($dias as $dia)
-                                                <td class="bloque" data-dia="{{ $dia->id }}" data-bloque="{{ $bloque->id }}">
-                                                    {{ $bloque->inicio }}
+                                                @foreach ($bloque->b_dia as $bdia)
+                                                <td class="{{ ($bdia->bd_estado == 'activo') ? 'bg-success text-light' : '' }} bloque cursor-pointer" data-bd="{{ $bdia->bd_id }}">
+                                                   {{ $bloque->inicio }}
                                                 </td>
                                                 @endforeach
                                             </tr>

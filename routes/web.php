@@ -44,7 +44,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/especialidades/usuario/save',[EspecialidadController::class,'guardar_especialidad_usuario'])->name('espec.user.save');
 
     Route::resource('/bloque-dia', BloqueDiaController::class);
-    Route::get('/bloque-dia/config-agenda/{dia}/{bloque}', [BloqueDiaController::class, 'config_agenda'])->name('config_agenda');
+    Route::get('/bloque-dia/config-agenda/{bdia}', [BloqueDiaController::class, 'config_agenda'])->name('config_agenda');
 });
 
 
