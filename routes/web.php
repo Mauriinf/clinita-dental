@@ -42,9 +42,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::delete('/especialidades/{especialidad}', [EspecialidadController::class,'destroy']);
     Route::get('/especialidades/{id}/show',[EspecialidadController::class,'show']);
     Route::post('/especialidades/usuario/save',[EspecialidadController::class,'guardar_especialidad_usuario'])->name('espec.user.save');
-
-    Route::resource('/bloque-dia', BloqueDiaController::class);
-    Route::get('/bloque-dia/config-agenda/{bdia}', [BloqueDiaController::class, 'config_agenda'])->name('config_agenda');
 });
 
 
