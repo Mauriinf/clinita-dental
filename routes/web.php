@@ -6,6 +6,8 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\EspecialidadController;
+use App\Http\Controllers\OdontogramaController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,4 +51,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('citas', [CitaController::class,'index'])->name('citas.index');
     Route::delete('/citas/{cita}', [CitaController::class,'destroy']);
     Route::get('/citas/{id}/show',[CitaController::class,'show']);
+    //Odontograma
+    Route::get('/nuevo/odontograma',[OdontogramaController::class,'odontograma']);
 });

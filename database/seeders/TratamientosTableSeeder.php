@@ -16,14 +16,17 @@ class TratamientosTableSeeder extends Seeder
     {
         Tratamiento::create([
             'descripcion' => 'Caries',
+            'estado' => 'ACTIVO',
             'costo' => 50
         ]);
         Tratamiento::create([
             'descripcion' => 'Implante',
+            'estado' => 'ACTIVO',
             'costo' => 50
         ]);
         Tratamiento::create([
             'descripcion' => 'Corona',
+            'estado' => 'ACTIVO',
             'costo' => 70
         ]);
     }

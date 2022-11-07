@@ -40,6 +40,7 @@ class PermissionTableSeeder extends Seeder
         //php artisan db:seed --class=CreateAdminUserSeeder
         //php artisan db:seed --class=DiasTableSeeder
         //php artisan db:seed --class=BloquesTableSeeder
+        //php artisan db:seed --class=DientesTableSeeder
         //php artisan db:seed --class=TratamientosTableSeeder
     }
 }
