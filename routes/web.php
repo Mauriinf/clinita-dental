@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BloqueDiaController;
 use App\Http\Controllers\CitaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
@@ -49,4 +50,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('citas', [CitaController::class,'index'])->name('citas.index');
     Route::delete('/citas/{cita}', [CitaController::class,'destroy']);
     Route::get('/citas/{id}/show',[CitaController::class,'show']);
+    //CONFIG CALENDARIO
+    Route::resource('/bloque-dia', BloqueDiaController::class);
+    Route::get('/bloque-dia/config-agenda/{bdia}', [BloqueDiaController::class, 'config_agenda'])->name('config_agenda');
 });
