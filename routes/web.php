@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BloqueDiaController;
 use App\Http\Controllers\CitaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
@@ -53,4 +54,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/citas/{id}/show',[CitaController::class,'show']);
     //Odontograma
     Route::get('/nuevo/odontograma',[OdontogramaController::class,'odontograma']);
+    //CONFIG CALENDARIO
+    Route::resource('/bloque-dia', BloqueDiaController::class);
+    Route::get('/bloque-dia/config-agenda/{bdia}', [BloqueDiaController::class, 'config_agenda'])->name('config_agenda');
 });
