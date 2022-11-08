@@ -6,7 +6,7 @@
 				 {diente:3,cara:2,estado:6,tipo:1},
 				 {diente:4,cara:2,estado:4,tipo:1}];
 
-	
+
 
 	$(document).ready(function(){
 
@@ -15,12 +15,12 @@
 			if (desabilitado != 'desabilitado' ) {
 				pintar(color,this)
 			}
-			
+
 		});
 		$('input:radio').change(function(){
 			var tipo = $(this).attr('value');
 			cambiarOdontograma(tipo);
-			
+
 		});
 
 		$('.color').click(function(){
@@ -31,7 +31,7 @@
 		var saltarEachCirculo = null;
 		var saltarEachPoligono = null;
 		limpiar();
-		cambiarOdontograma(datos[0].tipo)	
+		cambiarOdontograma(datos[0].tipo)
 		for (var i = 0; i < datos.length; i++) {
 			if (datos[0].tipo == 1) {
 				$('#Decidua').prop('checked',true);
@@ -43,7 +43,7 @@
 			{
 				$('#Mixta').prop('checked',true);
 			}
-			
+
 			saltarEachCirculo = false;
 			saltarEachPoligono = false;
 			if (datos[i].estado == 3 || datos[i].estado ==  8) {
@@ -54,14 +54,14 @@
 					}
 				});
 			}
-			else if (datos[i].estado == 4 || datos[i].estado ==  6) 
+			else if (datos[i].estado == 4 || datos[i].estado ==  6)
 			{
 				$('#'+datos[i].diente +' polygon').each(function(){
 					if (saltarEachPoligono == false) {
 						pintar(datos[i].estado,this);
 						saltarEachPoligono = true;
 					}
-				});	
+				});
 			}
 			else
 			{
@@ -70,13 +70,13 @@
 					if (datos[i].cara == $(this).attr('value')) {
 						pintar(datos[i].estado,this);
 					}
-				});	
+				});
 			}
 
-			
+
 		}
-			
-				
+
+
 	});
 	$('#agregar').click(function(){
 		datos = [];
@@ -91,11 +91,11 @@
 					datos.push({diente:dienteD,cara:caraD,estado:estadoD,tipo:tipoD});
 					return false;
 				}
-				else 
+				else
 				{
 					datos.push({diente:dienteD,cara:caraD,estado:estadoD,tipo:tipoD});
 				}
-				
+
 			});
 		});
 	});
@@ -107,7 +107,7 @@
 
 		cambiarOdontograma($('input:radio[name=tipo]:checked').val());
 	});
-	
+
 	function activar_Desactivar_Dientes(lado,ad,valor)
 	{
 		if (ad == 1 && valor < 6) {
@@ -151,25 +151,25 @@
 				if ((id > 3 && id < 14) ||  (id > 19 && id < 30) ) {
 					$(this).find('polygon').each(function(){
 						valor = $(this).attr('value');
-						activar_Desactivar_Dientes(this,0,valor);	
-						quitarEspecial(this);						
+						activar_Desactivar_Dientes(this,0,valor);
+						quitarEspecial(this);
 					});
 				}
 				else
 				{
 					$(this).find('polygon').each(function(){
 						valor = $(this).attr('value');
-						activar_Desactivar_Dientes(this,1,valor);	
-						quitarEspecial(this);						
+						activar_Desactivar_Dientes(this,1,valor);
+						quitarEspecial(this);
 					});
-				}	
+				}
 			});
 			$('.nino polygon').each(function(){
 				valor = $(this).attr('value');
 				activar_Desactivar_Dientes(this,1,valor);
 				quitarEspecial(this);
 			});
-		}		
+		}
 	}
 
 	function limpiar(){
@@ -205,7 +205,7 @@
 				else if ($(this).attr('value') == 10) {
 					$(this).attr('class','implante');
 				}
-		});	
+		});
 		$(objeto).parent().find('circle').each(function(){
 				if ($(this).attr('value') == 8 ) {
 					$(this).attr('class','corona');
@@ -213,7 +213,7 @@
 				else if ($(this).attr('value') == 9) {
 					$(this).attr('class','endodoncia');
 				}
-				
+
 		});
 	}
 
@@ -224,22 +224,22 @@
 					$(this).attr({class:'diente',
 								  estado:0});
 				}
-			});	
+			});
 	}
 
 	function pintar(color,objeto){
 		if (color == 1) {
-			quitarEspecial(objeto);		
+			quitarEspecial(objeto);
 			$(objeto).attr({class:'marcadoRojo marcado',
 							estado:color});		}
 		else if(color == 2){
-			quitarEspecial(objeto);	
+			quitarEspecial(objeto);
 			$(objeto).attr({class:'marcadoAmarillo marcado',
 							estado:color});
 		}
 		else if(color == 3){
 			limpiarLados(objeto);
-			quitarEspecial(objeto);	
+			quitarEspecial(objeto);
 			$(objeto).parent().find('.endodoncia').each(function(){
 				$(this).attr({class:'marcadoNaranja marcado',
 							estado:color});
@@ -247,7 +247,7 @@
 		}
 		else if(color == 4){
 			limpiarLados(objeto);
-			quitarEspecial(objeto);	
+			quitarEspecial(objeto);
 			$(objeto).parent().find('.ausente').each(function(){
 				$(this).attr({class:'marcadoTomate marcado',
 							estado:color});
@@ -255,34 +255,34 @@
 
 		}
 		else if(color == 5){
-			quitarEspecial(objeto);	
+			quitarEspecial(objeto);
 			$(objeto).attr({class:'marcadoMarron marcado',
 							estado:color});
 
 		}
 		else if(color == 6){
 			limpiarLados(objeto);
-			quitarEspecial(objeto);	
+			quitarEspecial(objeto);
 			$(objeto).parent().find('.implante').each(function(){
 				$(this).attr({class:'marcadoMorado marcado',
 							estado:color});
 			});
 		}
 		else if(color == 7){
-			quitarEspecial(objeto);	
+			quitarEspecial(objeto);
 			$(objeto).attr({class:'marcadoVerde marcado',
 							estado:color});
 		}
 		else if(color == 8){
 			limpiarLados(objeto);
-			quitarEspecial(objeto);	
+			quitarEspecial(objeto);
 			$(objeto).parent().find('.corona').each(function(){
 				$(this).attr({class:'marcadoAzul marcado',
 							estado:color});
 			});
 		}
 		else if(color == 9){
-			quitarEspecial(objeto);	
+			quitarEspecial(objeto);
 			$(objeto).attr({class:'diente',
 							estado:color});
 		}

@@ -1,5 +1,5 @@
 app.controller('dientes',['$scope',function($scope){
-		var jsonArmado;
+		var jsonArmado
 
 		var adultoArriva = [];
 		for (var i = 1; i < 17; i++) {
@@ -12,7 +12,7 @@ app.controller('dientes',['$scope',function($scope){
 				jsonArmado = {id:i,tipoDiente:'decidua'};
 				adultoArriva.push(jsonArmado);
 			}
-			
+
 		}
 		$scope.adultoArriva = adultoArriva;
 
@@ -29,7 +29,7 @@ app.controller('dientes',['$scope',function($scope){
 			}
 		}
 		$scope.adultoAbajo = adultoAbajo;
-		
+
 		var ninoArriva = [];
 		for (var i = 33; i < 43; i++) {
 			jsonArmado = {id:i,tipoDiente:'nino'};
@@ -43,5 +43,4 @@ app.controller('dientes',['$scope',function($scope){
 			ninoAbajo.push(jsonArmado);
 		}
 		$scope.ninoAbajo = ninoAbajo;
-                
 	}]);
