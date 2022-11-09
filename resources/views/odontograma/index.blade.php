@@ -3,12 +3,9 @@
 @push('css-vendor')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="{!! asset('odontogram/style.css') !!}" />
+<link rel="stylesheet" href="{!! asset('odontograma/style.css') !!}" />
 @endpush
 @section('content')
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link rel="stylesheet" href="{!! asset('odontogram/style.css') !!}" />--}}
 
     <div id="canva-group" class="col-lg-12 col-md-12 col-sm-12">
         <canvas id="camada1Odontograma"></canvas>
@@ -93,5 +90,5 @@
 @endsection
 @push('scripts-page')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="{!! asset('odontogram/odontograma.js') !!}"></script>
+<script src="{!! asset('odontograma/odontograma.js') !!}"></script>
 @endpush
