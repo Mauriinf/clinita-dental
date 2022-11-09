@@ -54,10 +54,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/citas/{id}/show',[CitaController::class,'show']);
     //Odontograma
     Route::get('/nuevo/odontograma',[OdontogramaController::class,'odontograma']);
-    //Odontograma
-    Route::get('/nuevo2/odontograma',[OdontogramaController::class,'odon']);
-    //Odontograma
-    Route::get('/nuevo3/odontograma',[OdontogramaController::class,'odontogram']);
+
     //CONFIG CALENDARIO
     Route::resource('/bloque-dia', BloqueDiaController::class);
     Route::get('/bloque-dia/config-agenda/{bdia}', [BloqueDiaController::class, 'config_agenda'])->name('config_agenda');

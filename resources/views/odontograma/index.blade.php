@@ -1,114 +1,97 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-	<script src="{!! asset('odontograma/scripts/jquery-2.1.4.js') !!}"></script>
-	<script src="{!! asset('odontograma/scripts/angular.js') !!}"></script>
-	<link rel="stylesheet" type="text/css" href="{!! asset('odontograma/css/estilosOdontograma.css') !!}">
-</head>
-<body ng-app="app" >
-<div ng-controller="dientes">
-<center>
-	<div>
-		<svg height="50" class="" width="50"  data-ng-repeat="i in adultoArriva" id="">
-		  	<polygon points="10,15 15,10 50,45 45,50" estado="4" value="6" class="ausente" />
-  			<polygon points="45,10 50,15 15,50 10,45" estado="4" value="7" class="ausente" />
-  			<circle cx="30" cy="30" r="16" estado="8" value="8" class="corona"/>
-  			<circle cx="30" cy="30" r="20" estado="3" value="9" class="endodoncia"/>
-  			<polygon points="50,10 40,10 10,26 10,32 46,32 10,50 20,50 50,36 50,28 14,28" estado="6" value="10" class="implante"/>
-  			<polygon points="10,10 50,10 40,20 20,20" estado="0" value="1" class="diente" />
-  			<polygon points="50,10 50,50 40,40 40,20" estado="0" value="2" class="diente" />
-  			<polygon points="50,50 10,50 20,40 40,40" estado="0" value="3" class="diente" />
-  			<polygon points="10,50 20,40 20,20 10,10" estado="0" value="4" class="diente" />
-  			<polygon points="20,20 40,20 40,40 20,40" estado="0" value="5" class="diente" />
+@extends('vuexy.layouts.default', ['activePage' => 'espec'])
+@section('title','Especialidades')
+@push('css-vendor')
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="{!! asset('odontogram/style.css') !!}" />
+@endpush
+@section('content')
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="{!! asset('odontogram/style.css') !!}" />--}}
 
-		</svg>
-	</div>
-	<div>
-		<svg height="50" class="" width="50"  data-ng-repeat="i in ninoArriva" id="">
-  			<polygon points="10,15 15,10 50,45 45,50" estado="4" value="6" class="ausente" />
-  			<polygon points="45,10 50,15 15,50 10,45" estado="4" value="7" class="ausente" />
-  			<circle cx="30" cy="30" r="16" estado="8" value="8" class="corona"/>
-  			<circle cx="30" cy="30" r="20" estado="3" value="9" class="endodoncia"/>
-  			<polygon points="50,10 40,10 10,26 10,32 46,32 10,50 20,50 50,36 50,28 14,28" estado="6" value="10" class="implante"/>
-  			<polygon points="10,10 50,10 40,20 20,20" estado="0" value="1" class="diente" />
-  			<polygon points="50,10 50,50 40,40 40,20" estado="0" value="2" class="diente" />
-  			<polygon points="50,50 10,50 20,40 40,40" estado="0" value="3" class="diente" />
-  			<polygon points="10,50 20,40 20,20 10,10" estado="0" value="4" class="diente" />
-  			<polygon points="20,20 40,20 40,40 20,40" estado="0" value="5" class="diente" />
+    <div id="canva-group" class="col-lg-12 col-md-12 col-sm-12">
+        <canvas id="camada1Odontograma"></canvas>
+        <canvas id="camada2Odontograma"></canvas>
+        <canvas id="camada3Odontograma"></canvas>
+        <canvas id="camada4Odontograma"></canvas>
+    </div>
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Adicionar procedimiento</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <input type="hidden" id="procedimentosRemovidos" th:field="*{procedimentosRemovidos}">
+                        <div id="procedimentosDiv"></div>
+                        <div class="form-group col-md-12">
+                            <label for="nomeProcedimento">Nombre</label>
+                            <i data-type="info" class="fas fa-info-circle fa-1x text-info" onclick="toast_message('.','info')" style="margin-left: 5px; cursor: pointer;"></i>
+                            <select class="form-control" id="nomeProcedimento">
+                                <option selected value="">-- Seleccione una opción --</option>
 
-		</svg>
-	</div>
-	<div>
-		<svg height="50" class="" width="50"  data-ng-repeat="i in ninoAbajo" id="">
-  			<polygon points="10,15 15,10 50,45 45,50" estado="4" value="6" class="ausente" />
-  			<polygon points="45,10 50,15 15,50 10,45" estado="4" value="7" class="ausente" />
-  			<circle cx="30" cy="30" r="16" estado="8" value="8" class="corona"/>
-  			<circle cx="30" cy="30" r="20" estado="3" value="9" class="endodoncia"/>
-  			<polygon points="50,10 40,10 10,26 10,32 46,32 10,50 20,50 50,36 50,28 14,28" estado="6" value="10" class="implante"/>
-  			<polygon points="10,10 50,10 40,20 20,20" estado="0" value="1" class="diente" />
-  			<polygon points="50,10 50,50 40,40 40,20" estado="0" value="2" class="diente" />
-  			<polygon points="50,50 10,50 20,40 40,40" estado="0" value="3" class="diente" />
-  			<polygon points="10,50 20,40 20,20 10,10" estado="0" value="4" class="diente" />
-  			<polygon points="20,20 40,20 40,40 20,40" estado="0" value="5" class="diente" />
+                            </select>
+                        </div>
+                        <div class="form-group col-12" id="colOutroProcedimento">
+                            <label for="outroProcedimento">Otro procedimiento</label>
+                            <i style="margin-left:5px;cursor: pointer;" class="alerta fas fa-info-circle fa-1x text-info" data-type="info" onclick="mensagens('.','info')"></i>
+                            <input id="outroProcedimento" class="form-control" type="text">
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="exampleColorInput" class="form-label">Color</label>
+                            <i style="margin-left:5px;cursor: pointer;" class="alerta fas fa-info-circle fa-1x text-info" data-type="info" onclick="mensagens('.','info')"></i>
+                            <input type="color" id="cor" disabled class="form-control form-control-color" value="#563d7c" title="Choose your color">
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="informacoesAdicionais">Información Adicional</label>
+                            <i style="margin-left:5px;cursor: pointer;" class="alerta fas fa-info-circle fa-1x text-info" data-type="info" onclick="mensagens('.','info')"></i>
+                            <textarea rows="5" id="informacoesAdicionais" maxlength="5000" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group col-md-1 d-inline mt-2" style="text-align: center; margin: auto;">
+                            <a id="botaoAdicionar" class="form-control btn-sigsaude btnCorNovo">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <div class="panel panel-default">
+                                <div class="table-responsive">
+                                    <table class="table display dataTable table-bordered table-striped" id="tabelaTestesEspecificosForm">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>Color</th>
+                                                <th>Informacion Adicional</th>
+                                                <th class="text-center">Acción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="bodyProcedimentos">
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-		</svg>
-	</div>
-	<div>
-		<svg height="50" class="" width="50"  data-ng-repeat="i in adultoAbajo" id="">
-   			<polygon points="10,15 15,10 50,45 45,50" estado="4" value="6" class="ausente" />
-  			<polygon points="45,10 50,15 15,50 10,45" estado="4" value="7" class="ausente" />
-  			<circle cx="30" cy="30" r="16" estado="8" value="8" class="corona"/>
-  			<circle cx="30" cy="30" r="20" estado="3" value="9" class="endodoncia"/>
-  			<polygon points="50,10 40,10 10,26 10,32 46,32 10,50 20,50 50,36 50,28 14,28" estado="6" value="10" class="implante"/>
-  			<polygon points="10,10 50,10 40,20 20,20" estado="0" value="1" class="diente" />
-  			<polygon points="50,10 50,50 40,40 40,20" estado="0" value="2" class="diente" />
-  			<polygon points="50,50 10,50 20,40 40,40" estado="0" value="3" class="diente" />
-  			<polygon points="10,50 20,40 20,20 10,10" estado="0" value="4" class="diente" />
-  			<polygon points="20,20 40,20 40,40 20,40" estado="0" value="5" class="diente" />
-
-		</svg>
-	</div>
-</center>
-</div>
-
-<input type="button" value="ver" id="ver"/>
-<input type="button" value="Agregar" id="agregar"/>
-<input type="button" value="limpiar" id="limpiar"/>
-
-<input type="radio" id="Decidua" name="tipo" value="1" checked />Permanente
-<input type="radio" id="Niños" name="tipo" value="2" />Decidua
-<input type="radio" id="Mixta" name="tipo" value="3" />Mixta
-<table border="1" align="center">
-	<tr>
-		<th>Amalgama</th>
-		<th>Caries</th>
-		<th>Endodoncia</th>
-		<th>Ausente</th>
-		<th>Resina</th>
-		<th>Implante</th>
-		<th>Sellante</th>
-		<th>Corona</th>
-		<th>Normal</th>
-	</tr>
-		<td><center><div class="color" value="1" style="background-color:red;width:20px;height:20px"></div></center></td>
-		<td><center><div class="color" value="2" style="background-color:yellow;width:20px;height:20px"></div></center></td>
-		<td><center><div class="color" value="3" style="background-color:orange;width:20px;height:20px"></div></center></td>
-		<td><center><div class="color" value="4" style="background-color:tomato;width:20px;height:20px"></div></center></td>
-		<td><center><div class="color" value="5" style="background-color:#CC6600;width:20px;height:20px"></div></center></td>
-		<td><center><div class="color" value="6" style="background-color:#CC66CC;width:20px;height:20px"></div></center></td>
-		<td><center><div class="color" value="7" style="background-color:green;width:20px;height:20px"></div></center></td>
-		<td><center><div class="color" value="8" style="background-color:blue;width:20px;height:20px"></div></center></td>
-		<td><center><div class="color" value="9" style="background-color:black;width:20px;height:20px"></div></center></td>
-	<tr>
-</table>
-
-<!--Jquery/Javascrip-->
-<script type="text/javascript" src="{!! asset('odontograma/scripts/jquery-odontograma.js') !!}"></script>
-<!--Modulo de Angular-->
-<script type="text/javascript" src="{!! asset('odontograma/scripts/app.js') !!}"></script>
-<!-- Angular Directivas-->
-<script type="text/javascript" src="{!! asset('odontograma/scripts/controller.js') !!}"></script>
-
-</body>
-</html>
+@endsection
+@push('scripts-page')
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{!! asset('odontogram/odontograma.js') !!}"></script>
+@endpush

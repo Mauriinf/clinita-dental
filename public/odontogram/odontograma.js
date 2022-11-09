@@ -221,7 +221,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ordemExibicaoDente -= 16;
             posicaoY = dimensionesTrapecio.baseMayor + posicoesPadrao.margemYEntreDentes + posicoesPadrao.posicaoYInicialDente;
         }
-
         let posicaoX = definePosicionXInicialDiente(ordemExibicaoDente - 1)
 
         /* 1ª zona */
@@ -296,14 +295,29 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
+    function estaEnPantalla(elemento) {
+        var estaEnPantalla = false;
 
+        var posicionElemento = $(elemento).get(0).getBoundingClientRect();
+
+        if (posicionElemento.top >= 0 && posicionElemento.left >= 0
+                && posicionElemento.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+                && posicionElemento.right <= (window.innerWidth || document.documentElement.clientWidth)) {
+            estaEnPantalla = true;
+        }
+
+        return estaEnPantalla;
+    }
     camada4.onmousemove = (event) => {
         let x = event.x
         let y = event.y
-
-        x -= camada1.offsetLeft
-        y -= camada1.offsetTop
-
+        if(estaEnPantalla('#navegation')){
+            x -= (camada1.offsetLeft+document.getElementById('navegation').clientWidth)
+            y -= camada1.offsetTop
+        }else{
+            x -= camada1.offsetLeft //(x-document.getElementById('canva-group').clientWidth)  //+255
+            y -= camada1.offsetTop
+        }
         procedimento.limpar()
         procedimento.indice = null
 
@@ -324,9 +338,13 @@ document.addEventListener('DOMContentLoaded', () => {
     camada4.onclick = (event) => {
         let x = event.x
         let y = event.y
-
-        x -= camada1.offsetLeft
-        y -= camada1.offsetTop
+        if(estaEnPantalla('#navegation')){
+            x -= (camada1.offsetLeft+document.getElementById('navegation').clientWidth)
+            y -= camada1.offsetTop
+        }else{
+            x -= camada1.offsetLeft
+            y -= camada1.offsetTop
+        }
 
         procedimento.limpar()
         procedimento.indice = null
