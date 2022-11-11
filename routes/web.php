@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\BloqueDiaController;
 use App\Http\Controllers\CitaController;
+use App\Http\Controllers\CuracionesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\OdontogramaController;
+use App\Http\Controllers\TratamientoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +54,15 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('citas', [CitaController::class,'index'])->name('citas.index');
     Route::delete('/citas/{cita}', [CitaController::class,'destroy']);
     Route::get('/citas/{id}/show',[CitaController::class,'show']);
+    //TRATAMIENTOS
+    Route::get('tratamientos', [TratamientoController::class,'index'])->name('trata.index');
+	Route::post('/tratamientos', [TratamientoController::class,'store']);
+	Route::put('/tratamientos/{tratamiento}', [TratamientoController::class,'estado'])->name('trata.update.estado');
+    Route::delete('/tratamientos/{tratamiento}', [TratamientoController::class,'destroy']);
+    Route::get('/tratamientos/{id}/show',[TratamientoController::class,'show']);
+    ///curaciones
+    Route::get('consultas', [CuracionesController::class,'index'])->name('curaciones.index');
+    Route::get('nueva/consulta', [CuracionesController::class,'nuevo'])->name('nueva.consulta');
     //Odontograma
     Route::get('/nuevo/odontograma',[OdontogramaController::class,'odontograma']);
 

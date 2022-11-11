@@ -112,7 +112,7 @@
                                         <div class="mb-1">
                                           <label for="dni">Fecha</label>
                                           <div class="input-group input-group-alternative">
-                                            <input type="text" id="date" class="form-control flatpickr-basic" placeholder="YYYY-MM-DD" value="{{ old('fecha_cita', date('Y-m-d')) }}" data-date-format="Y-m-d"/>
+                                            <input type="text" id="date" name="fecha_cita" class="form-control flatpickr-basic" placeholder="YYYY-MM-DD" value="{{ old('fecha_cita', date('Y-m-d')) }}" data-date-format="Y-m-d"/>
 
                                             @if ($errors->has('fecha_cita'))
                                                 <span class="help-block alert alert-danger">

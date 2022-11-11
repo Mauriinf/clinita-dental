@@ -30,7 +30,11 @@ class PermissionTableSeeder extends Seeder
            'lista-cita',
            'crear-cita',
            'editar-cita',
-           'eliminar-cita'
+           'eliminar-cita',
+           'lista-tratamiento',
+           'crear-tratamiento',
+           'editar-tratamiento',
+           'eliminar-tratamiento'
         ];
 
         foreach ($permissions as $permission) {

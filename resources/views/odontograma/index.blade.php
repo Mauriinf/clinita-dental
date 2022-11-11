@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="{!! asset('odontograma/style.css') !!}" />
 @endpush
 @section('content')
-
     <div id="canva-group" class="col-lg-12 col-md-12 col-sm-12">
         <canvas id="camada1Odontograma"></canvas>
         <canvas id="camada2Odontograma"></canvas>
@@ -91,4 +90,21 @@
 @push('scripts-page')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="{!! asset('odontograma/odontograma.js') !!}"></script>
+<script>
+    let tratamientos=JSON.parse('<?php echo json_encode($tratamientos); ?>');
+    const options = tratamientos.map(problema => {
+            return `\n<option value='${problema.id}'>${problema.descripcion}</option>`
+    })
+    document.querySelector("#nomeProcedimento").innerHTML += options
+    document.querySelector("#nomeProcedimento").addEventListener('change', (event) => {
+            let procedimento = document.querySelector("#nomeProcedimento")
+            if (procedimento.value !== '') {
+                procedimento = tratamientos.find(problemaAtual => problemaAtual.id === parseInt(procedimento.value));
+                document.querySelector("#cor").value = procedimento.color
+            } else {
+                document.querySelector("#cor").disabled = true
+                document.getElementById("colOutroProcedimento").style.display = 'none'
+            }
+    })
+</script>
 @endpush

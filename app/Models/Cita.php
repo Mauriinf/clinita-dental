@@ -68,9 +68,9 @@ class Cita extends Model
         else
         $where=" WHERE ct.estado='$tipo' ";
         if($user->hasRole('Doctor')){
-            $where+=" AND doc.id='$user->id'";
+            $where.=" AND doc.id='$user->id'";
         }elseif($user->hasRole('Paciente')){
-            $where+=" AND paci.id='$user->id'";
+            $where.=" AND paci.id='$user->id'";
         }
         $query=DB::select ($consulta.$where);
         return $query;

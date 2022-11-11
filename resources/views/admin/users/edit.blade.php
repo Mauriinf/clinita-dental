@@ -67,7 +67,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Teléfono:</strong>
-                    {!! Form::text('telefono', null, array('placeholder' => 'Telefono','class' => 'form-control')) !!}
+                    {!! Form::number('telefono', null, array('placeholder' => 'Telefono','class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -79,7 +79,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Email:</strong>
-                    {!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control')) !!}
+                    {!! Form::email('email', null, array('placeholder' => 'Email','class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">

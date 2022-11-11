@@ -51,6 +51,11 @@
                     <i data-feather='grid'></i><span class="menu-title text-truncate" data-i18n="Especialidad"></span>Especialidades
                 </a>
             </li>
+            <li class=" nav-item {{ $activePage == 'tratamiento' ? ' active' : '' }} ">
+                <a class="d-flex align-items-center" href="{{ route('trata.index') }}">
+                    <i data-feather='grid'></i><span class="menu-title text-truncate" data-i18n="Tratamiento"></span>Tratamiento
+                </a>
+            </li>
             <li class=" nav-item {{ $activePage == 'citas-crear' ? ' active' : '' }} ">
                 <a class="d-flex align-items-center" href="{{ route('citas.create') }}">
                     <i data-feather='calendar'></i><span class="menu-title text-truncate" data-i18n="crear"></span>Reserva Citas
@@ -66,7 +71,10 @@
                     <i data-feather='clock'></i><span class="menu-title text-truncate" data-i18n="Citas"></span>Conf. Horario
                 </a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="app-todo.html"><i data-feather="check-square"></i><span class="menu-title text-truncate" data-i18n="Todo">Todo</span></a>
+            <li class=" nav-item {{ $activePage == 'curaciones' ? ' active' : '' }} ">
+                <a class="d-flex align-items-center" href="{{ route('curaciones.index') }}">
+                    <i data-feather="check-square"></i><span class="menu-title text-truncate" data-i18n="Curaciones">Curaciones</span>
+                </a>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="app-calendar.html"><i data-feather="calendar"></i><span class="menu-title text-truncate" data-i18n="Calendar">Calendar</span></a>
             </li>

@@ -787,28 +787,6 @@ document.addEventListener('DOMContentLoaded', () => {
      * Iniciar el odontograma, dibujar la estructura, cargar los datos, etc.
      */
     const iniciaOdontograma = () => {
-        const options = itensProcedimento.map(problema => {
-            return `\n<option value='${problema.nome}'>${problema.nome}</option>`
-        })
-        document.querySelector("#nomeProcedimento").innerHTML += options
-
-        document.querySelector("#nomeProcedimento").addEventListener('change', (event) => {
-            let procedimento = document.querySelector("#nomeProcedimento")
-            if (procedimento.value !== '') {
-                procedimento = itensProcedimento.find(problemaAtual => problemaAtual.nome === procedimento.value)
-                document.querySelector("#cor").value = procedimento.cor
-                if (procedimento.nome === 'Otro') {
-                    document.querySelector("#cor").disabled = false
-                    document.getElementById("colOutroProcedimento").style.display = 'block'
-                } else {
-                    document.querySelector("#cor").disabled = true
-                    document.getElementById("colOutroProcedimento").style.display = 'none'
-                }
-            } else {
-                document.querySelector("#cor").disabled = true
-                document.getElementById("colOutroProcedimento").style.display = 'none'
-            }
-        })
 
         document.querySelector("#nomeProcedimento").dispatchEvent(new Event('change'))
 
