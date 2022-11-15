@@ -17,10 +17,10 @@ class CreateOdontogramaTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_consulta');
             $table->foreign('id_consulta')->references('id')->on('consultas');
-            $table->unsignedBigInteger('id_diente');
-            $table->foreign('id_diente')->references('id')->on('dientes');
             $table->unsignedBigInteger('id_tratamiento');
             $table->foreign('id_tratamiento')->references('id')->on('tratamientos');
+            $table->integer('id_diente');
+            $table->integer('parte_diente');
             $table->string('observacion');
             $table->timestamps();
         });

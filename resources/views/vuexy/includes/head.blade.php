@@ -6,7 +6,6 @@
     <meta content="" name="Mauricio Nina" />
     {{-- CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <link rel="apple-touch-icon" href="{!! asset('app-assets/images/ico/apple-icon-120.png') !!}">
     <link rel="shortcut icon" type="image/x-icon" href="{!! asset('app-assets/images/ico/favicon.ico') !!}">
     <link rel="icon" type="image/png" href="{!! asset('assets/img/favicon.png') !!}">
@@ -31,13 +30,14 @@
     <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/css/plugins/charts/chart-apex.css') !!}">
     <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/css/plugins/extensions/ext-component-toastr.css') !!}">
     <!-- END: Page CSS-->
-    @stack('css-page')
-    <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/style.css') !!}">
-    <!-- END: Custom CSS-->
     {{-- Scripts --}}
     <script>
         window.Laravel = {!! json_encode([
                 'csrfToken' => csrf_token(),
-            ]) !!};
+        ]) !!};
     </script>
+    @stack('css-page')
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/style.css') !!}">
+    <!-- END: Custom CSS-->
+

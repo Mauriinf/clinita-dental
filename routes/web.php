@@ -65,7 +65,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('nueva/consulta', [CuracionesController::class,'nuevo'])->name('nueva.consulta');
     //Odontograma
     Route::get('/nuevo/odontograma',[OdontogramaController::class,'odontograma']);
-
+    Route::get('/lista/odontograma',[OdontogramaController::class,'lista_odontograma'])->name('list.odontograma');
+    Route::post('/guardar/odontograma',[OdontogramaController::class,'guardar_odontograma']);
+    Route::post('/eliminar/odontograma',[OdontogramaController::class,'eliminar_odontograma']);
     //CONFIG CALENDARIO
     Route::resource('/bloque-dia', BloqueDiaController::class);
     Route::get('/bloque-dia/config-agenda/{bdia}', [BloqueDiaController::class, 'config_agenda'])->name('config_agenda');

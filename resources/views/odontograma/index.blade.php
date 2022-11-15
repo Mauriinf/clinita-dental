@@ -1,6 +1,13 @@
 @extends('vuexy.layouts.default', ['activePage' => 'espec'])
 @section('title','Especialidades')
 @push('css-vendor')
+<!-- BEGIN: Vendor CSS-->
+<link rel="stylesheet" type="text/css" href="{!! asset('app-assets/vendors/css/animate/animate.min.css') !!}">
+<link rel="stylesheet" type="text/css" href="{!! asset('app-assets/vendors/css/extensions/sweetalert2.min.css') !!}">
+<!-- END: Vendor CSS-->
+<!-- BEGIN: Page CSS-->
+<link rel="stylesheet" type="text/css" href="{!! asset('app-assets/css/plugins/extensions/ext-component-sweet-alerts.css') !!}">
+<!-- END: Page CSS-->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="{!! asset('odontograma/style.css') !!}" />
@@ -13,7 +20,7 @@
         <canvas id="camada4Odontograma"></canvas>
     </div>
     <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog" style="max-width: 50%;">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalLabel">Adicionar procedimiento</h5>
@@ -47,8 +54,8 @@
                             <textarea rows="5" id="informacoesAdicionais" maxlength="5000" class="form-control"></textarea>
                         </div>
                         <div class="form-group col-md-1 d-inline mt-2" style="text-align: center; margin: auto;">
-                            <a id="botaoAdicionar" class="form-control btn-sigsaude btnCorNovo">
-                                <i class="fas fa-plus"></i>
+                            <a id="botaoAdicionar" class="form-control btn btn-primary btnCorNovo">
+                                <i data-feather='plus'></i> Agregar
                             </a>
                         </div>
                     </div>
@@ -62,11 +69,13 @@
                                                 <th>Nombre</th>
                                                 <th>Color</th>
                                                 <th>Informacion Adicional</th>
+                                                <th>Costo Ref.</th>
                                                 <th class="text-center">Acción</th>
                                             </tr>
                                         </thead>
                                         <tbody id="bodyProcedimentos">
                                             <tr>
+                                                <td></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -80,7 +89,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -88,6 +97,11 @@
 
 @endsection
 @push('scripts-page')
+<!-- BEGIN: Page JS-->
+<script src="{!! asset('app-assets/vendors/js/extensions/sweetalert2.all.min.js') !!}"></script>
+<script src="{!! asset('app-assets/vendors/js/extensions/polyfill.min.js') !!}"></script>
+<script src="{!! asset('app-assets/js/scripts/extensions/ext-component-sweet-alerts.js') !!}"></script>
+<!-- END: Page JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="{!! asset('odontograma/odontograma.js') !!}"></script>
 <script>

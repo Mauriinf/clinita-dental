@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }]
 
     let procedimentos = []
+    let lista=[];
     class Procedimento {
         constructor(nome, cor, numeroDente, faceDente, informacoesAdicionais) {
             this.nome = nome;
@@ -91,10 +92,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         salvar() {
             if (this.valido()) {
-                const procedimento = procedimentos.find(prc => prc.nome === this.nome && prc.numeroDente === this.numeroDente && prc.faceDente === this.faceDente)
-                if (procedimento === undefined) procedimentos.push(this.criaObjeto())
-                else procedimentos[procedimentos.indexOf(procedimento)] = this.criaObjeto()
-                storage.save(procedimentos)
+                $.ajaxSetup({
+                    headers:{
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "/guardar/odontograma",
+                    type: 'POST',
+                    dataType : 'json',
+                    data: { id_consulta:1,id_tratamiento:this.nome,numeroDiente:this.numeroDente,parteDiente:this.faceDente,obsevacion:this.informacoesAdicionais},
+                    success: function(data)
+                    {
+                        // Swal.fire({
+                        //     type: "success",
+                        //         title: "¡Se guardo exitosamente!",
+                        //         showConfirmButton: true,
+                        //         confirmButtonText: "Ok"
+
+                        // })
+                    },
+                });
+                procedimentos =recuperarDatos()
+                 //const procedimento = procedimentos.find(prc => prc.nome === this.nome && prc.numeroDente === this.numeroDente && prc.faceDente === this.faceDente)
+                 //if (procedimento === undefined) procedimentos.push(this.criaObjeto())
+                 //else procedimentos[procedimentos.indexOf(procedimento)] = this.criaObjeto()
+                // storage.save(procedimentos)
             }
         }
         remover() {
@@ -358,6 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const atualizaTabela = () => {
         const tbody = document.getElementById('bodyProcedimentos')
         let trs = ''
+        let cont=0;
         procedimentos.filter(prc => prc.numeroDente === procedimento.numeroDente && prc.faceDente === procedimento.faceDente).forEach(item => {
             const tr = `
                 <tr>
@@ -368,11 +392,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         <input type="color" disabled class="form-control form-control-color" value="${item.cor}">
                     </td>
                     <td>
-                        ${item.informacoesAdicionais || 'NÃO INFORMADO'}
+                        ${item.informacoesAdicionais || 'NO CONFIRMADO'}
                     </td>
                     <td>
-                        <a onclick="apagar('${item.nome}', ${item.numeroDente}, ${item.faceDente})" class="btn btn-danger">
-                            <i class="far fa-trash-alt"></i>
+                        ${item.costo_referencial} Bs.
+                    </td>
+                    <td>
+                        <a onclick="apagar('${item.id}','${item.nome}', ${item.numeroDente}, ${item.faceDente})" class="btn btn-danger btn-sm">
+                            <i data-feather="trash"></i>
                         </a>
                     </td>
                 </tr>
@@ -381,11 +408,26 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         tbody.innerHTML = trs
     }
+    window.apagar = (id,nome, numeroDente, faceDente) => {
+        $.ajaxSetup({
+            headers:{
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
-    window.apagar = (nome, numeroDente, faceDente) => {
-        const procd = procedimentos.find(prc => prc.nome === nome && prc.numeroDente === numeroDente && prc.faceDente === faceDente)
-        procedimentos.splice(procedimentos.indexOf(procd), 1)
-        storage.save(procedimentos)
+        $.ajax({
+            url: "/eliminar/odontograma",
+            type: 'POST',
+            dataType : 'json',
+            data: { id:id},
+            success: function(data)
+            {
+            },
+        });
+        procedimentos =recuperarDatos()
+        //const procd = procedimentos.find(prc => prc.nome === nome && prc.numeroDente === numeroDente && prc.faceDente === faceDente)
+        //procedimentos.splice(procedimentos.indexOf(procd), 1)
+        //storage.save(procedimentos)
         atualizaTabela()
         resizeCanvas()
     }
@@ -780,8 +822,36 @@ document.addEventListener('DOMContentLoaded', () => {
             pintarFace(contexto2, element, 'black', element.cor)
         });
     }
+    //Recuperar datos desde la base de datos
+    const recuperarDatos=()=>{
+        lista=[];
+        jQuery.ajax({
+            url: "/lista/odontograma",
+            type: 'GET',
+            dataType : 'json',
+            cache: 'true',
+            data: { id_consulta:1},
+            success: function(data)
+            {
+                for(var n = 0; n<data.length; n++){
+                    let obj={};
+                    obj ['id']=data[n].id;
+                    obj ['id_consulta']=data[n].id_consulta;
+                    obj ['id_tratamiento']=data[n].id_tratamiento;
+                    obj ['costo_referencial']=data[n].costo;
+                    obj ['nome']=data[n].descripcion;
+                    obj ['cor']=data[n].color;
+                    obj ['numeroDente']=data[n].id_diente;
+                    obj ['faceDente']=data[n].parte_diente;
+                    obj ['informacoesAdicionais']=data[n].observacion;
+                    lista.push(obj);
+                }
 
-
+            },
+            async: false // <- esto lo convierte en síncrono
+        });
+        return lista;
+    }
 
     /**
      * Iniciar el odontograma, dibujar la estructura, cargar los datos, etc.
@@ -794,14 +864,12 @@ document.addEventListener('DOMContentLoaded', () => {
             procedimento.nome = document.querySelector("#nomeProcedimento").value
             procedimento.cor = document.querySelector("#cor").value
             procedimento.informacoesAdicionais = document.querySelector("#informacoesAdicionais").value
-
             procedimento.salvar()//guardar datos
             pintarFace(contexto2, procedimento, 'black', procedimento.cor)
             atualizaTabela()
         }
-
-        procedimentos = storage.fetch()
-
+        procedimentos =recuperarDatos()
+        //procedimentos = storage.fetch()
         numeroDientes.superior.forEach((numero, index) => numeroDenteXOrdemExibicaoDente[numero] = index)
         numeroDientes.inferior.forEach((numero, index) => numeroDenteXOrdemExibicaoDente[numero] = index + 16)
 
