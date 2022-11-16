@@ -16,7 +16,7 @@ function seleccionar(bloque){
   
         success: function(data)
         {
-            if(data == 'activo')
+            if(data == 'ACTIVO')
                 bloque.target.classList.add('bg-success', 'text-light');
             else
                 bloque.target.classList.remove('bg-success', 'text-light');

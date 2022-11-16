@@ -28,12 +28,12 @@
                         </h4>
                         <div class="pull-right">
                             <div class="input-group-prepend pull-right btnagregar">
-                                @can('crear-especialidad')
-                                <a href="javascript:void(0)" onclick="mostrarform(true)" class="btn btn-sm btn-primary">
+                            @if($bdu_existe)
+                                <a href="{{ route('generar_agenda') }}" class="btn btn-sm btn-primary">
                                     <i data-feather='plus'></i>
                                     Nuevo
                                 </a>
-                                @endcan
+                            @endif
                             </div>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="table-responsive listaregistros">
-                                        <table class="table table-bordered table-td-valign-middle dt-responsive">
+                                        <table class="table table-bordered table-td-valign-middle dt-responsive mt-1">
                                             <thead class="thead">
                                                 <tr>
                                                     <th>Lunes</th>
@@ -57,11 +57,14 @@
                                             <tbody >
                                             @foreach ($bloques as $bloque)
                                             <tr>
-                                                @foreach ($bloque->b_dia as $bdia)
-                                                <td class="{{ ($bdia->bd_estado == 'activo') ? 'bg-success text-light' : '' }} bloque cursor-pointer" data-bd="{{ $bdia->bd_id }}">
-                                                   {{ $bloque->inicio }}
-                                                </td>
-                                                @endforeach
+                                                @forelse ($bloque->b_dia as $bdia)
+                                                    <td class="{{ ($bdia->bd_estado == 'ACTIVO') ? 'bg-success text-light' : '' }} bloque cursor-pointer" data-bd="{{ $bdia->bd_id }}">
+                                                        {{ $bloque->inicio }}
+                                                    </td>    
+                                                @empty
+                                                    <td colspan="7" class="text-center">Lo sentimos no existe un horario generado para generar un horario haga click en Nuevo</td>
+                                                    @break
+                                                @endforelse
                                             </tr>
                                             @endforeach    
                                             </tbody>

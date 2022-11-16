@@ -71,4 +71,5 @@ Route::group(['middleware' => ['auth']], function() {
     //CONFIG CALENDARIO
     Route::resource('/bloque-dia', BloqueDiaController::class);
     Route::get('/bloque-dia/config-agenda/{bdia}', [BloqueDiaController::class, 'config_agenda'])->name('config_agenda');
+    Route::get('/generar-agenda', [BloqueDiaController::class, 'generar_agenda'])->name('generar_agenda');
 });
