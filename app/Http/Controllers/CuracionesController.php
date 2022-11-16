@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Curaciones;
+use App\Models\Tratamiento;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,9 @@ class CuracionesController extends Controller
     }
     public function nuevo()
     {
-        return view('curaciones.create',);
+        $tipos_tratamiento=Tratamiento::select()->where('estado','=','ACTIVO')->get();
+        $tratamientos=$tipos_tratamiento;
+        return view('curaciones.create',compact('tratamientos'));
     }
     public function buscar_paciente(Request $request){
         $usuario = User::where('ci', $request->ci)->first();

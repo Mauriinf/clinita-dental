@@ -10,10 +10,10 @@ function buscar(e){
 
     const container = document.getElementById('modal_buscar_paciente');
     const myModal = new bootstrap.Modal(container);
-    
-    
+
+
     let ci = e.target.elements['ci'].value;
-    
+
     let url = `/curaciones/buscar-paciente/${ci}`;
 
     let nombres = document.getElementById('nombres');
@@ -29,10 +29,11 @@ function buscar(e){
         processData: false,
         success: function(data){
             console.log(data);
-            nombres.value = data.nombres;        
-            paterno.value = data.paterno;       
-            materno.value = data.materno;        
-            paciente.value = data.id;      
+            nombres.value = data.nombres;
+            paterno.value = data.paterno;
+            materno.value = data.materno;
+            paciente.value = data.id;
+            $('#modal_buscar_paciente').hide();
         }
     });
 }

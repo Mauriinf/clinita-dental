@@ -441,12 +441,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const posicaoX = definePosicionXInicialDiente(index)
             dibujarDiente(posicaoX, posicoesPadrao.posicaoYInicialDente)
         }
-
         for (let index = 0; index < 16; index++) {
             const posicaoX = definePosicionXInicialDiente(index)
             dibujarDiente(posicaoX, posicoesPadrao.margemYEntreDentes + tamanhoDente + posicoesPadrao.posicaoYInicialDente)
         }
-
         numeroDientes.superior.forEach((numero, index) => {
             const posicaoX = definePosicaoXInicialQuadrado(index)
             dibujarCuadradoNumDiente({
@@ -742,10 +740,9 @@ document.addEventListener('DOMContentLoaded', () => {
             largura: (camada1.width * 70) / tamanhoTelaReferencia,
             altura: (camada1.width * 150) / tamanhoTelaReferencia
         }
-
-
         posicoesPadrao.margemXEntreDentes = (camada1.width * 8) / tamanhoTelaReferencia
         posicoesPadrao.margemYEntreDentes = (camada1.width * 200) / tamanhoTelaReferencia
+
         posicoesPadrao.posicaoYInicialDente = (camada1.width * 50) / tamanhoTelaReferencia;//altura margen inicial
 
         tamanhoColuna = camada1.width / 16

@@ -45,7 +45,7 @@
                                 <div class="input-group-prepend pull-right btnagregar">
                                     <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modal_buscar_paciente">
                                         <i data-feather='search'></i>
-                                        Buscar    
+                                        Buscar
                                     </button>
                                 </div>
                             </div>
@@ -199,7 +199,7 @@
         <!-- Basic Horizontal form layout section end -->
 
         <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog" style="max-width: 50%;">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalLabel">Adicionar procedimiento</h5>
@@ -233,8 +233,8 @@
                                 <textarea rows="5" id="informacoesAdicionais" maxlength="5000" class="form-control"></textarea>
                             </div>
                             <div class="form-group col-md-1 d-inline mt-2" style="text-align: center; margin: auto;">
-                                <a id="botaoAdicionar" class="form-control btn-sigsaude btnCorNovo">
-                                    <i class="fas fa-plus"></i>
+                                <a id="botaoAdicionar" class="form-control btn btn-primary btnCorNovo">
+                                    <i data-feather='plus'></i> Agregar
                                 </a>
                             </div>
                         </div>
@@ -248,11 +248,13 @@
                                                     <th>Nombre</th>
                                                     <th>Color</th>
                                                     <th>Informacion Adicional</th>
+                                                    <th>Costo Ref.</th>
                                                     <th class="text-center">Acción</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="bodyProcedimentos">
                                                 <tr>
+                                                    <td></td>
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
@@ -266,7 +268,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Guardar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -300,4 +302,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{!! asset('odontograma/odontograma.js') !!}"></script>
     <script src="{!! asset('js/buscar_paciente.js') !!}"></script>
+    <script>
+        let tratamientos=JSON.parse('<?php echo json_encode($tratamientos); ?>');
+        const options = tratamientos.map(problema => {
+                return `\n<option value='${problema.id}'>${problema.descripcion}</option>`
+        })
+        document.querySelector("#nomeProcedimento").innerHTML += options
+        document.querySelector("#nomeProcedimento").addEventListener('change', (event) => {
+                let procedimento = document.querySelector("#nomeProcedimento")
+                if (procedimento.value !== '') {
+                    procedimento = tratamientos.find(problemaAtual => problemaAtual.id === parseInt(procedimento.value));
+                    document.querySelector("#cor").value = procedimento.color
+                } else {
+                    document.querySelector("#cor").disabled = true
+                    document.getElementById("colOutroProcedimento").style.display = 'none'
+                }
+        })
+    </script>
 @endpush
