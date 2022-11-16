@@ -66,9 +66,9 @@
                     <i data-feather='clock'></i><span class="menu-title text-truncate" data-i18n="Citas"></span>Mis Citas
                 </a>
             </li>
-            <li class=" nav-item {{ $activePage == 'citas' ? ' active' : '' }} ">
+            <li class=" nav-item {{ $activePage == 'b_dia' ? ' active' : '' }} ">
                 <a class="d-flex align-items-center" href="{{ route('bloque-dia.index') }}">
-                    <i data-feather='clock'></i><span class="menu-title text-truncate" data-i18n="Citas"></span>Conf. Horario
+                    <i data-feather='bookmark'></i><span class="menu-title text-truncate" data-i18n="Citas"></span>Conf. Horario
                 </a>
             </li>
             <li class=" nav-item {{ $activePage == 'curaciones' ? ' active' : '' }} ">

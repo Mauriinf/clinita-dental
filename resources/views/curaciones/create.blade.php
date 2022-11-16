@@ -40,7 +40,15 @@
                 <div class="col-md-6 col-12" id="prueba">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Horizontal Form</h4>
+                            <h4 class="card-title">Datos personales</h4>
+                            <div class="pull-right">
+                                <div class="input-group-prepend pull-right btnagregar">
+                                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modal_buscar_paciente">
+                                        <i data-feather='search'></i>
+                                        Buscar    
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -63,8 +71,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <form action="{{ url('guardar/citas') }}" method="post">
+                            <form action="{{ route('guardar_consulta') }}" method="POST">
                                 @csrf
+                                <input type="hidden" name="paciente" id="paciente">
                                 <div class="row">
                                     <div class="col-lg-12 col-xl-12 col-md-12 col-12">
                                         <div class="mb-1">
@@ -125,7 +134,7 @@
                                         <div class="mb-1">
                                           <label for="fecha_inicio">Fecha Inicio</label>
                                           <div class="input-group input-group-alternative">
-                                            <input type="text" id="inicio" class="form-control flatpickr-basic" placeholder="YYYY-MM-DD" value="{{ old('fecha_inicio', date('Y-m-d')) }}" data-date-format="Y-m-d"/>
+                                            <input type="text" id="inicio" name="f_inicio" class="form-control flatpickr-basic" placeholder="YYYY-MM-DD" value="{{ old('fecha_inicio', date('Y-m-d')) }}" data-date-format="Y-m-d"/>
                                             @if ($errors->has('fecha_inicio'))
                                                 <span class="help-block alert alert-danger">
                                                     <strong>{{ $errors->first('fecha_inicio') }}</strong>
@@ -138,7 +147,7 @@
                                         <div class="mb-1">
                                           <label for="fecha_fin">Fecha Final</label>
                                           <div class="input-group input-group-alternative">
-                                            <input type="text" id="fin" class="form-control flatpickr-basic" placeholder="YYYY-MM-DD" value="{{ old('fecha_fin', date('Y-m-d')) }}" data-date-format="Y-m-d"/>
+                                            <input type="text" id="fin" name="f_fin" class="form-control flatpickr-basic" placeholder="YYYY-MM-DD" value="{{ old('fecha_fin', date('Y-m-d')) }}" data-date-format="Y-m-d"/>
                                             @if ($errors->has('fecha_fin'))
                                                 <span class="help-block alert alert-danger">
                                                     <strong>{{ $errors->first('fecha_fin') }}</strong>
@@ -262,6 +271,10 @@
                 </div>
             </div>
         </div>
+
+        <!-- start modal -->
+        <!-- Modal -->
+        @include('curaciones.buscar_paciente')
     </div>
 </div>
 @endsection
@@ -286,4 +299,5 @@
     <!-- END: Page JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{!! asset('odontograma/odontograma.js') !!}"></script>
+    <script src="{!! asset('js/buscar_paciente.js') !!}"></script>
 @endpush

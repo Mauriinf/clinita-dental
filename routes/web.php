@@ -72,4 +72,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('/bloque-dia', BloqueDiaController::class);
     Route::get('/bloque-dia/config-agenda/{bdia}', [BloqueDiaController::class, 'config_agenda'])->name('config_agenda');
     Route::get('/generar-agenda', [BloqueDiaController::class, 'generar_agenda'])->name('generar_agenda');
+    // curaciones
+    Route::get('/curaciones/buscar-paciente/{ci}', [CuracionesController::class, 'buscar_paciente'])->name('buscar_paciente');
+    Route::post('/curaciones/guardar-consulta', [CuracionesController::class, 'guardar_consulta'])->name('guardar_consulta');
 });
