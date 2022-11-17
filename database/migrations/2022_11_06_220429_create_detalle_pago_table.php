@@ -13,14 +13,14 @@ class CreateDetallePagoTable extends Migration
      */
     public function up()
     {
-        Schema::create('detalle_pago', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_curacion');
-            $table->foreign('id_curacion')->references('id')->on('curaciones');
-            $table->date('fecha');
-            $table->decimal('pago',8,2);
-            $table->timestamps();
-        });
+        // Schema::create('detalle_pago', function (Blueprint $table) {
+        //     $table->bigIncrements('id');
+        //     $table->unsignedBigInteger('id_curacion');
+        //     $table->foreign('id_curacion')->references('id')->on('curaciones');
+        //     $table->date('fecha');
+        //     $table->decimal('pago',8,2);
+        //     $table->timestamps();
+        // });
     }
 
     /**

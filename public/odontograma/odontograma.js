@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-
+    let id_consulta= $('#id_consulta').val();
     const camada1 = document.querySelector('#camada1Odontograma')
     const contexto1 = camada1.getContext('2d')
 
@@ -101,16 +101,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     url: "/guardar/odontograma",
                     type: 'POST',
                     dataType : 'json',
-                    data: { id_consulta:1,id_tratamiento:this.nome,numeroDiente:this.numeroDente,parteDiente:this.faceDente,obsevacion:this.informacoesAdicionais},
+                    data: { id_consulta:id_consulta,id_tratamiento:this.nome,numeroDiente:this.numeroDente,parteDiente:this.faceDente,obsevacion:this.informacoesAdicionais},
                     success: function(data)
                     {
-                        // Swal.fire({
-                        //     type: "success",
-                        //         title: "¡Se guardo exitosamente!",
-                        //         showConfirmButton: true,
-                        //         confirmButtonText: "Ok"
-
-                        // })
                     },
                 });
                 procedimentos =recuperarDatos()
@@ -396,6 +389,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     </td>
                     <td>
                         ${item.costo_referencial} Bs.
+                    </td>
+                    <td>
+                        <input id=\'dpago${item.id}\' type=\'number\' step=\'any\' min=\'0\' class=\'pagos form-control input-sm\' style=\'width:100%\' >
+                        <input id=\'dpagoid${item.id}\' type=\'hidden\' step=\'any\' class=\'idsPagos\' value=\'${item.id}\'>
                     </td>
                     <td>
                         <a onclick="apagar('${item.id}','${item.nome}', ${item.numeroDente}, ${item.faceDente})" class="btn btn-danger btn-sm">
@@ -731,7 +728,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         //window.innerWidth - 25
         camada1.width = camada2.width = camada3.width = camada4.width = document.getElementById('canva-group').clientWidth - 25
-        const altura = (camada1.width * alturaTelaReferencia) / tamanhoTelaReferencia-100;//altura
+        const altura = (camada1.width * alturaTelaReferencia) / tamanhoTelaReferencia;//altura
         camada1.height =camada2.height =camada3.height=camada4.height = altura;
 
         valoresBase = {
@@ -821,13 +818,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     //Recuperar datos desde la base de datos
     const recuperarDatos=()=>{
+
         lista=[];
         jQuery.ajax({
             url: "/lista/odontograma",
             type: 'GET',
             dataType : 'json',
             cache: 'true',
-            data: { id_consulta:1},
+            data: { id_consulta:id_consulta},
             success: function(data)
             {
                 for(var n = 0; n<data.length; n++){

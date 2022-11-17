@@ -33,7 +33,7 @@ function buscar(e){
             paterno.value = data.paterno;
             materno.value = data.materno;
             paciente.value = data.id;
-            $('#modal_buscar_paciente').hide();
+            myModal.hide();
         }
     });
 }

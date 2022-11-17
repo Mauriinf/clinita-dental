@@ -13,14 +13,16 @@ class CreateCuracionesTable extends Migration
      */
     public function up()
     {
-        Schema::create('curaciones', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_odontograma');
-            $table->foreign('id_odontograma')->references('id')->on('odontograma');
-            $table->string('estado');
-            $table->string('observacion');
-            $table->timestamps();
-        });
+        // Schema::create('curaciones', function (Blueprint $table) {
+        //     $table->bigIncrements('id');
+        //     $table->unsignedBigInteger('id_odontograma');
+        //     $table->foreign('id_odontograma')->references('id')->on('odontograma');
+        //     $table->string('estado');
+        //     $table->date('fecha');
+        //     $table->decimal('pago',8,2);
+        //     $table->string('observacion');
+        //     $table->timestamps();
+        // });
     }
 
     /**

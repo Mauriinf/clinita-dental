@@ -16,7 +16,7 @@
 @endpush
 @section('content')
 <div class="content-wrapper container-xxl p-0">
-    <div class="content-header row">
+    {{-- <div class="content-header row">
         <div class="content-header-left col-md-9 col-12 mb-2">
             <div class="row breadcrumbs-top">
                 <div class="col-12">
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="content-body">
         <!-- Basic Horizontal form layout section start -->
         <section id="basic-horizontal-layouts">
@@ -179,14 +179,14 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <button class="btn  btn-primary" type="submit"><i class="fa fa-save"></i> Guardar </button>
+                                        <button class="btn  btn-primary" type="submit"><i data-feather='save'></i> Guardar </button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-12">
+                <div class="col-md-6 col-12 col-sm-12">
                     <div id="canva-group" class="col-lg-12 col-md-12 col-sm-12">
                         <canvas id="camada1Odontograma"></canvas>
                         <canvas id="camada2Odontograma"></canvas>

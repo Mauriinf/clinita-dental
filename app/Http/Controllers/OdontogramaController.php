@@ -10,11 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class OdontogramaController extends Controller
 {
-    public function odontograma(){
+    public function odontograma($id){
         $tipos_tratamiento=Tratamiento::select()->where('estado','=','ACTIVO')->get();
-        $dientes=Diente::all();
         $tratamientos=$tipos_tratamiento;
-        return view('odontograma.index',compact('dientes','tratamientos'));
+        return view('odontograma.index',compact('tratamientos','id'));
     }
     public function lista_odontograma(Request $request){
         $id_consulta=$request->id_consulta;
@@ -42,6 +41,10 @@ class OdontogramaController extends Controller
     }
     public function eliminar_odontograma(Request $request){
         $res=Odontograma::delete_odontograma($request->id);
+        return $res;
+    }
+    public function actualizar_pago(Request $request){
+        $res=Odontograma::pagos($request->id,$request->pago);
         return $res;
     }
 }

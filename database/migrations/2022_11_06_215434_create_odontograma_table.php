@@ -22,6 +22,9 @@ class CreateOdontogramaTable extends Migration
             $table->integer('id_diente');
             $table->integer('parte_diente');
             $table->string('observacion');
+            $table->string('estado');
+            $table->date('fecha');
+            $table->decimal('pago',8,2);
             $table->timestamps();
         });
     }

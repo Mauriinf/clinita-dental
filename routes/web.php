@@ -62,10 +62,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/tratamientos/{id}/show',[TratamientoController::class,'show']);
     ///curaciones
     Route::get('consultas', [CuracionesController::class,'index'])->name('curaciones.index');
+    Route::get('lista/consultas', [CuracionesController::class,'lista_consultas'])->name('lista.consultas');
     Route::get('nueva/consulta', [CuracionesController::class,'nuevo'])->name('nueva.consulta');
     //Odontograma
-    Route::get('/nuevo/odontograma',[OdontogramaController::class,'odontograma']);
+    Route::get('/nuevo/odontograma/{id}',[OdontogramaController::class,'odontograma'])->name('nuevo.odontograma');
     Route::get('/lista/odontograma',[OdontogramaController::class,'lista_odontograma'])->name('list.odontograma');
+    Route::post('/actualizar/pago',[OdontogramaController::class,'actualizar_pago'])->name('actualizar.pago');;
     Route::post('/guardar/odontograma',[OdontogramaController::class,'guardar_odontograma']);
     Route::post('/eliminar/odontograma',[OdontogramaController::class,'eliminar_odontograma']);
     //CONFIG CALENDARIO

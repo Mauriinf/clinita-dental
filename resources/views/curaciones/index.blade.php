@@ -15,6 +15,11 @@
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/css/plugins/extensions/ext-component-sweet-alerts.css') !!}">
     <!-- END: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/vendors/css/forms/select/select2.min.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/vendors/css/pickers/pickadate/pickadate.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/css/plugins/forms/pickers/form-flat-pickr.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/css/plugins/forms/pickers/form-pickadate.css') !!}">
 @endpush
 @section('content')
 <div class="content-wrapper p-0">
@@ -28,10 +33,14 @@
                         </h4>
                         <div class="pull-right">
                             <div class="input-group-prepend pull-right btnagregar">
-                                <a href="{{route('nueva.consulta')}}"  class="btn btn-sm btn-primary">
+                                {{-- <a href="{{route('nueva.consulta')}}"  class="btn btn-sm btn-primary">
                                     <i data-feather='plus'></i>
                                     Nuevo
-                                </a>
+                                </a> --}}
+                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modal-message">
+                                    <i data-feather='plus'></i>
+                                    Nuevo
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -43,11 +52,11 @@
                                         <table class="table table-striped table-bordered table-td-valign-middle dt-responsive" id="dt-ListaEspec">
                                             <thead class="thead">
                                                 <tr>
-                                                    <th>Nº</th>
+
                                                     <th>C.I. Paciente</th>
                                                     <th>Paciente</th>
                                                     <th>Doctor</th>
-                                                    <th>Motivos</th>
+
                                                     <th>Diagnosticos</th>
                                                     <th>Medicamentos</th>
                                                     <th>Alergias</th>
@@ -58,54 +67,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody >
-                                                @foreach ($consultas as $row)
-                                                    <tr>
-                                                    <th >
-                                                        {{ $loop->iteration }}
-                                                    </th>
-                                                    <th scope="row">
-                                                        {{ $row->ci_paciente }}
-                                                    </th>
-                                                    <td>
-                                                        {{ $row->nombre_paciente }}
-                                                    </td>
-                                                    <td>
-                                                        {{ $row->nombre_doctor }}
-                                                    </td>
-                                                    <td>
-                                                        {{ $row->motivo }}
-                                                    </td>
-                                                    <td>
-                                                        {{ $row->diagnostico }}
-                                                    </td>
-                                                    <td>
-                                                        {{ $row->medicamentos }}
-                                                    </td>
-                                                    <td>
-                                                        {{ $row->alergias }}
-                                                    </td>
-                                                    <td>
-                                                        {{ $row->enfermedades }}
-                                                    </td>
-                                                    <td>
-                                                        {{ $row->costo_total }}
-                                                    </td>
-                                                    <td>
-                                                        {{ $row->estado }}
-                                                    </td>
-                                                    <td>
-                                                        <a  href="javascript:void(0)"  class="btn btn-sm btn-primary" onclick=""><i data-feather='edit'></i>Editar</a>
 
-                                                        <a href="javascript:void(0)"  class="btn btn-sm btn-danger" onclick=""><i data-feather='trash-2' ></i>Eliminar</a>
-
-                                                        <form id="delete-form" method="post" class="d-none">
-
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        </form>
-                                                    </td>
-                                                    </tr>
-                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -119,7 +81,163 @@
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="modal-message">
+    <div class="modal-dialog" style="max-width: 40%;" role="document">
+        <div class="modal-content" >
+            <div class="modal-header">
+                <h4 class="modal-title">Nueva consulta</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <form onSubmit="return false" id="formAdd" action="{{ route('guardar_consulta') }}">
+                <div class="modal-body">
+                    {{ csrf_field() }}
+                    <div class="alert alert-danger print-error-msg" style="display:none">
+                        <ul></ul>
+                    </div>
+                    <input type="hidden" value="" name="id_paciente" id="id_paciente">
+                    <div class="form-group row">
+                        <div class="col-md-12 text-center">
+                            <div class="row">
+                                <div class="col-md-8 offset-sm-3">
+                                    <div class="mb-1 ">
+                                        <div class="input-group " >
+                                            <span class="input-group-text" id="carnet">C.I.</span>
+                                            <input type="text" class="form-control" name="ci" id="ci"/>
+                                            <button type="button" class="btn btn-primary" onclick="f_buscar()"><i class="fa fa-search-minus"></i> Buscar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-md-12">
+                                    <div class="mb-1">
+                                        <div class="input-group " >
+                                            <span class="input-group-text">
+                                                Nombre(s)
+                                            </span>
+                                            <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Nombres" value="" disabled/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-md">
+                                    <div class="mb-1">
+                                        <div class="input-group" >
+                                            <span class="input-group-text">
+                                                Ap. Paterno
+                                            </span>
+                                            <input type="text" class="form-control" id="paterno" name="paterno" placeholder="Apellido Paterno" value="" disabled/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-md">
+                                    <div class="mb-1">
+                                        <div class="input-group" >
+                                            <span class="input-group-text">
+                                                Ap. Materno
+                                            </span>
+                                            <input type="text" class="form-control" id="materno" name="materno" placeholder="Apellido Materno" value="" disabled/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md">
+                                    <div class="mb-1">
+                                        <div class="input-group" >
+                                            <span class="input-group-text">
+                                                Diagnostico
+                                            </span>
+                                            <input type="text" class="form-control" placeholder="Diagnostico" name="diagnostico" id="diagnostico" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md">
+                                    <div class="mb-1">
+                                        <div class="input-group" >
+                                            <span class="input-group-text">
+                                                Medicamentos
+                                            </span>
+                                            <input type="text" class="form-control" placeholder="Medicamentos" name="medicamentos" id="medicamentos"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-md">
+                                    <div class="mb-1">
+                                        <div class="input-group " >
+                                            <span class="input-group-text">
+                                                Alergias
+                                            </span>
+                                            <input type="text" class="form-control" placeholder="Alergias" name="alergias" id="alergias" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-md">
+                                    <div class="mb-1">
+                                        <div class="input-group " >
+                                            <span class="input-group-text">
+                                                Enfermedades
+                                            </span>
+                                            <input type="text" class="form-control" placeholder="Enfermedades" name="enfermedades" id="enfermedades"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-space-10">
+                                <div class="col-md">
+                                    <div class="mb-1">
+                                        <div class="input-group " >
+                                            <span class="input-group-text">
+                                                Fecha Ini.
+                                            </span>
+                                            <input type="text" id="inicio" name="f_inicio" class="form-control flatpickr-basic" placeholder="YYYY-MM-DD" value="{{ old('fecha_inicio', date('Y-m-d')) }}" data-date-format="Y-m-d"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md">
+                                    <div class="mb-1">
+                                        <div class="input-group" >
+                                            <span class="input-group-text">
+                                                Fecha Fin
+                                            </span>
+                                            <input type="text" id="fin" name="f_fin" class="form-control flatpickr-basic" placeholder="YYYY-MM-DD" value="{{ old('fecha_fin', date('Y-m-d')) }}" data-date-format="Y-m-d"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-space-10">
+                                <div class="col-md">
+                                    <div class="mb-1">
+                                        <div class="input-group" >
+                                            <span class="input-group-text">
+                                                Costo Total
+                                            </span>
+                                            <input type="text" class="form-control" id="costo" name="costo" placeholder="Costo Total" value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times-circle"></i> Cerrar</a>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 @endsection
 
@@ -147,8 +265,16 @@
     <script src="{!! asset('app-assets/vendors/js/extensions/polyfill.min.js') !!}"></script>
     <script src="{!! asset('app-assets/js/scripts/extensions/ext-component-sweet-alerts.js') !!}"></script>
     <!-- END: Page JS-->
-    <script src="{{ asset('js/especialidad.js') }}"></script>
-    <script src="{{ asset('js/sonrident.js') }}"></script>
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{!! asset('app-assets/vendors/js/pickers/pickadate/picker.js') !!}"></script>
+    <script src="{!! asset('app-assets/vendors/js/pickers/pickadate/picker.date.js') !!}"></script>
+    <script src="{!! asset('app-assets/vendors/js/pickers/pickadate/picker.time.js') !!}"></script>
+    <script src="{!! asset('app-assets/vendors/js/pickers/pickadate/legacy.js') !!}"></script>
+    <script src="{!! asset('app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js') !!}"></script>
+    <!-- END: Page Vendor JS-->
+    <!-- BEGIN: Page JS-->
+    <script src="{!! asset('app-assets/js/scripts/forms/pickers/form-pickers.js') !!}"></script>
+    <!-- END: Page JS-->
 @endpush
 @push('scripts-page')
 <script>
@@ -159,9 +285,105 @@ $(document).ready( function () {
         language: {
             "url": "/app-assets/js/scripts/tables/spanish.json"
         },
-
+        "ajax": {
+            url: "{{route('lista.consultas')}}",
+            type: 'GET',
+        },
+        columns: [
+                    { data: 'ci_paciente', name: 'ci_paciente'},
+                    { data: 'nombre_paciente' , name: 'nombre_paciente'},
+                    { data: 'nombre_doctor' , name: 'nombre_doctor'},
+                    { data: 'diagnostico' , name: 'diagnostico'},
+                    {data: 'medicamentos', name: 'medicamentos'},
+                    {data: 'alergias', name: 'alergias'},
+                    {data: 'enfermedades', name: 'enfermedades'},
+                    {data: 'costo_total', name: 'costo_total'},
+                    {data: 'estado', name: 'estado'},
+                { data: 'botones', "orderable": false}
+        ],
+        error: function(jqXHR, textStatus, errorThrown){
+            $("#dt-ListaEspec").DataTable().clear().draw();
+        }
     });
 });
+function f_buscar(){
+    let nombres = document.getElementById('nombres');
+    let paterno = document.getElementById('paterno');
+    let materno = document.getElementById('materno');
+    let paciente = document.getElementById('id_paciente');
+    var ci=$('#ci').val();
+    $.ajax({
+        url: `/curaciones/buscar-paciente/${ci}`,
+        type: 'GET',
+        data: {},
+        success: function(data)
+        {
+            if(data){
+                nombres.value = data.nombres;
+                paterno.value = data.paterno;
+                materno.value = data.materno;
+                paciente.value = data.id;
+            }else{
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "No se encontro el C.I."
+                });
+            }
+        }
+    });
+}
+$(document).on("submit" ,"#formAdd", function(e){
+        $.ajaxSetup({
+            header: $('meta[name="_token"]').attr('content')
+        });
+        e.preventDefault(e);
+        $.ajax({
+            type: 'POST',
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            dataType: 'json',
+            cache: false,
+        }).done(function (data) {
+            if (data.error) {
+                printErrorMsg(data,1);
+            } else {
+                if(data[0]==='OK'){
+                    Swal.fire({
+                        type: "success",
+                        title: "¡Registrado Correctamente!",
+                        showConfirmButton: true,
+                        confirmButtonText: "Ok"
 
+                    })
+                    $('#modal-message').modal('hide');
+                }else{
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: data[0]
+                    });
+                }
+                $(".print-error-msg").css('display','none');//ocultar div de errores
+            }
+            $('#dt-ListaEspec').DataTable().ajax.reload();
+        });
+    });
+function printErrorMsg (msg,accion) {
+    if(accion==1){
+        $(".print-error-msg").find("ul").html('');
+        $(".print-error-msg").css('display','block');
+        $.each( msg.error, function( key, value ) {//mostrar la lista de errores
+            $(".print-error-msg").find("ul").append('<li>'+value+'</li>');
+        });
+    }
+    else{
+        $(".print-error-msg-edit").find("ul").html('');
+        $(".print-error-msg-edit").css('display','block');
+        $.each( msg.error, function( key, value ) {//mostrar la lista de errores
+            $(".print-error-msg-edit").find("ul").append('<li>'+value+'</li>');
+        });
+    }
+}
 </script>
 @endpush

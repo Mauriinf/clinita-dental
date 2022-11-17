@@ -16,8 +16,8 @@ class CreateTratamientosTable extends Migration
         Schema::create('tratamientos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('descripcion');
-            $table->string('color');
-            $table->string('estado');
+            $table->string('color')->nullable();
+            $table->string('estado')->nullable();
             $table->decimal('costo',8,2);
             $table->timestamps();
         });

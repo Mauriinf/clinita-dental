@@ -25,10 +25,10 @@ class Curaciones extends Model
         'costo_total'
     ];
     public static function consultas(){
-        $query=DB::select ("SELECT us.ci as ci_paciente,(us.nombres || ' ' || us.paterno || ' ' || us.materno) as nombre_paciente,doc.ci as ci_doctor,(doc.nombres||' '||doc.paterno||' '||doc.materno) as nombre_doctor ,co.* FROM consultas co INNER JOIN users us
-                            ON us.id=co.id_cliente
-                            INNER JOIN users doc
-                            ON doc.id=co.id_doctor");
+        $query=DB::select ("SELECT us.ci as ci_paciente,CONCAT(us.nombres,' ',us.paterno,' ',us.materno) as nombre_paciente,doc.ci as ci_doctor,CONCAT(doc.nombres,' ',doc.paterno,' ',doc.materno) as nombre_doctor ,co.* FROM consultas co INNER JOIN users us
+                        ON us.id=co.id_cliente
+                        INNER JOIN users doc
+                        ON doc.id=co.id_doctor");
         return $query;
     }
 }
