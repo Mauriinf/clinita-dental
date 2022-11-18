@@ -31,18 +31,18 @@
                                 <h4 class="card-title">Mi Perfil</h4>
                             </div>
                             <div class="card-body py-2 my-25">
-                                <form class="validate-form pt-50" method="POST" action="{{ route('perfil.actualizar') }}">
+                                <form class="validate-form pt-50" method="POST" action="{{ route('perfil.actualizar') }}" enctype="multipart/form-data">
                                 <!-- header section -->
                                 <div class="d-flex">
                                     <a href="#" class="me-25">
-                                        <img src="../../../app-assets/images/portrait/small/avatar-s-11.jpg" id="account-upload-img" class="uploadedAvatar rounded me-50" alt="profile image" height="100" width="100" />
+                                        <img src="{{ Auth::user()->avatar ? asset('avatar/'.Auth::user()->avatar) : asset('images/user.png')}}" id="avatar-img" class="uploadedAvatar rounded me-50" alt="profile image" height="100" width="100" />
                                     </a>
                                     <!-- upload and reset button -->
                                     <div class="d-flex align-items-end mt-75 ms-1">
                                         <div>
                                             <label for="avatar" class="btn btn-sm btn-primary mb-75 me-75">Subir</label>
-                                            <input type="file" id="avatar" hidden accept="image/*" />
-                                            <button type="button" id="account-reset" class="btn btn-sm btn-outline-secondary mb-75">Cancelar</button>
+                                            <input type="file" id="avatar" name="avatar" hidden accept="image/*" />
+                                            <button type="button" id="avatar-reset" class="btn btn-sm btn-outline-secondary mb-75">Cancelar</button>
                                             <p class="mb-0">Tipos de archivos permitidos: png, jpg, jpeg.</p>
                                         </div>
                                     </div>
@@ -162,14 +162,26 @@
 <script>
                 //dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex mr-0 mr-sm-3"l><"d-block d-lg-inline-flex"B>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>',
 $(document).ready( function () {
-    $('#dt-ListaEspec').DataTable({
-        dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex mr-0 mr-sm-3"l><"d-block d-lg-inline-flex"B>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>',
-        language: {
-            "url": "/app-assets/js/scripts/tables/spanish.json"
-        },
+    const $seleccionArchivos = document.querySelector("#avatar"),
+    $imagenPrevisualizacion = document.querySelector("#avatar-img");
 
+    // Escuchar cuando cambie
+    $seleccionArchivos.addEventListener("change", () => {
+    // Los archivos seleccionados, pueden ser muchos o uno
+    const archivos = $seleccionArchivos.files;
+    // Si no hay archivos salimos de la función y quitamos la imagen
+    if (!archivos || !archivos.length) {
+        $imagenPrevisualizacion.src = "";
+        return;
+    }
+    // Ahora tomamos el primer archivo, el cual vamos a previsualizar
+    const primerArchivo = archivos[0];
+    // Lo convertimos a un objeto de tipo objectURL
+    const objectURL = URL.createObjectURL(primerArchivo);
+    // Y a la fuente de la imagen le ponemos el objectURL
+    $imagenPrevisualizacion.src = objectURL;
     });
 });
-document.querySelector("#color").disabled = false
+
 </script>
 @endpush

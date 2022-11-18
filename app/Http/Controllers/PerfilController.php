@@ -19,10 +19,17 @@ class PerfilController extends Controller
             'telefono'  => 'required',
             'direccion' => 'required'
         ]);
+        
+        $nombre_imagen = time().'.'.$request->avatar->extension();
+
+        // Public Folder
+        $request->avatar->move(public_path('avatar'), $nombre_imagen);
+        
         $usuario = User::find(Auth::user()->id);
         $usuario->email = $request->email;
         $usuario->telefono = $request->telefono;
         $usuario->direccion = $request->direccion;
+        $usuario->avatar = $nombre_imagen;
         $usuario->save();
         return redirect()->route('perfil.index');
     }

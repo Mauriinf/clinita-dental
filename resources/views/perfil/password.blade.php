@@ -89,14 +89,6 @@
                                         @endif
                                     </div>
                                     <div class="col-12">
-                                        <p class="fw-bolder">Password requirements:</p>
-                                        <ul class="ps-1 ms-25">
-                                            <li class="mb-50">Minimum 8 characters long - the more, the better</li>
-                                            <li class="mb-50">At least one lowercase character</li>
-                                            <li>At least one number, symbol, or whitespace character</li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-12">
                                         <button type="submit" class="btn btn-primary me-1 mt-1">Guardar Cambios</button>
                                         <button type="reset" class="btn btn-outline-secondary mt-1">Cancelar</button>
                                     </div>
