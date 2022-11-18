@@ -16,11 +16,9 @@ class BloqueDiaController extends Controller
         $bdu_existe = ( $b_usuario > 0 ) ? false : true;
         $dias = Dia::all();
         $bloques = Bloque::all();
-
         foreach($bloques as $bloque){
-            $bloque->b_dia = (object)BloqueDia::get_agenda($bloque->id);
+            $bloque->b_dia = (object)BloqueDia::get_agenda($bloque->id,Auth::user()->id);
         }
-
         return view('admin.bloque_dia.index', compact('bloques', 'bdu_existe'));
     }
 
@@ -68,7 +66,7 @@ class BloqueDiaController extends Controller
         if($b_usuario === 0){
             $dias = Dia::all();
             $bloques = Bloque::all();
-            
+
             foreach($dias as $dia)
             {
                 foreach($bloques as $bloque){

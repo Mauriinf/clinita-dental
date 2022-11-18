@@ -137,14 +137,14 @@ class CitaController extends Controller
                     if ($user->hasRole('Admin')) {
                         $paciente_id = $request->input('paciente');
                      }else{
-                        $paciente_id = Auth::user()->id();
+                        $paciente_id = Auth::user()->id;
                      }
                      $cita = Cita::create([
                          'descripcion'    => $request->input('descripcion'),
                          'id_especialidad'=> $request->input('especialidad'),
                          'id_usuario'     => $paciente_id,
                          'fecha'          => $request->input('fecha_cita'),
-                         'estado'         => 'RESERVADO',
+                         'estado'         => 'CONFIRMADO',
                          'id_bloque_dia'  => $request->input('id_bloque')
                      ]);
                      $notificacion='La cita se ha registrado Correctamente';

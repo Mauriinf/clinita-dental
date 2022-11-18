@@ -379,7 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const tr = `
                 <tr>
                     <td>
-                        ${item.nome}
+                        ${item.nome} (${item.costo_referencial} Bs.)
                     </td>
                     <td>
                         <input type="color" disabled class="form-control form-control-color" value="${item.cor}">
@@ -388,15 +388,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         ${item.informacoesAdicionais || 'NO CONFIRMADO'}
                     </td>
                     <td>
-                        ${item.costo_referencial} Bs.
-                    </td>
-                    <td>
-                        <input id=\'dpago${item.id}\' type=\'number\' step=\'any\' min=\'0\' class=\'pagos form-control input-sm\' style=\'width:100%\' >
+                        <input id=\'dpago${item.id}\' type=\'number\' step=\'any\' min=\'0\' class=\'pagos form-control input-sm\' style=\'width:100%\' value=\'${item.pago}\'>
                         <input id=\'dpagoid${item.id}\' type=\'hidden\' step=\'any\' class=\'idsPagos\' value=\'${item.id}\'>
                     </td>
                     <td>
                         <a onclick="apagar('${item.id}','${item.nome}', ${item.numeroDente}, ${item.faceDente})" class="btn btn-danger btn-sm">
-                            <i data-feather="trash"></i>
+                            Eliminar
                         </a>
                     </td>
                 </tr>
@@ -839,9 +836,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     obj ['numeroDente']=data[n].id_diente;
                     obj ['faceDente']=data[n].parte_diente;
                     obj ['informacoesAdicionais']=data[n].observacion;
+                    obj ['pago']=data[n].pago;
                     lista.push(obj);
                 }
-
             },
             async: false // <- esto lo convierte en síncrono
         });

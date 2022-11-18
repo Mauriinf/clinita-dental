@@ -28,7 +28,8 @@ class OdontogramaController extends Controller
                     'odontograma.parte_diente',
                     'tratamientos.descripcion',
                     'tratamientos.costo',
-                    'tratamientos.color'
+                    'tratamientos.color',
+                    'odontograma.pago'
                 )
                 ->where('id_consulta','=',$id_consulta)
                 ->get();

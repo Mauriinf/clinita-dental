@@ -10,8 +10,9 @@ class Odontograma extends Model
     use HasFactory;
     protected $table='odontograma';
     public static function save_info($id_consulta,$id_tratamiento,$numeroDiente,$parteDiente,$obsevacion){
-        $query=DB::select ("INSERT INTO odontograma (id_consulta,id_tratamiento, id_diente, parte_diente, observacion,estado)
-        VALUES ('$id_consulta', '$id_tratamiento', '$numeroDiente', '$parteDiente', '$obsevacion', 'PROCESO') ");
+        $fecha = date('Y/m/d');
+        $query=DB::select ("INSERT INTO odontograma (id_consulta,id_tratamiento, id_diente, parte_diente, observacion,estado,fecha,pago)
+        VALUES ('$id_consulta', '$id_tratamiento', '$numeroDiente', '$parteDiente', '$obsevacion', 'PROCESO','$fecha',0) ");
         return $query;
     }
     public static function delete_odontograma($id){
@@ -20,7 +21,7 @@ class Odontograma extends Model
 
     }
     public static function pagos($id,$pago){
-        $fecha = date('d/m/Y h:i:s A', time());
+        $fecha = date('Y/m/d');
         $query=DB::select ("UPDATE odontograma SET pago = '$pago', fecha = '$fecha' where id='$id' ");
         return $query;
     }

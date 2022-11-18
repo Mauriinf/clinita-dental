@@ -56,12 +56,9 @@
                                                     <th>C.I. Paciente</th>
                                                     <th>Paciente</th>
                                                     <th>Doctor</th>
-
                                                     <th>Diagnosticos</th>
-                                                    <th>Medicamentos</th>
-                                                    <th>Alergias</th>
-                                                    <th>Enfermedades</th>
                                                     <th>Costo Total</th>
+                                                    <th>Total Pagado</th>
                                                     <th>Estado</th>
                                                     <th >Action</th>
                                                 </tr>
@@ -294,10 +291,8 @@ $(document).ready( function () {
                     { data: 'nombre_paciente' , name: 'nombre_paciente'},
                     { data: 'nombre_doctor' , name: 'nombre_doctor'},
                     { data: 'diagnostico' , name: 'diagnostico'},
-                    {data: 'medicamentos', name: 'medicamentos'},
-                    {data: 'alergias', name: 'alergias'},
-                    {data: 'enfermedades', name: 'enfermedades'},
                     {data: 'costo_total', name: 'costo_total'},
+                    {data: 'total_pagado', name: 'total_pagado'},
                     {data: 'estado', name: 'estado'},
                 { data: 'botones', "orderable": false}
         ],
