@@ -55,9 +55,44 @@ class CuracionesController extends Controller
                 'fecha_final' => $request->f_fin,
                 'alergias' => $request->alergias,
                 'enfermedades' => $request->enfermedades,
-                'estado' => 'ACTIVO',
+                'estado' => 'PROCESO',
                 'costo_total' => $request->costo
             ]);
+            array_push($respuesta,'OK');
+            return ($respuesta);
+        }else{
+            return response()->json(['error'=>$validator->errors()]);
+            //return response()->json($validator->errors()->all());
+        }
+
+    }
+    public function editar_consulta(Request $request){
+        $roles=[
+            'costo'=>'required',
+            'id_paciente'=>'required|numeric',
+           ];
+           $mensajes=[
+            'costo.required'=>'El campo costo es requerido',
+            'id_paciente.required'=>'Seleccione a un Paciente',
+            'id_paciente.numeric'=>'Seleccione a un Paciente',
+           ];
+               $validator = Validator::make($request->all(),$roles,$mensajes );
+
+        $respuesta=Array();
+        if ($validator->passes()) {
+            $curaciones = Curaciones::find($request->id_consulta);
+            $curaciones->id_cliente = $request->id_paciente;
+            $curaciones->id_doctor = Auth::user()->id;
+            $curaciones->diagnostico = $request->diagnostico;
+            $curaciones->medicamentos = $request->medicamentos;
+            $curaciones->fecha_inicio = $request->f_inicio;
+            $curaciones->fecha_final = $request->f_fin;
+            $curaciones->alergias = $request->alergias;
+            $curaciones->enfermedades = $request->enfermedades;
+            $curaciones->estado = $request->estado;
+            $curaciones->costo_total = $request->costo;
+            $curaciones->save();
+
             array_push($respuesta,'OK');
             return ($respuesta);
         }else{

@@ -76,9 +76,7 @@
                                                         <div class="form-check form-check-primary form-switch">
                                                             <input type="checkbox" class="form-check-input" {{ $tra->estado=='ACTIVO' ? 'checked' :"" }} onclick="event.preventDefault();
                                                             document.getElementById('form-estado<?php echo $tra->id; ?>').submit();"/>
-
                                                         </div>
-
                                                         </form>
                                                     </label>
                                                 </td>

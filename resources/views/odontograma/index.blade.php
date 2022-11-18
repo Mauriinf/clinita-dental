@@ -13,6 +13,24 @@
 <link rel="stylesheet" href="{!! asset('odontograma/style.css') !!}" />
 @endpush
 @section('content')
+    <div class="content-header row">
+        <div class="content-header-left col-md-9 col-12 mb-2">
+            <div class="row breadcrumbs-top">
+                <div class="col-12">
+                    <h2 class="content-header-title float-start mb-0">Odontograma</h2>
+                    <div class="breadcrumb-wrapper">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{route('home')}}">Principal</a>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-header text-center">
+        <h1 class="fw-bolder">Odontograma</h1>
+    </div>
     <div id="canva-group" class="col-lg-12 col-md-12 col-sm-12">
         <canvas id="camada1Odontograma"></canvas>
         <canvas id="camada2Odontograma"></canvas>

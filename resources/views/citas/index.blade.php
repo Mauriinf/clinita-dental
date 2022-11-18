@@ -46,9 +46,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-bs-toggle="pill" href="#home" aria-expanded="true">Proximas Citas</a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a class="nav-link" id="confirmar-tab" data-bs-toggle="pill" href="#confirmar" aria-expanded="false">Citas por Confirmar</a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item">
                                     <a class="nav-link" id="historial-tab" data-bs-toggle="pill" href="#historial" aria-expanded="false">Historial de Citas</a>
                                 </li>
@@ -63,7 +63,7 @@
                                                 <th>Médico</th>
                                                 <th>Fecha</th>
                                                 <th>Hora</th>
-                                                <th>Estado</th>
+                                                <th>Atendido</th>
                                                 <th >Action</th>
                                             </tr>
                                         </thead>
@@ -86,7 +86,18 @@
                                                     {{ $row->inicio }} - {{ $row->fin }}
                                                 </td>
                                                 <td >
-                                                    {{ $row->estado }}
+                                                    <label class="custom-toggle">
+                                                        <form action="{{ route('cita.update.estado',$row->id) }}" id="form-estado{{$row->id}}" method="post">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <input type="hidden" name="estado" value="{{($row->estado=='CONFIRMADO')?'ATENDIDO':'CONFIRMADO'}}">
+                                                        <div class="form-check form-check-primary form-switch">
+                                                            <input type="checkbox" class="form-check-input" {{ $row->estado=='ATENDIDO' ? 'checked' :"" }} onclick="event.preventDefault();
+                                                            document.getElementById('form-estado<?php echo $row->id; ?>').submit();"/>
+                                                        </div>
+                                                        </form>
+                                                    </label>
+
                                                 </td>
                                                 <td>
                                                     <a href="javascript:void(0)"  class="btn btn-sm btn-danger" onclick="eliminar(<?php echo $row->id; ?>)"><i data-feather='trash-2' ></i>Eliminar</a>
@@ -102,7 +113,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="tab-pane" id="confirmar" role="tabpanel" aria-labelledby="confirmar-tab" aria-expanded="false">
+                                {{-- <div class="tab-pane" id="confirmar" role="tabpanel" aria-labelledby="confirmar-tab" aria-expanded="false">
                                     <table class="table table-striped table-bordered table-td-valign-middle dt-responsive" id="dt-CitasConfirmar">
                                         <thead class="thead">
                                             <tr>
@@ -149,7 +160,7 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                </div>
+                                </div> --}}
                                 <div class="tab-pane" id="historial" role="tabpanel" aria-labelledby="historial-tab" aria-expanded="false">
                                     <table class="table table-striped table-bordered table-td-valign-middle dt-responsive" id="dt-Historial">
                                         <thead class="thead">
@@ -182,7 +193,8 @@
                                                     {{ $row->inicio }} - {{ $row->fin }}
                                                 </td>
                                                 <td >
-                                                    {{ $row->estado }}
+                                                    <span class="badge bg-success">{{ $row->estado }}</span>
+
                                                 </td>
                                                 <td>
                                                     <a href="{{url('/citas/'.$row->id.'/show')}}"  class="btn btn-sm btn-info" ><i data-feather='eye' ></i> Ver</a>

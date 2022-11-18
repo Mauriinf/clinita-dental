@@ -98,7 +98,7 @@
                                 <div class="col-md-8 offset-sm-3">
                                     <div class="mb-1 ">
                                         <div class="input-group " >
-                                            <span class="input-group-text" id="carnet">C.I.</span>
+                                            <span class="input-group-text" >C.I.</span>
                                             <input type="text" class="form-control" name="ci" id="ci"/>
                                             <button type="button" class="btn btn-primary" onclick="f_buscar()"><i class="fa fa-search-minus"></i> Buscar</button>
                                         </div>
@@ -137,6 +137,164 @@
                                                 Ap. Materno
                                             </span>
                                             <input type="text" class="form-control" id="materno" name="materno" placeholder="Apellido Materno" value="" disabled/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md">
+                                    <div class="mb-1">
+                                        <div class="input-group" >
+                                            <span class="input-group-text">
+                                                Diagnostico
+                                            </span>
+                                            <input type="text" class="form-control" placeholder="Diagnostico" name="diagnostico"  />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md">
+                                    <div class="mb-1">
+                                        <div class="input-group" >
+                                            <span class="input-group-text">
+                                                Medicamentos
+                                            </span>
+                                            <input type="text" class="form-control" placeholder="Medicamentos" name="medicamentos" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-md">
+                                    <div class="mb-1">
+                                        <div class="input-group " >
+                                            <span class="input-group-text">
+                                                Alergias
+                                            </span>
+                                            <input type="text" class="form-control" placeholder="Alergias" name="alergias"  />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-md">
+                                    <div class="mb-1">
+                                        <div class="input-group " >
+                                            <span class="input-group-text">
+                                                Enfermedades
+                                            </span>
+                                            <input type="text" class="form-control" placeholder="Enfermedades" name="enfermedades" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-space-10">
+                                <div class="col-md">
+                                    <div class="mb-1">
+                                        <div class="input-group " >
+                                            <span class="input-group-text">
+                                                Fecha Ini.
+                                            </span>
+                                            <input type="text"  name="f_inicio" class="form-control flatpickr-basic" placeholder="YYYY-MM-DD" value="{{ old('fecha_inicio', date('Y-m-d')) }}" data-date-format="Y-m-d"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md">
+                                    <div class="mb-1">
+                                        <div class="input-group" >
+                                            <span class="input-group-text">
+                                                Fecha Fin
+                                            </span>
+                                            <input type="text" name="f_fin" class="form-control flatpickr-basic" placeholder="YYYY-MM-DD" value="{{ old('fecha_fin', date('Y-m-d')) }}" data-date-format="Y-m-d"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-space-10">
+                                <div class="col-md">
+                                    <div class="mb-1">
+                                        <div class="input-group" >
+                                            <span class="input-group-text">
+                                                Costo Total
+                                            </span>
+                                            <input type="text" class="form-control" name="costo" placeholder="Costo Total" value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times-circle"></i> Cerrar</a>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-editar">
+    <div class="modal-dialog" style="max-width: 40%;" role="document">
+        <div class="modal-content" >
+            <div class="modal-header">
+                <h4 class="modal-title">Editar consulta</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <form onSubmit="return false" id="formEdit" action="{{ route('editar_consulta') }}">
+                <div class="modal-body">
+                    {{ csrf_field() }}
+                    <div class="alert alert-danger print-error-msg" style="display:none">
+                        <ul></ul>
+                    </div>
+                    <input type="hidden" value="" name="id_paciente" id="id_pac">
+                    <input type="hidden" value="" name="id_consulta" id="id_edit">
+                    <div class="form-group row">
+                        <div class="col-md-12 text-center">
+                            <div class="row">
+                                <div class="col-md-8 offset-sm-3">
+                                    <div class="mb-1 ">
+                                        <div class="input-group " >
+                                            <span class="input-group-text" >C.I.</span>
+                                            <input type="text" class="form-control" name="ci" id="carnet"/>
+                                            <button type="button" class="btn btn-primary" onclick="f_buscar2()"><i class="fa fa-search-minus"></i> Buscar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-md-12">
+                                    <div class="mb-1">
+                                        <div class="input-group " >
+                                            <span class="input-group-text">
+                                                Nombre(s)
+                                            </span>
+                                            <input type="text" class="form-control" id="nombre_paciente" name="nombres" placeholder="Nombres" value="" disabled/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-md">
+                                    <div class="mb-1">
+                                        <div class="input-group" >
+                                            <span class="input-group-text">
+                                                Ap. Paterno
+                                            </span>
+                                            <input type="text" class="form-control" id="paterno_paciente" name="paterno" placeholder="Apellido Paterno" value="" disabled/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-md">
+                                    <div class="mb-1">
+                                        <div class="input-group" >
+                                            <span class="input-group-text">
+                                                Ap. Materno
+                                            </span>
+                                            <input type="text" class="form-control" id="materno_paciente" name="materno" placeholder="Apellido Materno" value="" disabled/>
                                         </div>
                                     </div>
                                 </div>
@@ -223,6 +381,21 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row row-space-10">
+                                <div class="col-md">
+                                    <div class="mb-1">
+                                        <div class="input-group" >
+                                            <span class="input-group-text">
+                                                Estado
+                                            </span>
+                                            <select name="estado" id="estado" class="form-control">
+                                                <option value="PROCESO">EN PROCESO</option>
+                                                <option value="CONCLUIDO">CONCLUIDO</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <hr>
@@ -293,7 +466,13 @@ $(document).ready( function () {
                     { data: 'diagnostico' , name: 'diagnostico'},
                     {data: 'costo_total', name: 'costo_total'},
                     {data: 'total_pagado', name: 'total_pagado'},
-                    {data: 'estado', name: 'estado'},
+                    {data: 'estado', name: 'estado',
+                        render: function(data, type, row, meta) {
+                            return data === 'PROCESO' ?
+                                '<span class="badge bg-success">PROCESO</span>' :
+                                '<span class="badge bg-primary">CONCLUIDO</span>';
+                        }
+                    },
                 { data: 'botones', "orderable": false}
         ],
         error: function(jqXHR, textStatus, errorThrown){
@@ -328,6 +507,85 @@ function f_buscar(){
         }
     });
 }
+function f_buscar2(){
+    let nombres = document.getElementById('nombre_paciente');
+    let paterno = document.getElementById('paterno_paciente');
+    let materno = document.getElementById('materno_paciente');
+    let paciente = document.getElementById('id_pac');
+    var ci=$('#carnet').val();
+    $.ajax({
+        url: `/curaciones/buscar-paciente/${ci}`,
+        type: 'GET',
+        data: {},
+        success: function(data)
+        {
+            if(data){
+                nombres.value = data.nombres;
+                paterno.value = data.paterno;
+                materno.value = data.materno;
+                paciente.value = data.id;
+            }else{
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "No se encontro el C.I."
+                });
+            }
+        }
+    });
+}
+function f_editar_consulta(id,diagnostico,medicamentos,alergias,enfermedades,estado,fecha_inicio,fecha_final,costo_total,id_paciente,ci_paciente,nom_paciente,pat_paciente,mat_paciente){
+    document.getElementById('id_edit').value=id;
+    document.getElementById('nombre_paciente').value=nom_paciente;
+    document.getElementById('paterno_paciente').value=pat_paciente;
+    document.getElementById('materno_paciente').value=mat_paciente;
+    document.getElementById('id_pac').value=id_paciente;
+    document.getElementById('carnet').value=ci_paciente;
+    document.getElementById('diagnostico').value=diagnostico;
+    document.getElementById('medicamentos').value=medicamentos;
+    document.getElementById('alergias').value=alergias;
+    document.getElementById('enfermedades').value=enfermedades;
+    document.getElementById('costo').value=costo_total;
+    document.getElementById('inicio').value=fecha_inicio;
+    document.getElementById('fin').value=fecha_final;
+    $('#modal-editar').modal('toggle');
+}
+$(document).on("submit" ,"#formEdit", function(e){
+        $.ajaxSetup({
+            header: $('meta[name="_token"]').attr('content')
+        });
+        e.preventDefault(e);
+        $.ajax({
+            type: 'POST',
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            dataType: 'json',
+            cache: false,
+        }).done(function (data) {
+            if (data.error) {
+                printErrorMsg(data,1);
+            } else {
+                if(data[0]==='OK'){
+                    Swal.fire({
+                        type: "success",
+                        title: "¡Modificado Correctamente!",
+                        showConfirmButton: true,
+                        confirmButtonText: "Ok"
+
+                    })
+                    $('#modal-editar').modal('hide');
+                }else{
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: data[0]
+                    });
+                }
+                $(".print-error-msg").css('display','none');//ocultar div de errores
+            }
+            $('#dt-ListaEspec').DataTable().ajax.reload();
+        });
+    });
 $(document).on("submit" ,"#formAdd", function(e){
         $.ajaxSetup({
             header: $('meta[name="_token"]').attr('content')

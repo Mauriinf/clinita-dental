@@ -25,7 +25,7 @@ class Curaciones extends Model
         'costo_total'
     ];
     public static function consultas(){
-        $query=DB::select ("SELECT us.ci as ci_paciente,CONCAT(us.nombres,' ',us.paterno,' ',us.materno) as nombre_paciente,doc.ci as ci_doctor,CONCAT(doc.nombres,' ',doc.paterno,' ',doc.materno) as nombre_doctor ,co.*, ( SELECT SUM(od.pago) from odontograma od where od.id_consulta=co.id) as total_pagado FROM consultas co INNER JOIN users us
+        $query=DB::select ("SELECT us.id as id_paciente,us.ci as ci_paciente,us.nombres as nom_paciente,us.paterno as pat_paciente,us.materno as mat_paciente,CONCAT(us.nombres,' ',us.paterno,' ',us.materno) as nombre_paciente,doc.ci as ci_doctor,CONCAT(doc.nombres,' ',doc.paterno,' ',doc.materno) as nombre_doctor ,co.*, ( SELECT SUM(od.pago) from odontograma od where od.id_consulta=co.id) as total_pagado FROM consultas co INNER JOIN users us
                         ON us.id=co.id_cliente
                         INNER JOIN users doc
                         ON doc.id=co.id_doctor");

@@ -55,6 +55,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('citas', [CitaController::class,'index'])->name('citas.index');
     Route::delete('/citas/{cita}', [CitaController::class,'destroy']);
     Route::get('/citas/{id}/show',[CitaController::class,'show']);
+    Route::put('/cita/{citas}/estado', [CitaController::class,'estado'])->name('cita.update.estado');
     //TRATAMIENTOS
     Route::get('tratamientos', [TratamientoController::class,'index'])->name('trata.index');
 	Route::post('/tratamientos', [TratamientoController::class,'store']);
@@ -78,9 +79,10 @@ Route::group(['middleware' => ['auth']], function() {
     // curaciones
     Route::get('/curaciones/buscar-paciente/{ci}', [CuracionesController::class, 'buscar_paciente'])->name('buscar_paciente');
     Route::post('/curaciones/guardar-consulta', [CuracionesController::class, 'guardar_consulta'])->name('guardar_consulta');
+    Route::post('/curaciones/editar-consulta', [CuracionesController::class, 'editar_consulta'])->name('editar_consulta');
     // mi perfil
-    Route::get('/perfil', [PerfilController::class, 'index'])->name('perfil.index'); 
-    Route::put('/perfil', [PerfilController::class, 'actualizar'])->name('perfil.actualizar'); 
-    Route::get('/password', [PerfilController::class, 'password'])->name('password'); 
-    Route::put('/password', [PerfilController::class, 'password_actualizar'])->name('password.actualizar'); 
+    Route::get('/perfil', [PerfilController::class, 'index'])->name('perfil.index');
+    Route::put('/perfil', [PerfilController::class, 'actualizar'])->name('perfil.actualizar');
+    Route::get('/password', [PerfilController::class, 'password'])->name('password');
+    Route::put('/password', [PerfilController::class, 'password_actualizar'])->name('password.actualizar');
 });

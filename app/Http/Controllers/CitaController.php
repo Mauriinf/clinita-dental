@@ -30,7 +30,11 @@ class CitaController extends Controller
             )
         );
     }
-
+    public function estado(Cita $citas,Request $Request){
+        $citas->estado=$Request->input('estado');
+        $citas->save();
+        return redirect('/citas');
+    }
     /**
      * Show the form for creating a new resource.
      *
