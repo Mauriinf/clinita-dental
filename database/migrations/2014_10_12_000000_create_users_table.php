@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->date('fec_nac')->nullable();
             $table->boolean('estado');
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('avatar')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

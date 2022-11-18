@@ -17,7 +17,7 @@ class BloqueDiaController extends Controller
         $dias = Dia::all();
         $bloques = Bloque::all();
         foreach($bloques as $bloque){
-            $bloque->b_dia = (object)BloqueDia::get_agenda($bloque->id,Auth::user()->id);
+            $bloque->b_dia = (object)BloqueDia::get_agenda($bloque->id);
         }
         return view('admin.bloque_dia.index', compact('bloques', 'bdu_existe'));
     }

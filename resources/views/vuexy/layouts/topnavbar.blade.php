@@ -24,10 +24,17 @@
                 </div>
             </li>
             <li class="nav-item dropdown dropdown-user"><a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <div class="user-nav d-sm-flex d-none"><span class="user-name fw-bolder">John Doe</span><span class="user-status">Admin</span></div><span class="avatar"><img class="round" src="../../../app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"><span class="avatar-status-online"></span></span>
+                    <div class="user-nav d-sm-flex d-none"><span class="user-name fw-bolder">{{ Auth::user()->nombres }}</span><span class="user-status">{{ Auth::user()->username }}</span></div><span class="avatar"><img class="round" src="{{ Auth::user()->avatar ? asset('avatar/'.Auth::user()->avatar) : asset('images/user.png')}}" alt="avatar" height="40" width="40"><span class="avatar-status-online"></span></span>
                 </a>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user"><a class="dropdown-item" href="page-profile.html"><i class="me-50" data-feather="user"></i> Profile</a>
-                    <div class="dropdown-divider"></div><a class="dropdown-item" href="page-account-settings-account.html"><i class="me-50" data-feather="settings"></i> Settings</a><a class="dropdown-item" href="page-pricing.html"><i class="me-50" data-feather="credit-card"></i> Pricing</a><a class="dropdown-item"  href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="me-50" data-feather="power"></i> Logout</a>
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user"><a class="dropdown-item" href="{{ route('perfil.index') }}"><i class="me-50" data-feather="user"></i> Mi Perfil</a>
+                    <div class="dropdown-divider">
+                    </div>
+                    <a class="dropdown-item" href="{{ route('password') }}">
+                        <i class="me-50" data-feather="settings"></i> Contraseña
+                    </a>
+                    <a class="dropdown-item"  href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="me-50" data-feather="power"></i> Cerrar Sesion
+                    </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
