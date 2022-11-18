@@ -17,6 +17,7 @@ class BloqueDia extends Model
     ];
 
     public static function get_agenda($bloque_id){
+        $usuario = Auth::user()->id;
         $resultados = DB::select(
             DB::raw("
             SELECT bdia.id as bd_id, bdia.estado as bd_estado, d.nombre_dia as bd_nombre
@@ -26,8 +27,9 @@ class BloqueDia extends Model
       INNER JOIN dia d
               ON bdia.id_dia = d.id
       INNER JOIN bloque b
-              ON bdia.id_bloque = b.id
-           WHERE bdia.id_bloque = $bloque_id
+              ON bdia.id_bloque  = b.id
+           WHERE bdia.id_bloque  = $bloque_id
+             AND bdia.id_usuario =  $usuario
         ORDER BY bdia.id_dia ASC
         "));
         return $resultados;

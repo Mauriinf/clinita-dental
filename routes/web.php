@@ -10,6 +10,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\OdontogramaController;
 use App\Http\Controllers\TratamientoController;
+use App\Http\Controllers\PerfilController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,4 +78,9 @@ Route::group(['middleware' => ['auth']], function() {
     // curaciones
     Route::get('/curaciones/buscar-paciente/{ci}', [CuracionesController::class, 'buscar_paciente'])->name('buscar_paciente');
     Route::post('/curaciones/guardar-consulta', [CuracionesController::class, 'guardar_consulta'])->name('guardar_consulta');
+    // mi perfil
+    Route::get('/perfil', [PerfilController::class, 'index'])->name('perfil.index'); 
+    Route::put('/perfil', [PerfilController::class, 'actualizar'])->name('perfil.actualizar'); 
+    Route::get('/password', [PerfilController::class, 'password'])->name('password'); 
+    Route::put('/password', [PerfilController::class, 'password_actualizar'])->name('password.actualizar'); 
 });
