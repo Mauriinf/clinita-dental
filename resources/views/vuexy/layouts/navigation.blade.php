@@ -85,12 +85,13 @@
                 </a>
             </li>
             @endcan
+            @can('lista-curacion')
             <li class=" nav-item {{ $activePage == 'curaciones' ? ' active' : '' }} ">
                 <a class="d-flex align-items-center" href="{{ route('curaciones.index') }}">
                     <i data-feather='plus-square'></i><span class="menu-title text-truncate" data-i18n="Curaciones">Curaciones</span>
                 </a>
             </li>
-
+            @endcan
         </ul>
     </div>
 </div>
