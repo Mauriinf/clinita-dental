@@ -11,6 +11,7 @@ use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\OdontogramaController;
 use App\Http\Controllers\TratamientoController;
 use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\ReporteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,4 +86,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::put('/perfil', [PerfilController::class, 'actualizar'])->name('perfil.actualizar');
     Route::get('/password', [PerfilController::class, 'password'])->name('password');
     Route::put('/password', [PerfilController::class, 'password_actualizar'])->name('password.actualizar');
+    // reportes
+    Route::get('/historia-clinica', [ReporteController::class, 'historia_clinica'])->name('reporte.historia_clinica');
 });
