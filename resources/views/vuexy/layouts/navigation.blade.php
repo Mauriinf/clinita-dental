@@ -35,42 +35,56 @@
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Menú</span><i data-feather="more-horizontal"></i>
             </li>
+            @can('lista-roles')
             <li class="nav-item {{ $activePage == 'roles' ? ' active' : '' }}">
                 <a class="d-flex align-items-center" href="{{ route('roles.index') }}">
                     <i data-feather="shield"></i>
                     <span class="menu-title text-truncate" ></span>Roles
                 </a>
             </li>
+            @endcan
+            @can('lista-usuarios')
             <li class=" nav-item {{ $activePage == 'users' ? ' active' : '' }} ">
                 <a class="d-flex align-items-center" href="{{ route('users.index') }}">
                     <i data-feather='users'></i><span class="menu-title text-truncate" data-i18n="Usuarios"></span>Usuarios
                 </a>
             </li>
+            @endcan
+            @can('lista-especialidad')
             <li class=" nav-item {{ $activePage == 'espec' ? ' active' : '' }} ">
                 <a class="d-flex align-items-center" href="{{ route('espec.index') }}">
                     <i data-feather='grid'></i><span class="menu-title text-truncate" data-i18n="Especialidad"></span>Especialidades
                 </a>
             </li>
+            @endcan
+            @can('lista-tratamiento')
             <li class=" nav-item {{ $activePage == 'tratamiento' ? ' active' : '' }} ">
                 <a class="d-flex align-items-center" href="{{ route('trata.index') }}">
                     <i data-feather='cpu'></i><span class="menu-title text-truncate" data-i18n="Tratamiento"></span>Tratamiento
                 </a>
             </li>
+            @endcan
+            @can('crear-cita')
             <li class=" nav-item {{ $activePage == 'citas-crear' ? ' active' : '' }} ">
                 <a class="d-flex align-items-center" href="{{ route('citas.create') }}">
                     <i data-feather='calendar'></i><span class="menu-title text-truncate" data-i18n="crear"></span>Reserva Citas
                 </a>
             </li>
+            @endcan
+            @can('lista-cita')
             <li class=" nav-item {{ $activePage == 'citas' ? ' active' : '' }} ">
                 <a class="d-flex align-items-center" href="{{ route('citas.index') }}">
                     <i data-feather='clock'></i><span class="menu-title text-truncate" data-i18n="Citas"></span>Mis Citas
                 </a>
             </li>
+            @endcan
+            @can('configuracion-horario')
             <li class=" nav-item {{ $activePage == 'b_dia' ? ' active' : '' }} ">
                 <a class="d-flex align-items-center" href="{{ route('bloque-dia.index') }}">
                     <i data-feather='watch'></i><span class="menu-title text-truncate" data-i18n="Citas"></span>Conf. Horario
                 </a>
             </li>
+            @endcan
             <li class=" nav-item {{ $activePage == 'curaciones' ? ' active' : '' }} ">
                 <a class="d-flex align-items-center" href="{{ route('curaciones.index') }}">
                     <i data-feather='plus-square'></i><span class="menu-title text-truncate" data-i18n="Curaciones">Curaciones</span>

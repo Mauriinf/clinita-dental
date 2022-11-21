@@ -392,7 +392,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <input id=\'dpagoid${item.id}\' type=\'hidden\' step=\'any\' class=\'idsPagos\' value=\'${item.id}\'>
                     </td>
                     <td>
-                        <a onclick="apagar('${item.id}','${item.nome}', ${item.numeroDente}, ${item.faceDente})" class="btn btn-danger btn-sm">
+                        <a onclick="apagar('${item.id}','${item.nome}', ${item.numeroDente}, ${item.faceDente})" class="btn btn-danger btn-sm eliminarConsulta">
                             Eliminar
                         </a>
                     </td>

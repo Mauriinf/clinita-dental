@@ -37,10 +37,12 @@
                                     <i data-feather='plus'></i>
                                     Nuevo
                                 </a> --}}
+                                @can('crear-curacion')
                                 <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modal-message">
                                     <i data-feather='plus'></i>
                                     Nuevo
                                 </button>
+                                @endcan
                             </div>
                         </div>
                     </div>

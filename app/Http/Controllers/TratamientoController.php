@@ -12,13 +12,13 @@ class TratamientoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // function __construct()
-    // {
-    //      $this->middleware('permission:lista-tratamiento|crear-tratamiento|editar-tratamiento|eliminar-tratamiento', ['only' => ['index','store']]);
-    //      $this->middleware('permission:crear-tratamiento', ['only' => ['create','store']]);
-    //      $this->middleware('permission:editar-tratamiento', ['only' => ['edit','store']]);
-    //      $this->middleware('permission:eliminar-tratamiento', ['only' => ['destroy']]);
-    // }
+    function __construct()
+    {
+         $this->middleware('permission:lista-tratamiento|crear-tratamiento|editar-tratamiento|eliminar-tratamiento', ['only' => ['index','store']]);
+         $this->middleware('permission:crear-tratamiento', ['only' => ['create','store']]);
+         $this->middleware('permission:editar-tratamiento', ['only' => ['estado','store']]);
+         $this->middleware('permission:eliminar-tratamiento', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $tratamientos=Tratamiento::all();

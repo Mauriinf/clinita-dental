@@ -17,6 +17,13 @@ class CitaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+         $this->middleware('permission:lista-cita|crear-cita|editar-cita|eliminar-cita', ['only' => ['index','store']]);
+         $this->middleware('permission:crear-cita', ['only' => ['create','store']]);
+         $this->middleware('permission:editar-cita', ['only' => ['estado']]);
+         $this->middleware('permission:eliminar-cita', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $user= Auth::user();

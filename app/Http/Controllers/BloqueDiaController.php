@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 class BloqueDiaController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:configuracion-horario', ['only' => ['index','config_agenda','generar_agenda']]);
+    }
     public function index()
     {
         $b_usuario = BloqueDia::where('id_usuario', Auth::user()->id)->count();
