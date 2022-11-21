@@ -147,10 +147,10 @@
 
             <p class="section-subtitle">Bienvenido a Sonri-Dent</p>
 
-            <h1 class="h1 hero-title">Nosotras somos el mejor servicio dental</h1>
+            <h1 class="h1 hero-title">El mejor servicio dental</h1>
 
             <p class="hero-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet sed autem, dolor in consequuntur non porro placeat. Enim sapiente dolorum illo eligendi sed itaque, aliquid est sit hic minima aliquam!.
+                SonriDent es un sitio de confianza que ofrece la más alta calidad en servicios integrales de odontología.
             </p>
 
             {{-- <form action="" class="hero-form">
@@ -163,7 +163,7 @@
           </div>
 
           <figure class="hero-banner">
-            <img src="./landing/assets/images/hero-banner.png" width="587" height="839" alt="hero banner" class="w-100">
+            <img src="./landing/assets/images/doctor.png" width="587" height="839" alt="hero banner" class="w-100">
           </figure>
 
         </div>
@@ -190,15 +190,15 @@
               <div class="service-card">
 
                 <div class="card-icon">
-                  <img src="./landing/assets/images/service-icon-1.png" width="100" height="100" loading="lazy"
+                  <img src="./landing/assets/images/endodoncia.png" width="100" height="100" loading="lazy"
                     alt="service icon" class="w-100">
                 </div>
 
                 <div>
-                  <h3 class="h3 card-title">Canal raíz</h3>
+                  <h3 class="h3 card-title">Endodoncia o tratamiento de conducto</h3>
 
                   <p class="card-text">
-                    Aenean eleifend turpis tellus, nec laoreet metus elementum ac.
+                    Consiste en la extirpación del paquete vásculo-nervioso que se encuentra en el interior del diente y que es el causante del dolor, limpiando el interior del diente y dejándolo libre de infección
                   </p>
                 </div>
 
@@ -209,15 +209,17 @@
               <div class="service-card">
 
                 <div class="card-icon">
-                  <img src="./landing/assets/images/service-icon-2.png" width="100" height="100" loading="lazy"
+                  <img src="./landing/assets/images/blanqueamiento.png" width="100" height="100" loading="lazy"
                     alt="service icon" class="w-100">
                 </div>
 
                 <div>
-                  <h3 class="h3 card-title">Alineación de Dientes</h3>
+                  <h3 class="h3 card-title">Blanqueamiento Dental</h3>
 
                   <p class="card-text">
-                    Aenean eleifend turpis tellus, nec laoreet metus elementum ac.
+                    Es un tratamiento dental estético, que logra reducir varios tonos el color original de las piezas dentales, dejando los dientes más blancos y brillantes.
+                    Implantes y Cirugía bucal.
+                    Un implante es un tornillo de titanio integrado en el hueso y sustituye al diente natural. Trabajamos con las más altas calidades del mercado.
                   </p>
                 </div>
 
@@ -335,18 +337,19 @@
             <h2 class="h2 section-title">Cuidamos de su salud dental</h2>
 
             <p class="section-text section-text-1">
-              Aliquam ac sem et diam iaculis efficitur. Morbi in enim odio. Nullam quis volutpat est, sed dapibus
-              sapien. Cras
-              condimentum eu velit id tempor. Curabitur purus sapien, cursus sed nisl tristique, commodo vehicula arcu.
+                SonriDent está conformado por un grupo profesionales especializados al cuidado de tu salud bucal…
+
+                SonriDent es un sitio de confianza que ofrece la más alta calidad en servicios integrales de odontología.
+
+
+
             </p>
 
             <p class="section-text">
-              Aliquam erat volutpat. Aliquam enim massa, sagittis blandit ex mattis, ultricies posuere sapien. Morbi a
-              dignissim enim.
-              Fusce elementum, augue in elementum porta, sapien nunc volutpat ex, a accumsan nunc lectus eu lectus.
+                Contamos con todas las especialidades en el ámbito dental, utilizando las últimas tecnologías.
             </p>
 
-            <a href="#" class="btn">Leer mas..</a>
+            {{-- <a href="#" class="btn">Leer mas..</a> --}}
 
           </div>
 

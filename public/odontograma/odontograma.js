@@ -391,8 +391,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         <input id=\'dpago${item.id}\' type=\'number\' step=\'any\' min=\'0\' class=\'pagos form-control input-sm\' style=\'width:100%\' value=\'${item.pago}\'>
                         <input id=\'dpagoid${item.id}\' type=\'hidden\' step=\'any\' class=\'idsPagos\' value=\'${item.id}\'>
                     </td>
-                    <td>
-                        <a onclick="apagar('${item.id}','${item.nome}', ${item.numeroDente}, ${item.faceDente})" class="btn btn-danger btn-sm eliminarConsulta">
+                    <td class="eliminarConsulta">
+                        <a onclick="apagar('${item.id}','${item.nome}', ${item.numeroDente}, ${item.faceDente})" class="btn btn-danger btn-sm">
                             Eliminar
                         </a>
                     </td>
@@ -402,6 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         tbody.innerHTML = trs
     }
+
     window.apagar = (id,nome, numeroDente, faceDente) => {
         $.ajaxSetup({
             headers:{

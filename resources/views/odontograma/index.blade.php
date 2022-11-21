@@ -145,20 +145,7 @@
             }
     })
 $(document).ready( function () {
-    <?php
-        if(!auth()->user()->can('crear-odontograma')){
-    ?>
-    $("#sec-agregar").css('display','none');
-    <?php
-        }
-    ?>
-    <?php
-        if(!auth()->user()->can('editar-odontograma')){
-    ?>
-    $(".eliminarConsulta").css('display','none');
-    <?php
-        }
-    ?>
+
     //let table = $('#tabelaTestesEspecificosForm').DataTable();
     $('#tabelaTestesEspecificosForm tbody').on( 'focusout', 'input.pagos', function () {
         //var data = table.row( $(this).parents('tr') ).data();
