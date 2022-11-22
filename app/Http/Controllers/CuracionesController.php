@@ -12,6 +12,13 @@ use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Validator;
 class CuracionesController extends Controller
 {
+    // function __construct()
+    // {
+    //      $this->middleware('permission:lista-curacion|crear-curacion|editar-curacion|eliminar-curacion', ['only' => ['index','guardar_consulta']]);
+    //      $this->middleware('permission:crear-curacion', ['only' => ['nuevo','guardar_consulta']]);
+    //      $this->middleware('permission:editar-curacion', ['only' => ['editar_consulta']]);
+
+    // }
     public function index()
     {
         $consultas=Curaciones::consultas();

@@ -25,7 +25,7 @@ class PermissionTableSeeder extends Seeder
            'lista-especialidad',
            'crear-especialidad',
            'editar-especialidad',
-           'eliminar-especilidad',
+           'eliminar-especialidad',
            'asignar-especialidad-usuario',
            'lista-cita',
            'crear-cita',
@@ -34,7 +34,15 @@ class PermissionTableSeeder extends Seeder
            'lista-tratamiento',
            'crear-tratamiento',
            'editar-tratamiento',
-           'eliminar-tratamiento'
+           'eliminar-tratamiento',
+           'configuracion-horario',
+           'lista-curacion',
+           'crear-curacion',
+           'editar-curacion',
+           'odontograma',
+           'crear-odontograma',
+           'editar-odontograma',
+           'eliminar-odontograma'
         ];
 
         foreach ($permissions as $permission) {

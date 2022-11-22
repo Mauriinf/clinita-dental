@@ -48,7 +48,9 @@
                                                     <th>Nº</th>
                                                     <th>Nombre</th>
                                                     <th>Descripción</th>
+                                                    @can('editar-especialidad')
                                                     <th>Estado</th>
+                                                    @endcan
                                                     <th >Action</th>
                                                 </tr>
                                             </thead>
@@ -64,6 +66,7 @@
                                                     <td>
                                                         {{ $esp->descripcion }}
                                                     </td>
+                                                    @can('editar-especialidad')
                                                     <td >
                                                         <label class="custom-toggle">
                                                             <form action="{{ route('espec.update.estado',$esp->id) }}" id="form-estado{{$esp->id}}" method="post">
@@ -79,16 +82,18 @@
                                                             </form>
                                                         </label>
                                                     </td>
+                                                    @endcan
                                                     <td>
+                                                        @can('editar-especialidad')
                                                         <a  href="javascript:void(0)"  class="btn btn-sm btn-primary" onclick="mostrar(<?php echo $esp->id; ?>)"><i data-feather='edit'></i>Editar</a>
-
+                                                        @endcan
+                                                        @can('eliminar-especialidad')
                                                         <a href="javascript:void(0)"  class="btn btn-sm btn-danger" onclick="eliminar(<?php echo $esp->id; ?>)"><i data-feather='trash-2' ></i>Eliminar</a>
-
                                                         <form id="delete-form" method="post" class="d-none">
-
                                                         @csrf
                                                         @method('DELETE')
                                                         </form>
+                                                        @endcan
                                                     </td>
                                                     </tr>
                                                 @endforeach

@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\DB;
 
 class OdontogramaController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:odontograma', ['only' => ['odontograma','lista_odontograma']]);
+         $this->middleware('permission:crear-odontograma', ['only' => ['guardar_odontograma']]);
+         $this->middleware('permission:editar-odontograma', ['only' => ['actualizar_pago']]);
+         $this->middleware('permission:eliminar-odontograma', ['only' => ['eliminar_odontograma']]);
+    }
     public function odontograma($id){
         $tipos_tratamiento=Tratamiento::select()->where('estado','=','ACTIVO')->get();
         $tratamientos=$tipos_tratamiento;

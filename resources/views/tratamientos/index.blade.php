@@ -28,12 +28,12 @@
                         </h4>
                         <div class="pull-right">
                             <div class="input-group-prepend pull-right btnagregar">
-
+                                @can('crear-tratamiento')
                                 <a href="javascript:void(0)" onclick="mostrarform(true)" class="btn btn-sm btn-primary">
                                     <i data-feather='plus'></i>
                                     Nuevo
                                 </a>
-
+                                @endcan
                             </div>
                         </div>
                     </div>
@@ -48,7 +48,9 @@
                                                 <th>Descripcion</th>
                                                 <th>Color</th>
                                                 <th>Costo</th>
+                                                @can('editar-tratamiento')
                                                 <th>Estado</th>
+                                                @endcan
                                                 <th >Action</th>
                                             </tr>
                                         </thead>
@@ -67,6 +69,7 @@
                                                 <td>
                                                     {{ $tra->costo }}
                                                 </td>
+                                                @can('editar-tratamiento')
                                                 <td >
                                                     <label class="custom-toggle">
                                                         <form action="{{ route('trata.update.estado',$tra->id) }}" id="form-estado{{$tra->id}}" method="post">
@@ -80,9 +83,13 @@
                                                         </form>
                                                     </label>
                                                 </td>
+                                                @endcan
                                                 <td>
+                                                    @can('editar-tratamiento')
                                                     <a  href="javascript:void(0)"  class="btn btn-sm btn-primary" onclick="mostrar(<?php echo $tra->id; ?>)"><i data-feather='edit'></i>Editar</a>
+                                                    @endcan
 
+                                                    @can('eliminar-tratamiento')
                                                     <a href="javascript:void(0)"  class="btn btn-sm btn-danger" onclick="eliminar(<?php echo $tra->id; ?>)"><i data-feather='trash-2' ></i>Eliminar</a>
 
                                                     <form id="delete-form" method="post" class="d-none">
@@ -90,6 +97,7 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     </form>
+                                                    @endcan
                                                 </td>
                                                 </tr>
                                             @endforeach

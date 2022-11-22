@@ -46,7 +46,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-row">
+
+                    <div class="form-row" id="sec-agregar">
                         <input type="hidden" id="procedimentosRemovidos" th:field="*{procedimentosRemovidos}">
                         <div id="procedimentosDiv"></div>
                         <div class="form-group col-md-12">
@@ -72,12 +73,15 @@
                             <i style="margin-left:5px;cursor: pointer;" class="alerta fas fa-info-circle fa-1x text-info" data-type="info" onclick="mensagens('.','info')"></i>
                             <textarea rows="5" id="informacoesAdicionais" maxlength="5000" class="form-control"></textarea>
                         </div>
+
                         <div class="form-group col-md-1 d-inline mt-2" style="text-align: center; margin: auto;">
                             <a id="botaoAdicionar" class="form-control btn btn-primary btnCorNovo">
                                 <i data-feather='plus'></i> Agregar
                             </a>
                         </div>
+
                     </div>
+
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <div class="panel panel-default">
@@ -141,6 +145,7 @@
             }
     })
 $(document).ready( function () {
+
     //let table = $('#tabelaTestesEspecificosForm').DataTable();
     $('#tabelaTestesEspecificosForm tbody').on( 'focusout', 'input.pagos', function () {
         //var data = table.row( $(this).parents('tr') ).data();

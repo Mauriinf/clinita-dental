@@ -28,10 +28,12 @@
                         </h4>
                         <div class="pull-right">
                             <div class="input-group-prepend pull-right btnagregar">
+                                @can('crear-cita')
                                 <a href="{{ url('crear/cita')}}" class="btn btn-sm btn-primary">
                                     <i data-feather='plus'></i>
                                     Nuevo
                                 </a>
+                                @endcan
                             </div>
                         </div>
                     </div>
@@ -63,7 +65,9 @@
                                                 <th>Médico</th>
                                                 <th>Fecha</th>
                                                 <th>Hora</th>
+                                                @can('editar-cita')
                                                 <th>Atendido</th>
+                                                @endcan
                                                 <th >Action</th>
                                             </tr>
                                         </thead>
@@ -85,6 +89,7 @@
                                                 <td >
                                                     {{ $row->inicio }} - {{ $row->fin }}
                                                 </td>
+                                                @can('editar-cita')
                                                 <td >
                                                     <label class="custom-toggle">
                                                         <form action="{{ route('cita.update.estado',$row->id) }}" id="form-estado{{$row->id}}" method="post">
@@ -99,6 +104,7 @@
                                                     </label>
 
                                                 </td>
+                                                @endcan
                                                 <td>
                                                     <a href="javascript:void(0)"  class="btn btn-sm btn-danger" onclick="eliminar(<?php echo $row->id; ?>)"><i data-feather='trash-2' ></i>Eliminar</a>
 

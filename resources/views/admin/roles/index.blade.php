@@ -23,8 +23,8 @@
                         <div class="pull-right">
                             <div class="input-group-prepend pull-right">
                                 @can('crear-roles')
-                                <a href="{{ route("roles.create") }}" class="dropdown-item mb-1">
-                                    <i data-feather='user-plus'></i>
+                                <a href="{{ route("roles.create") }}" class="btn btn-sm btn-primary">
+                                    <i data-feather='plus'></i>
                                     Nuevo Rol
                                 </a>
                                 @endcan
