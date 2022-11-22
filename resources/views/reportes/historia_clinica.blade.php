@@ -20,54 +20,56 @@
             margin: 0;
             padding: 0;
         }
+        
+        table{
+            border-collapse: separate; 
+            border-spacing: 0 1.5rem;
+            border: 1px solid black;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
+    <p class="text-center">
+        
+    </p>
     <h3 class="text-center">HISTORIA CLINICA ODONTOLOGICA</h3>
     <h6 class="text-end">Nº 0001</h6>
+    <h6 class="text-end">C.I. {{ $usuario->ci }}</h6>
     <table class="table">
         <tr>
             <td class="text-center">
-                <p class="underline">Cespedes</p>
+                <p class="underline">{{ $usuario->paterno }}</p>
                 <p class="bottom-underline">Ap. Paterno</p>
             </td>
             <td class="text-center">
-                <p class="underline">Ruiz</p>
+                <p class="underline">{{ $usuario->materno }}</p>
                 <p class="bottom-underline">Ap. Materno</p>
             </td>
             <td class="text-center">
-                <td class="text-center">
-                    <p class="underline">Luis Sergio</p>
-                    <p class="bottom-underline">Nombres</p>
-                </td>
+                <p class="underline">{{ $usuario->nombres }}</p>
+                <p class="bottom-underline">Nombres</p>
             </td>
             <td class="text-center">
-                <td class="text-center">
-                    <p class="underline">45</p>
-                    <p class="bottom-underline">Edad</p>
-                </td>
+                <p class="underline">45</p>
+                <p class="bottom-underline">Edad</p>
             </td>
-        </tr>
-
-        <tr>
-            
-            <td class="text-center">
-                <p class="underline">22/05/2000</p>
-                <p class="bottom-underline">Fecha de nacimientos</p>
-            </td>
-            <td class="text-center">
-                <td class="text-center">
-                    <p class="underline">78621047</p>
-                    <p class="bottom-underline">Telefono</p>
-                </td>
-            </td>
-            <td class="text-center" colspan="2">
-                <p class="underline">Cespedes</p>
-                <p class="bottom-underline">Direccion</p>
-            </td>
-    
         </tr>
         
+        <tr>
+            <td class="text-center">
+                <p class="underline">25/03/2000</p>
+                <p class="bottom-underline">Fecha de nacimiento</p>
+            </td>
+            <td class="text-center">
+                <p class="underline">78541236</p>
+                <p class="bottom-underline">Telefono</p>
+            </td>
+            <td class="text-center" colspan="2">
+                <p class="underline">Calle Surco 387</p>
+                <p class="bottom-underline">Domicilio</p>
+            </td>
+        </tr>
     </table>
 </body>
 </html>
