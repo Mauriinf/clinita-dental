@@ -28,4 +28,8 @@
     @include('vuexy.includes.page-js')
     <!--END:Javascript-->
 </body>
+<script>
+	var URL_BASE = "{{URL("/")}}";
+
+</script>
 </html>

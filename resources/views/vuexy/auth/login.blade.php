@@ -102,10 +102,9 @@
 
 @push('scripts-vendor')
     <script src="{!! asset('app-assets/vendors/js/forms/validation/jquery.validate.min.js') !!}"></script>
-    <script src="{!! asset('app-assets/vendors/js/forms/validation/messages_es.js') !!}"></script>
 @endpush
 @push('scripts-page')
-    <script src="{!! asset('assets/js/pages/auth-login.js') !!}"></script>
+
     <script>
         $(window).on('load', function() {
             if (feather) {

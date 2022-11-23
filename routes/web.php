@@ -88,4 +88,5 @@ Route::group(['middleware' => ['auth']], function() {
     Route::put('/password', [PerfilController::class, 'password_actualizar'])->name('password.actualizar');
     // reportes
     Route::get('/historia-clinica/{id_paciente}', [ReporteController::class, 'historia_clinica'])->name('reporte.historia_clinica');
+    Route::get('/reporte/fecha', [ReporteController::class, 'reporte_fechas'])->name('reporte.entre.fechas');
 });
