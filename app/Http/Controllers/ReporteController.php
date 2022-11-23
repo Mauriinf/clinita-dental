@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Curaciones;
 use App\Models\User;
 use PDF;
 use Illuminate\Http\Request;
@@ -17,7 +18,11 @@ class ReporteController extends Controller
         $inicio=substr($request->fecha, 0, 10);
         $fin=substr($request->fecha, 14, 24);
         $tipo=$request->tipo;
-        $pdf = PDF::loadView('reportes.cobros');
-        return $pdf->download('ejemplo.pdf');
+        if($tipo==='ATEDIDOS'){
+            $pagos=Curaciones::cobros_entre_fechas($inicio,$fin);
+            $pdf = PDF::loadView('reportes.cobros', compact('pagos','inicio','fin'));
+            return $pdf->stream('pagos.pdf');
+        }
+
     }
 }

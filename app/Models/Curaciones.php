@@ -41,4 +41,16 @@ class Curaciones extends Model
         $query=DB::select ($consulta.$where);
         return $query;
     }
+    public static function cobros_entre_fechas($inicio,$fin){
+        $query=DB::select ("SELECT CONCAT(IFNULL(CONCAT(us.nombres, ' '), ''),IFNULL(CONCAT(us.paterno, ' '), ''),IFNULL(CONCAT(us.materno, ' '), '')) as nombre_paciente,
+                        us.ci as ci_paciente,us.nombres as nom_paciente,us.paterno as pat_paciente,us.materno as mat_paciente,doc.ci as ci_doctor,
+                        CONCAT(IFNULL(CONCAT(doc.nombres, ' '), ''),IFNULL(CONCAT(doc.paterno, ' '), ''),IFNULL(CONCAT(doc.materno, ' '), '')) as nombre_doctor ,
+                        co.costo_total, ( SELECT SUM(od.pago) from odontograma od where od.id_consulta=co.id AND od.fecha>='$inicio'
+                        AND od.fecha<='$fin') as total_pagado
+                                                FROM consultas co INNER JOIN users us
+                                                            ON us.id=co.id_cliente
+                                                            INNER JOIN users doc
+                                                            ON doc.id=co.id_doctor");
+        return $query;
+    }
 }
