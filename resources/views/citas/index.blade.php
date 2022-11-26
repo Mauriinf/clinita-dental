@@ -61,6 +61,7 @@
                                         <thead class="thead">
                                             <tr>
                                                 <th>Nº</th>
+                                                <th>Paciente</th>
                                                 <th>Descripción</th>
                                                 <th>Médico</th>
                                                 <th>Fecha</th>
@@ -77,9 +78,13 @@
                                                 <th >
                                                     {{ $loop->iteration }}
                                                 </th>
+                                                <td>
+                                                    {{ $row->nombres_paciente }} {{ $row->paterno_paciente }} {{ $row->materno_paciente }}
+                                                </td>
                                                 <th >
                                                     {{ $row->descripcion }}
                                                 </th>
+
                                                 <td>
                                                     {{ $row->nombres_doctor }} {{ $row->paterno_doctor }} {{ $row->materno_doctor }}
                                                 </td>
@@ -172,6 +177,7 @@
                                         <thead class="thead">
                                             <tr>
                                                 <th>Nº</th>
+                                                <th>Paciente</th>
                                                 <th>Especialidad</th>
                                                 <th>Médico</th>
                                                 <th>Fecha</th>
@@ -186,6 +192,9 @@
                                                 <th >
                                                     {{ $loop->iteration }}
                                                 </th>
+                                                <td>
+                                                    {{ $row->nombres_paciente }} {{ $row->paterno_paciente }} {{ $row->materno_paciente }}
+                                                </td>
                                                 <th >
                                                     {{ $row->especialidad }}
                                                 </th>

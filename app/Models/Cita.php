@@ -72,6 +72,7 @@ class Cita extends Model
         }elseif($user->hasRole('Paciente')){
             $where.=" AND paci.id='$user->id'";
         }
+        $where.=" ORDER BY ct.fecha ASC, bloque.id ASC";
         $query=DB::select ($consulta.$where);
         return $query;
     }

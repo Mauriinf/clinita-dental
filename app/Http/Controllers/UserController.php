@@ -9,6 +9,7 @@ use App\Models\Especialidad;
 use Spatie\Permission\Models\Role;
 use Hash;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\DB;
 class UserController extends Controller
@@ -25,7 +26,14 @@ class UserController extends Controller
         //if (! Gate::allows('user-lists')) {
 //return abort(401);
        // }
-        $data = User::all();
+       $user= Auth::user();
+       if($user->hasRole('Doctor') || $user->hasRole('Paciente')){
+            $data = User::role('Paciente')->get();
+        }else{
+            $data = User::all();
+        }
+
+
         $especialidad = Especialidad::select()->where('estado','=','1')->get();
         $espec_user=json_encode(Especialidad::especialidades_user());
         return view('admin.users.index',compact(['data','especialidad','espec_user']));
@@ -53,7 +61,9 @@ class UserController extends Controller
         $this->validate($request, [
             'username' => 'required|unique:users,username',
             'email' => 'required|email',
-            'nombres' => 'required',
+            'nombres' => 'required|regex:/^[\pL\s]+$/u',
+            'paterno'=> 'nullable|regex:/^[\pL\s]+$/u',
+            'materno'=> 'nullable|regex:/^[\pL\s]+$/u',
             'ci' => 'required|unique:users,ci',
             'password' => 'required|same:confirm-password',
             'roles' => 'required'
@@ -108,7 +118,9 @@ class UserController extends Controller
         $this->validate($request, [
             'username' => 'required|unique:users,username,'.$id,
             'email' => 'required|email',
-            'nombres' => 'required',
+            'nombres' => 'required|regex:/^[\pL\s]+$/u',
+            'paterno'=> 'nullable|regex:/^[\pL\s]+$/u',
+            'materno'=> 'nullable|regex:/^[\pL\s]+$/u',
             'ci' => 'required|unique:users,ci,'.$id,
             'password' => 'required|same:confirm-password',
             'roles' => 'required'

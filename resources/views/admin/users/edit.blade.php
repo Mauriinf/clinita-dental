@@ -99,19 +99,28 @@
                     <strong>Roles:</strong>
                     <select class="select2 form-control" name="roles[]" id="roles" multiple="multiple" aria-placeholder="Seleccione Rol de Usuario">
                         @if ($roles)
-                            @foreach($roles as $role)
-                                @php
-                                    $ban=0;
-                                @endphp
-                                @foreach($userRole as $myrole)
-                                    @if($myrole === $role)
-                                    @php
-                                        $ban=1; break;
-                                    @endphp
-                                    @endif
-                                @endforeach
-                                <option value="{{ $role }}" {{ $ban == 1 ? 'selected="selected"' : '' }}>{{ $role }}</option>
-                            @endforeach
+                            @role('Doctor')
+                                <option value="Paciente">Paciente</option>
+                            @else
+                                @role('Asistente')
+                                    <option value="Paciente">Paciente</option>
+                                @else
+                                    @foreach($roles as $role)
+                                        @php
+                                            $ban=0;
+                                        @endphp
+                                        @foreach($userRole as $myrole)
+                                            @if($myrole === $role)
+                                            @php
+                                                $ban=1; break;
+                                            @endphp
+                                            @endif
+                                        @endforeach
+                                        <option value="{{ $role }}" {{ $ban == 1 ? 'selected="selected"' : '' }}>{{ $role }}</option>
+                                    @endforeach
+                                @endrole
+                            @endrole
+
                         @endif
                     </select>
 

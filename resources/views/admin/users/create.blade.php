@@ -103,10 +103,17 @@
                             <strong>Roles:</strong>
                             <select class="select2 form-control" name="roles[]" id="roles" multiple="multiple" aria-placeholder="Seleccione Rol de Usuario" onchange="getValue(this);">
                                 @if ($roles)
-
+                                @role('Doctor')
+                                    <option value="Paciente">Paciente</option>
+                                @else
+                                    @role('Asistente')
+                                        <option value="Paciente">Paciente</option>
+                                    @else
                                     @foreach($roles as $role)
-                                        <option value="{{ $role }}">{{ $role }}</option>
+                                            <option value="{{ $role }}">{{ $role }}</option>
                                     @endforeach
+                                    @endrole
+                                @endrole
                                 @endif
                             </select>
 

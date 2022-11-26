@@ -61,7 +61,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    @role('Admin')
+                                    @role('Admin|Asistente')
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="mb-1">
                                             <label for="paciente">Paciente</label>

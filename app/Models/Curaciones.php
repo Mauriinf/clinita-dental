@@ -53,4 +53,12 @@ class Curaciones extends Model
                                                             ON doc.id=co.id_doctor");
         return $query;
     }
+    public static function atendidos_entre_fechas($inicio,$fin){
+        $query=DB::select ("SELECT DISTINCT us.ci as ci_paciente, CONCAT(IFNULL(CONCAT(us.nombres, ' '), ''),IFNULL(CONCAT(us.paterno, ' '), ''),IFNULL(CONCAT(us.materno, ' '), '')) as nombre_paciente
+        FROM consultas co INNER JOIN users us
+                    ON us.id=co.id_cliente
+                    WHERE co.fecha_creacion>='$inicio'
+                    AND co.fecha_creacion<='$fin'");
+        return $query;
+    }
 }
