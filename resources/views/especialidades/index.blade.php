@@ -177,7 +177,14 @@ $(document).ready( function () {
         language: {
             "url": "/app-assets/js/scripts/tables/spanish.json"
         },
-
+        buttons: [
+            //{ extend: 'copy', text: 'Copiar', className: 'btn-sm' },
+            //{ extend: 'csv', className: 'btn-sm' },
+            {   extend: 'excel', className: 'btn-sm',
+            },
+            { extend: 'pdf', className: 'btn-sm' },
+            { extend: 'print', text: 'Imprimir', className: 'btn-sm' }
+            ],
     });
 });
 

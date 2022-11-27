@@ -31,14 +31,24 @@
                         <div class="pull-right">
                             <div class="input-group-prepend pull-right">
                                 @can('crear-usuarios')
+                                <a href="{{ route("reporte.pacientes") }}" class="dropdown-item mb-1">
+                                    <i data-feather='user-plus'></i>
+                                    Reporte Pacientes
+                                </a>
+                                @endcan
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <div class="input-group-prepend pull-right">
+                                @can('crear-usuarios')
                                 <a href="{{ route("users.create") }}" class="dropdown-item mb-1">
                                     <i data-feather='user-plus'></i>
                                     Nuevo Usario
                                 </a>
                                 @endcan
-
                             </div>
                         </div>
+
                     </div>
                     <div class="card-body">
                         @if ($message = Session::get('success'))
@@ -208,10 +218,8 @@
             buttons: [
             //{ extend: 'copy', text: 'Copiar', className: 'btn-sm' },
             //{ extend: 'csv', className: 'btn-sm' },
-            {   extend: 'excel',
-                className: 'btn-sm',
+            {   extend: 'excel', className: 'btn-sm',
             },
-
             { extend: 'pdf', className: 'btn-sm' },
             { extend: 'print', text: 'Imprimir', className: 'btn-sm' }
             ],

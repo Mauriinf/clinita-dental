@@ -89,4 +89,5 @@ Route::group(['middleware' => ['auth']], function() {
     // reportes
     Route::get('/historia-clinica/{id_paciente}', [ReporteController::class, 'historia_clinica'])->name('reporte.historia_clinica');
     Route::get('/reporte/fecha', [ReporteController::class, 'reporte_fechas'])->name('reporte.entre.fechas');
+    Route::get('/reporte/pacientes', [ReporteController::class, 'reporte_pacientes'])->name('reporte.pacientes');
 });

@@ -433,6 +433,7 @@
                         <select class="form-select" name="tipoReporte" id="tipoReporte">
                             <option value="ATEDIDOS">PACIENTES ATENDIDOS</option>
                             <option value="GANANCIA">GANANCIAS</option>
+                            <option value="CITAS">CITAS</option>
                         </select>
 
                     </div>

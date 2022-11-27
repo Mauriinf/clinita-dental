@@ -66,12 +66,12 @@ class UserController extends Controller
             'materno'=> 'nullable|regex:/^[\pL\s]+$/u',
             'ci' => 'required|unique:users,ci',
             'password' => 'required|same:confirm-password',
-            'roles' => 'required'
+            'roles' => 'required',
+            'sexo' => 'required'
         ]);
 
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
-
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
 
@@ -123,7 +123,8 @@ class UserController extends Controller
             'materno'=> 'nullable|regex:/^[\pL\s]+$/u',
             'ci' => 'required|unique:users,ci,'.$id,
             'password' => 'required|same:confirm-password',
-            'roles' => 'required'
+            'roles' => 'required',
+            'sexo' => 'required'
         ]);
 
         $input = $request->all();

@@ -116,7 +116,16 @@
             //lengthMenu: [7, 10, 25, 50, 75, 100],
             language: {
                 "url": "/app-assets/js/scripts/tables/spanish.json"
-            }
+            },
+            buttons: [
+            //{ extend: 'copy', text: 'Copiar', className: 'btn-sm' },
+            //{ extend: 'csv', className: 'btn-sm' },
+            {   extend: 'excel', className: 'btn-sm',
+            },
+            { extend: 'pdf', className: 'btn-sm' },
+            { extend: 'print', text: 'Imprimir', className: 'btn-sm' }
+            ],
+
             });
     });
 

@@ -50,7 +50,7 @@
     <p class="text-center">
 
     </p>
-    <h3 class="text-center">CONTROL DE COBROS</h3>
+    <h3 class="text-center">Cantidad de Citas por Paciente</h3>
     <br>
     <h6 class="text-end">Desde la fecha {{$inicio}} al {{$fin}}</h6>
     <hr>
@@ -62,20 +62,16 @@
             <th width = "220px" style="border: 1px solid">Paciente</th>
             <th  width = "30px" style="border: 1px solid">Sexo</th>
             <th  width = "40px" style="border: 1px solid">Edad</th>
-            <th  width = "210px" style="border: 1px solid">Tratamiento</th>
-            <th width = "60px" style="border: 1px solid">Costo Total</th>
-            <th width = "60px" style="border: 1px solid">Total Pagado</th>
+            <th  width = "210px" style="border: 1px solid">Cant. Citas</th>
+
 
 
         </tr>
-        @php
-            $total_recaudado=00.00;
-        @endphp
-        @foreach ($pagos as $item)
+        @foreach ($citas as $item)
             <tr align="center" >
                 <td style="padding-top:.5em;padding-bottom:.5em;border: 1px solid;font-weight: bold">{{$loop->iteration}}</td>
-                <td style="padding-top:.5em;padding-bottom:.5em;border: 1px solid">{{$item->ci_paciente}}</td>
-                <td style="padding-top:.5em;padding-bottom:.5em;border: 1px solid">{{$item->nombre_paciente}}</td>
+                <td style="padding-top:.5em;padding-bottom:.5em;border: 1px solid">{{$item->ci}}</td>
+                <td style="padding-top:.5em;padding-bottom:.5em;border: 1px solid">{{$item->nombres}} {{$item->paterno}} {{$item->materno}}</td>
                 <td style="padding-top:.5em;padding-bottom:.5em;border: 1px solid">{{$item->sexo}}</td>
                 @php
                     $fecha_nac = new DateTime(date('Y/m/d',strtotime($item->fec_nac))); // Creo un objeto DateTime de la fecha ingresada
@@ -84,24 +80,9 @@
                     $myedad=$edad->format('%Y');
                 @endphp
                 <td style="padding-top:.5em;padding-bottom:.5em;border: 1px solid">{{$myedad}}</td>
-                <td style="padding-top:.5em;padding-bottom:.5em;border: 1px solid">{{$item->diagnostico}}</td>
-                <td style="padding-top:.5em;padding-bottom:.5em;border: 1px solid">{{$item->costo_total}}</td>
-                <td style="padding-top:.5em;padding-bottom:.5em;border: 1px solid">{{$item->total_pagado}}</td>
-                @php
-                    $total_recaudado+=$item->total_pagado;
-                @endphp
+                <td style="padding-top:.5em;padding-bottom:.5em;border: 1px solid">{{$item->numero_citas}}</td>
             </tr>
         @endforeach
-        <tr>
-            <td align="center"  style="padding-top:.5em;padding-bottom:.5em;border: 1px solid" colspan="7">Total Recaudado Bs.</td>
-            <td style="display: none;" ></td>
-            <td style="display: none;" ></td>
-            <td style="display: none;" ></td>
-            <td style="display: none;" ></td>
-            <td style="display: none;" ></td>
-            <td style="display: none;" ></td>
-            <td style="padding-top:.5em;padding-bottom:.5em;border: 1px solid">{{ sprintf("%.2f",$total_recaudado);}}</td>
-        </tr>
     </table>
     <hr>
 </body>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cita;
 use App\Models\Curaciones;
 use App\Models\User;
 use PDF;
@@ -27,8 +28,19 @@ class ReporteController extends Controller
                 $pagos=Curaciones::cobros_entre_fechas($inicio,$fin);
                 $pdf = PDF::loadView('reportes.cobros', compact('pagos','inicio','fin'));
                 return $pdf->stream('pagos.pdf');
+            }else{
+                if($tipo==='CITAS'){
+                    $citas=Cita::citas_entre_fechas($inicio,$fin);
+                    $pdf = PDF::loadView('reportes.citas', compact('citas','inicio','fin'));
+                    return $pdf->stream('citas.pdf');
+                }
             }
         }
 
+    }
+    public function reporte_pacientes(Request $request){
+        $usuarios= User::role('Paciente')->get();
+        $pdf = PDF::loadView('reportes.pacientes', compact('usuarios'));
+        return $pdf->stream('pacientes.pdf');
     }
 }

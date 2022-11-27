@@ -73,7 +73,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Username:</strong>
-                    {!! Form::text('username', null, array('placeholder' => 'Userame','class' => 'form-control')) !!}
+                    {!! Form::text('username', null, array('placeholder' => 'UserName','class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -134,6 +134,27 @@
                         <option value="1" >ACTIVO</option>
                         <option value="0" >INACTIVO</option>
                     </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Sexo:</strong>
+                    <div class="form-check my-50">
+                        @if ($user->sexo==='M')
+                            <input type="radio" id="validationRadio3" name="sexo" value="M" class="form-check-input" required checked  />
+                        @else
+                            <input type="radio" id="validationRadio3" name="sexo" value="M" class="form-check-input" required />
+                        @endif
+                        <label class="form-check-label" for="validationRadio3">Masculino</label>
+                    </div>
+                    <div class="form-check">
+                        @if ($user->sexo==='F')
+                            <input type="radio" id="validationRadio4" name="sexo" value="F" class="form-check-input" required checked />
+                        @else
+                            <input type="radio" id="validationRadio4" name="sexo" value="F" class="form-check-input" required />
+                        @endif
+                        <label class="form-check-label" for="validationRadio4">Femenino</label>
+                    </div>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

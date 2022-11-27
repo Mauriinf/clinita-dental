@@ -95,4 +95,14 @@ class Cita extends Model
                         WHERE ct.id='$id'");
         return $query;
     }
+    public static function citas_entre_fechas($inicio,$fin){
+        $query=DB::select ("SELECT us.id,us.nombres,us.paterno,us.materno,
+        us.ci,us.sexo,us.fec_nac, COUNT(*) as numero_citas
+                                FROM citas cit INNER JOIN users us
+                                            ON us.id=cit.id_usuario
+                                            WHERE cit.fecha>='$inicio'
+                                            AND cit.fecha<='$fin'
+                                            GROUP BY us.id,us.nombres,us.paterno,us.materno,us.ci,us.sexo,us.fec_nac");
+        return $query;
+    }
 }

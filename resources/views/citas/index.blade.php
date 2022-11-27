@@ -271,7 +271,14 @@ $(document).ready( function () {
         language: {
             "url": "/app-assets/js/scripts/tables/spanish.json"
         },
-
+        buttons: [
+            //{ extend: 'copy', text: 'Copiar', className: 'btn-sm' },
+            //{ extend: 'csv', className: 'btn-sm' },
+            {   extend: 'excel', className: 'btn-sm',
+            },
+            { extend: 'pdf', className: 'btn-sm' },
+            { extend: 'print', text: 'Imprimir', className: 'btn-sm' }
+            ],
     });
     $('#dt-CitasConfirmar').DataTable({
         dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex mr-0 mr-sm-3"l><"d-block d-lg-inline-flex"B>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>',

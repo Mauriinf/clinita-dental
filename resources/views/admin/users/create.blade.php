@@ -128,7 +128,19 @@
                             </select>
                         </div>
                     </div>
-
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Sexo:</strong>
+                            <div class="form-check my-50">
+                                <input type="radio" id="validationRadio3" name="sexo" value="M" class="form-check-input" required />
+                                <label class="form-check-label" for="validationRadio3">Masculino</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" id="validationRadio4" name="sexo" value="F" class="form-check-input" required />
+                                <label class="form-check-label" for="validationRadio4">Femenino</label>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Guardar</button>

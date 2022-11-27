@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('direccion')->nullable();
             $table->date('fec_nac')->nullable();
             $table->boolean('estado');
+            $table->char('sexo',1);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('avatar')->nullable();
             $table->string('password');

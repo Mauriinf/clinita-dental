@@ -29,7 +29,8 @@ class CreateAdminUserSeeder extends Seeder
             'paterno' => 'NINA',
             'materno' => 'CANAVIRI',
             'fec_nac' => '1995-01-01',
-            'estado' => '1'
+            'estado' => '1',
+            'sexo' => 'M'
         ]);
 
         $role = Role::create(['name' => 'Admin']);
