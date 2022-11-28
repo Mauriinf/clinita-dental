@@ -14,17 +14,7 @@
     <!-- END: Vendor CSS-->
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/css/plugins/extensions/ext-component-sweet-alerts.css') !!}">
-    <!-- END: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/vendors/css/forms/select/select2.min.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/vendors/css/pickers/pickadate/pickadate.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/css/plugins/forms/pickers/form-flat-pickr.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/css/plugins/forms/pickers/form-pickadate.css') !!}">
-    <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/vendors/css/pickers/pickadate/pickadate.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/css/plugins/forms/pickers/form-flat-pickr.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/css/plugins/forms/pickers/form-pickadate.css') !!}">
+
 @endpush
 @section('content')
 <div class="content-wrapper p-0">
@@ -415,45 +405,7 @@
         </div>
     </div>
 </div>
-<!-- modal -->
-<div class="modal fade" id="modal-reporte">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="titulo"><i class="fa fa-file-pdf" ></i> Generar Reporte </h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-            </div>
-            <div class="modal-body">
-                <div class="alert alert-danger print-error-msg" style="display:none">
-                    <ul></ul>
-                </div>
-                <div class="form-group row m-b-15">
-                    <label class="col-md-3 col-sm-3 col-form-label" for="message">Tipo de Reporte: </label>
-                    <div class="col-md-8 col-sm-8">
-                        <select class="form-select" name="tipoReporte" id="tipoReporte">
-                            <option value="ATEDIDOS">PACIENTES ATENDIDOS</option>
-                            <option value="GANANCIA">GANANCIAS</option>
-                            <option value="CITAS">CITAS</option>
-                        </select>
 
-                    </div>
-                </div>
-                <div class="form-group row m-b-15">
-                    <label class="col-md-3 col-sm-3 col-form-label" for="message">Fecha: </label>
-                    <div class="col-md-8 col-sm-8">
-                        <input type="text" id="fecha" class="form-control flatpickr-range" placeholder="YYYY-MM-DD a YYYY-MM-DD" />
-                    </div>
-
-                </div>
-            </div>
-            <div class="modal-footer">
-                <a href="javascript:;" class="btn btn-secondary" data-dismiss="modal">Cancelar</a>
-                <button type='button' onclick="f_imprimir()" class="btn btn-success"><i class="fa fa-file-pdf" ></i> Generar</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end modal -->
 @endsection
 
 @push('scripts-vendor')
@@ -480,16 +432,7 @@
     <script src="{!! asset('app-assets/vendors/js/extensions/polyfill.min.js') !!}"></script>
     <script src="{!! asset('app-assets/js/scripts/extensions/ext-component-sweet-alerts.js') !!}"></script>
     <!-- END: Page JS-->
-    <!-- BEGIN: Page Vendor JS-->
-    <script src="{!! asset('app-assets/vendors/js/pickers/pickadate/picker.js') !!}"></script>
-    <script src="{!! asset('app-assets/vendors/js/pickers/pickadate/picker.date.js') !!}"></script>
-    <script src="{!! asset('app-assets/vendors/js/pickers/pickadate/picker.time.js') !!}"></script>
-    <script src="{!! asset('app-assets/vendors/js/pickers/pickadate/legacy.js') !!}"></script>
-    <script src="{!! asset('app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js') !!}"></script>
-    <!-- END: Page Vendor JS-->
-    <!-- BEGIN: Page JS-->
-    <script src="{!! asset('app-assets/js/scripts/forms/pickers/form-pickers.js') !!}"></script>
-    <!-- END: Page JS-->
+
 
 @endpush
 @push('scripts-page')
@@ -502,13 +445,7 @@ $(document).ready( function () {
             "url": "/app-assets/js/scripts/tables/spanish.json"
         },
         buttons: [
-            {
-                text: '<i class="fas fa-print"></i> Reporte',
-                action: function (e, dt, node, config ){
-                    generar_reporte();
-                },
-                className: 'btn_personalizado'
-            }
+
         ],
         "ajax": {
             url: "{{route('lista.consultas')}}",
@@ -534,16 +471,10 @@ $(document).ready( function () {
             $("#dt-ListaEspec").DataTable().clear().draw();
         }
     });
-    function generar_reporte(){
-        $('#modal-reporte').modal('toggle');
-    }
+
 
 });
-function f_imprimir(){
-    let fecha=$('#fecha').val();
-    let tipo_reporte=$('#tipoReporte').val();
-    window.open(URL_BASE+"/reporte/fecha?fecha="+fecha+"&tipo="+tipo_reporte) ;
-}
+
 function f_buscar(){
     let nombres = document.getElementById('nombres');
     let paterno = document.getElementById('paterno');

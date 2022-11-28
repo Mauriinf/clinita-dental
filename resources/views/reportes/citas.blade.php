@@ -57,11 +57,11 @@
     <table  style="border-collapse:collapse;border=0px; border-radius: 10px;">
 
         <tr align="center">
-            <th width = "20px" style="border: 1px solid">Nro.</th>
-            <th  width = "60px" style="border: 1px solid">C.I.</th>
+            <th width = "50px" style="border: 1px solid">Nro.</th>
+            <th  width = "90px" style="border: 1px solid">C.I.</th>
             <th width = "220px" style="border: 1px solid">Paciente</th>
-            <th  width = "30px" style="border: 1px solid">Sexo</th>
-            <th  width = "40px" style="border: 1px solid">Edad</th>
+            <th  width = "50px" style="border: 1px solid">Sexo</th>
+            <th  width = "50px" style="border: 1px solid">Edad</th>
             <th  width = "210px" style="border: 1px solid">Cant. Citas</th>
 
 

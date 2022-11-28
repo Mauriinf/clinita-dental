@@ -1,13 +1,7 @@
 @extends('vuexy.layouts.default', ['activePage' => 'citas-crear'])
 @section('title','Agendar Cita')
 @push('css-vendor')
-    <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/vendors/css/forms/select/select2.min.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/vendors/css/pickers/pickadate/pickadate.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/css/plugins/forms/pickers/form-flat-pickr.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/css/plugins/forms/pickers/form-pickadate.css') !!}">
-    <!-- END: Vendor CSS-->
+
 @endpush
 @section('content')
 <div class="content-wrapper container-xxl p-0">
@@ -65,7 +59,7 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="mb-1">
                                             <label for="paciente">Paciente</label>
-                                            <select class="select2 form-select" data-live-search="true" name="paciente"  data-style="btn-inverse" required>
+                                            <select class="form-select" data-live-search="true" name="paciente"  data-style="btn-inverse" required>
                                             <option value="">Seleccionar Paciente</option>
                                                 @foreach ($pacientes as $paci)
                                                     <option value="{{ $paci->id }}" @if(old('paciente') == $paci->id) selected @endif>{{ $paci->nombres }}</option>
@@ -82,7 +76,7 @@
                                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
                                         <div class="mb-1">
                                             <label for="especialidad">Especialidad</label>
-                                            <select name="especialidad" id="especialidad" class=" select2 form-select form-control" required>
+                                            <select name="especialidad" id="especialidad" class="form-select form-control" required>
                                             <option value="">Seleccionar especialidad</option>
                                             @foreach ($especialidades as $specialty)
                                                 <option value="{{ $specialty->id }}" >{{ $specialty->nombre }}</option>
@@ -98,7 +92,7 @@
                                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
                                         <div class="mb-1">
                                             <label for="email">Médico</label>
-                                            <select name="doctor" id="doctor" required class="select2 form-select" data-live-search="true" data-style="btn-inverse">
+                                            <select name="doctor" id="doctor" required class="form-select" data-live-search="true" data-style="btn-inverse">
 
                                             </select>
                                             @if ($errors->has('doctor'))
@@ -161,15 +155,6 @@
     <!-- BEGIN: Page JS-->
     <script src="{!! asset('app-assets/js/scripts/forms/form-select2.js') !!}"></script>
     <!-- END: Page JS-->
-    <!-- BEGIN: Page Vendor JS-->
-    <script src="{!! asset('app-assets/vendors/js/pickers/pickadate/picker.js') !!}"></script>
-    <script src="{!! asset('app-assets/vendors/js/pickers/pickadate/picker.date.js') !!}"></script>
-    <script src="{!! asset('app-assets/vendors/js/pickers/pickadate/picker.time.js') !!}"></script>
-    <script src="{!! asset('app-assets/vendors/js/pickers/pickadate/legacy.js') !!}"></script>
-    <script src="{!! asset('app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js') !!}"></script>
-    <!-- END: Page Vendor JS-->
-    <!-- BEGIN: Page JS-->
-    <script src="{!! asset('app-assets/js/scripts/forms/pickers/form-pickers.js') !!}"></script>
-    <!-- END: Page JS-->
+
     <script src="{{ asset('js/citas/crear.js') }}"></script>
 @endpush

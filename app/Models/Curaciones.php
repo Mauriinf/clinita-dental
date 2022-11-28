@@ -61,4 +61,35 @@ class Curaciones extends Model
                     AND co.fecha_creacion<='$fin'");
         return $query;
     }
+    public static function hombres_mujeres_atendidos(){
+        $query=DB::select ("SELECT count(*) as total,
+                sum(us.sexo = 'M') as Masculinos,
+                sum(us.sexo = 'F') as Femeninos
+                FROM users us
+        WHERE us.id IN(
+        SELECT cs.id_cliente
+        from consultas cs
+        GROUP BY cs.id_cliente)");
+        return $query;
+
+    }
+    public static function Mayores_de_edad(){
+        $query=DB::select ("SELECT count(*) as mayores_edad FROM (SELECT us.id,YEAR( CURDATE( ) ) - YEAR( us.fec_nac ) - IF( MONTH( CURDATE( ) ) < MONTH(  us.fec_nac), 1, IF ( MONTH(CURDATE( )) = MONTH( us.fec_nac), IF (DAY( CURDATE( ) ) < DAY(  us.fec_nac ),1,0 ),0)) AS edades
+        from users us
+        WHERE us.id IN(
+            SELECT cs.id_cliente
+            from consultas cs
+            GROUP BY cs.id_cliente) HAVING edades BETWEEN 18 AND 100) as cantidad");
+        return $query;
+    }
+    public static function Menores_de_edad(){
+        $query=DB::select ("SELECT count(*) as menores_edad FROM (SELECT us.id,YEAR( CURDATE( ) ) - YEAR( us.fec_nac ) - IF( MONTH( CURDATE( ) ) < MONTH(  us.fec_nac), 1, IF ( MONTH(CURDATE( )) = MONTH( us.fec_nac), IF (DAY( CURDATE( ) ) < DAY(  us.fec_nac ),1,0 ),0)) AS edades
+        from users us
+        WHERE us.id IN(
+            SELECT cs.id_cliente
+            from consultas cs
+            GROUP BY cs.id_cliente) HAVING edades BETWEEN 0 AND 18) as cantidad");
+        return $query;
+    }
+
 }

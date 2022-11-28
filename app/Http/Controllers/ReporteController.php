@@ -33,6 +33,12 @@ class ReporteController extends Controller
                     $citas=Cita::citas_entre_fechas($inicio,$fin);
                     $pdf = PDF::loadView('reportes.citas', compact('citas','inicio','fin'));
                     return $pdf->stream('citas.pdf');
+                }else{
+                    if($tipo==='HOMBRESMUJERES'){
+                        $generos=Curaciones::hombres_mujeres_atendidos($inicio,$fin);
+                        $pdf = PDF::loadView('reportes.generos', compact('generos','inicio','fin'));
+                        return $pdf->stream('HombresyMujeres.pdf');
+                    }
                 }
             }
         }

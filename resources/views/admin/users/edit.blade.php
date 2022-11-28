@@ -1,13 +1,7 @@
 @extends('vuexy.layouts.default', ['activePage' => 'users'])
 @section('title','Editar Usuario')
 @push('css-vendor')
-    <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/vendors/css/forms/select/select2.min.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/vendors/css/pickers/pickadate/pickadate.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/css/plugins/forms/pickers/form-flat-pickr.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('app-assets/css/plugins/forms/pickers/form-pickadate.css') !!}">
-    <!-- END: Vendor CSS-->
+
 @endpush
 @section('content')
 <div class="card">
@@ -179,15 +173,6 @@
     <!-- BEGIN: Page JS-->
     <script src="{!! asset('app-assets/js/scripts/forms/form-select2.js') !!}"></script>
     <!-- END: Page JS-->
-    <!-- BEGIN: Page Vendor JS-->
-    <script src="{!! asset('app-assets/vendors/js/pickers/pickadate/picker.js') !!}"></script>
-    <script src="{!! asset('app-assets/vendors/js/pickers/pickadate/picker.date.js') !!}"></script>
-    <script src="{!! asset('app-assets/vendors/js/pickers/pickadate/picker.time.js') !!}"></script>
-    <script src="{!! asset('app-assets/vendors/js/pickers/pickadate/legacy.js') !!}"></script>
-    <script src="{!! asset('app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js') !!}"></script>
-    <!-- END: Page Vendor JS-->
-    <!-- BEGIN: Page JS-->
-    <script src="{!! asset('app-assets/js/scripts/forms/pickers/form-pickers.js') !!}"></script>
-    <!-- END: Page JS-->
+
 
 @endpush

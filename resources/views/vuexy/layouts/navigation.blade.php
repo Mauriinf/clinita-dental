@@ -1,7 +1,7 @@
 <div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true" id="navegation">
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
-            <li class="nav-item me-auto"><a class="navbar-brand" href="../../../html/ltr/vertical-menu-template-semi-dark/index.html"><span class="brand-logo">
+            <li class="nav-item me-auto"><a class="navbar-brand" href="{{route('home')}}"><span class="brand-logo">
                             <svg viewbox="0 0 139 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="24">
                                 <defs>
                                     <lineargradient id="linearGradient-1" x1="100%" y1="10.5120544%" x2="50%" y2="89.4879456%">
@@ -92,6 +92,62 @@
                 </a>
             </li>
             @endcan
+
+            <li class=" nav-item {{ $activePage == 'reportes' ? ' active' : '' }} ">
+                <a class="d-flex align-items-center" href="javascript:;" onclick="generar_reporte()">
+                    <i data-feather='clipboard'></i><span class="menu-title text-truncate" data-i18n="Reportes">Reportes</span>
+                </a>
+            </li>
+
         </ul>
     </div>
 </div>
+<!-- modal -->
+<div class="modal fade" id="modal-reporte">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="titulo"><i class="fa fa-file-pdf" ></i> Generar Reporte </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger print-error-msg" style="display:none">
+                    <ul></ul>
+                </div>
+                <div class="form-group row m-b-15">
+                    <label class="col-md-3 col-sm-3 col-form-label" for="message">Tipo de Reporte: </label>
+                    <div class="col-md-8 col-sm-8">
+                        <select class="form-select" name="tipoReporte" id="tipoReporte">
+                            <option value="ATEDIDOS">PACIENTES ATENDIDOS</option>
+                            <option value="GANANCIA">GANANCIAS</option>
+                            <option value="CITAS">CITAS</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="form-group row m-b-15">
+                    <label class="col-md-3 col-sm-3 col-form-label" for="message">Fecha: </label>
+                    <div class="col-md-8 col-sm-8">
+                        <input type="text" id="fecha" class="form-control flatpickr-range" placeholder="YYYY-MM-DD a YYYY-MM-DD" />
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-secondary" data-dismiss="modal">Cancelar</a>
+                <button type='button' onclick="f_imprimir()" class="btn btn-success"><i class="fa fa-file-pdf" ></i> Generar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal -->
+<script>
+     function generar_reporte() {
+        $('#modal-reporte').modal('toggle');
+    }
+    function f_imprimir(){
+        let fecha=$('#fecha').val();
+        let tipo_reporte=$('#tipoReporte').val();
+        window.open(URL_BASE+"/reporte/fecha?fecha="+fecha+"&tipo="+tipo_reporte) ;
+    }
+</script>
