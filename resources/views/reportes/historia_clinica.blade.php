@@ -30,12 +30,10 @@
     </style>
 </head>
 <body>
-    <p class="text-center">
-        
-    </p>
     <h3 class="text-center">HISTORIA CLINICA ODONTOLOGICA</h3>
     <h6 class="text-end">Nº 0001</h6>
     <h6 class="text-end">C.I. {{ $usuario->ci }}</h6>
+    <h6>Datos Personales</h6>
     <table class="table">
         <tr>
             <td class="text-center">
@@ -71,5 +69,94 @@
             </td>
         </tr>
     </table>
+
+    <h6>Antecedentes Patologicos</h6>
+    <table class="table">
+        <tr class="text-center">
+            <td>
+                <p>
+                    <span>Alergias: </span>
+                    <span>Si</span>
+                </p>
+            </td>
+            <td>
+                <p>
+                    <span>Enfermedades: </span>
+                    <span>Si</span>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                
+            </td>
+            <td>
+
+            </td>
+        </tr>
+    </table>
+
+    <h6>Antecedentes Bucodentales</h6>
+    <table class="table">
+        <tr class="text-center">
+            <td>
+                <p>
+                    <span>Fecha de la ultima visita al odontologo: </span>
+                    <span>27/11/2022</span>
+                </p>
+            </td>
+            <td>
+                <p>
+                    <span>Habitos: </span>
+                    <span>Fuma (x)</span>
+                    <span>Bebe (x)</span>
+                    <p>Otros: ........</p>
+                </p>
+            </td>
+        </tr>
+    </table>
+
+    <h6>Antecedentes Higiene Oral</h6>
+    <table class="table">
+        <tr class="text-center">
+            <td>
+                <p>
+                    <span>Utiliza cepillo dental: </span>
+                    <span>SI</span>
+                </p>
+            </td>
+            <td>
+                <p>
+                    <span>Utiliza hilo dental: </span>
+                    <span>SI</span>
+                </p>
+            </td>
+            <td>
+                <p>
+                    <span>Utiliza enjuage bucal: </span>
+                    <span>SI</span>
+                </p>
+            </td>
+        </tr>
+        <tr class="text-center">
+            <td>
+                <p>
+                    <span>Frecuencia del cepillado dental: </span>
+                    <span>3 veces al dia</span>
+                </p>
+            </td>
+            <td colspan="2">
+                <p>
+                    <span>Durante el cepillado dental le sangran las encias: </span>
+                    <span>SI</span>
+                </p>
+            </td>
+        </tr>
+
+    </table>
+    <h6>Observaciones</h6>
+    <p>
+        ..............................
+    </p>
 </body>
 </html>
