@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cita;
 use App\Models\Curaciones;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -41,6 +43,10 @@ class HomeController extends Controller
         $porcentajeMayores = round($porcentajeMayores, 0);  // Quitar los decimales
         $porcentajeMenores = ((float)$menores * 100) / ($mayores+$menores); // Regla de tres
         $porcentajeMenores = round($porcentajeMenores, 0);  // Quitar los decimales
-        return view('home')->with('generos',$generos)->with('hombres',$hombres)->with('mujeres',$mujeres)->with('mayores',$mayores)->with('menores',$menores)->with('porcentajeMayores',$porcentajeMayores)->with('porcentajeMenores',$porcentajeMenores);
+        $users = User::role('Paciente')->get();
+        $doctores = User::role('Doctor')->get();
+        $citas = Cita::all();
+        $consultas = Curaciones::all();
+        return view('home', compact('users', 'doctores', 'citas', 'consultas', 'generos', 'hombres', 'mujeres', 'mayores', 'menores', 'porcentajeMayores', 'porcentajeMenores'));
     }
 }
