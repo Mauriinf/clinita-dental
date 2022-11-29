@@ -27,9 +27,9 @@ class HomeController extends Controller
     public function index()
     {
         $generos=Curaciones::hombres_mujeres_atendidos();
-        $hombres = ((float)$generos[0]->Masculinos * 100) / $generos[0]->total; // Regla de tres
+        $hombres = ((float)$generos[0]->Masculinos * 100) / ($generos[0]->total===0?1:$generos[0]->total); // Regla de tres
         $hombres = round($hombres, 0);  // Quitar los decimales
-        $mujeres = ((float)$generos[0]->Femeninos * 100) / $generos[0]->total; // Regla de tres
+        $mujeres = ((float)$generos[0]->Femeninos * 100) /($generos[0]->total===0?1:$generos[0]->total); // Regla de tres
         $mujeres = round($mujeres, 0);  // Quitar los decimales
         $cantmayores= Curaciones::Mayores_de_edad();
         $mayores=0;
@@ -39,9 +39,9 @@ class HomeController extends Controller
         $cantmenores= Curaciones::Menores_de_edad();
         if(count($cantmenores)>0)
         $menores=$cantmenores[0]->menores_edad;
-        $porcentajeMayores = ((float)$mayores * 100) / ($mayores+$menores); // Regla de tres
+        $porcentajeMayores = ((float)$mayores * 100) / (($mayores+$menores)===0?1:$mayores+$menores); // Regla de tres
         $porcentajeMayores = round($porcentajeMayores, 0);  // Quitar los decimales
-        $porcentajeMenores = ((float)$menores * 100) / ($mayores+$menores); // Regla de tres
+        $porcentajeMenores = ((float)$menores * 100) / (($mayores+$menores)===0?1:$mayores+$menores); // Regla de tres
         $porcentajeMenores = round($porcentajeMenores, 0);  // Quitar los decimales
         $users = User::role('Paciente')->get();
         $doctores = User::role('Doctor')->get();
