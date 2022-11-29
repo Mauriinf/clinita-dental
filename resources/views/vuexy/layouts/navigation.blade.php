@@ -92,13 +92,13 @@
                 </a>
             </li>
             @endcan
-
+            @role('Doctor|Admin|Asistente')
             <li class=" nav-item {{ $activePage == 'reportes' ? ' active' : '' }} ">
                 <a class="d-flex align-items-center" href="javascript:;" onclick="generar_reporte()">
                     <i data-feather='clipboard'></i><span class="menu-title text-truncate" data-i18n="Reportes">Reportes</span>
                 </a>
             </li>
-
+            @endrole
         </ul>
     </div>
 </div>

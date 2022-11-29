@@ -20,7 +20,8 @@ class Cita extends Model
     ];
     public static function horas_doctor($date, $doctorId){
         $dayofweek = date('N', strtotime($date));//Obtener el numero del dia de la semana segun una fecha ej: lunes=1,mater=2, etc
-        $query=DB::select ("SELECT bd.id as id_bloque_dia, bd.id_usuario,bd.id_dia,bd.id_bloque, bloque.inicio,bloque.fin FROM bloque_dia bd
+        $query=DB::select ("SELECT bd.id as id_bloque_dia, bd.id_usuario,bd.id_dia,bd.id_bloque, bloque.inicio,bloque.fin
+                        FROM bloque_dia bd
                             INNER JOIN dia
                             ON dia.id=bd.id_dia
                             INNER JOIN bloque

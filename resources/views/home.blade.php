@@ -5,86 +5,88 @@
 @endpush
 @section('content')
 <div class="content-wrapper container-xxl p-0">
-<!-- ChartJS section start -->
-<section id="chartjs-chart">
+@role('Doctor|Admin|Asistente')
+    <!-- ChartJS section start -->
+    <section id="chartjs-chart">
 
-    <div class="row">
-        <!-- Donut Chart Starts -->
-        <div class="col-lg-6 col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Total Hombres y Mujeres Atendidos</h4>
-                </div>
-                <div class="card-body">
-                    <canvas class="doughnut-chart-ex chartjs" data-height="275"></canvas>
-                    <div class="d-flex justify-content-between mt-3 mb-1">
-                        <div class="d-flex align-items-center">
-                            <i data-feather='users'  class="font-medium-2 text-primary"></i>
-                            <span class="fw-bold ms-75 me-25">Total Hombres</span>
-                            <span>[ {{$generos[0]->Masculinos}} ]</span>
-                        </div>
-                        <div>
-                            <span>{{$hombres}} %</span>
-                            <i data-feather="arrow-up" class="text-success"></i>
-                        </div>
+        <div class="row">
+            <!-- Donut Chart Starts -->
+            <div class="col-lg-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Total Hombres y Mujeres Atendidos</h4>
                     </div>
-                    <div class="d-flex justify-content-between mb-1">
-                        <div class="d-flex align-items-center">
-                            <i data-feather='users'  class="font-medium-2 text-warning"></i>
-                            <span class="fw-bold ms-75 me-25">Total Mujeres</span>
-                            <span>[ {{$generos[0]->Femeninos}} ]</span>
+                    <div class="card-body">
+                        <canvas class="doughnut-chart-ex chartjs" data-height="275"></canvas>
+                        <div class="d-flex justify-content-between mt-3 mb-1">
+                            <div class="d-flex align-items-center">
+                                <i data-feather='users'  class="font-medium-2 text-primary"></i>
+                                <span class="fw-bold ms-75 me-25">Total Hombres</span>
+                                <span>[ {{$generos[0]->Masculinos}} ]</span>
+                            </div>
+                            <div>
+                                <span>{{$hombres}} %</span>
+                                <i data-feather="arrow-up" class="text-success"></i>
+                            </div>
                         </div>
-                        <div>
-                            <span>{{$mujeres}} %</span>
-                            <i data-feather="arrow-up" class="text-success"></i>
+                        <div class="d-flex justify-content-between mb-1">
+                            <div class="d-flex align-items-center">
+                                <i data-feather='users'  class="font-medium-2 text-warning"></i>
+                                <span class="fw-bold ms-75 me-25">Total Mujeres</span>
+                                <span>[ {{$generos[0]->Femeninos}} ]</span>
+                            </div>
+                            <div>
+                                <span>{{$mujeres}} %</span>
+                                <i data-feather="arrow-up" class="text-success"></i>
+                            </div>
                         </div>
-                    </div>
 
-                </div>
-            </div>
-        </div>
-        <!-- Donut Chart Starts -->
-        <!-- Donut Chart Starts -->
-        <div class="col-lg-6 col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Total Mayores y Menores de Edad Atendidos</h4>
-                </div>
-                <div class="card-body">
-                    <canvas class="chartjs" id="mayores-menores" data-height="275"></canvas>
-                    <div class="d-flex justify-content-between mt-3 mb-1">
-                        <div class="d-flex align-items-center">
-                            <i data-feather="calendar" class="font-medium-2 text-primary"></i>
-                            <span class="fw-bold ms-75 me-25">Total Menores de Edad </span>
-                            <span>[ {{$menores}} ]</span>
-                        </div>
-                        <div>
-                            <span>{{$porcentajeMenores}} %</span>
-                            <i data-feather="arrow-up" class="text-success"></i>
-                        </div>
                     </div>
-                    <div class="d-flex justify-content-between mb-1">
-                        <div class="d-flex align-items-center">
-                            <i data-feather="calendar" class="font-medium-2 text-warning"></i>
-                            <span class="fw-bold ms-75 me-25">Total Mayores de Edad</span>
-                            <span>[ {{$mayores}} ]</span>
-                        </div>
-                        <div>
-                            <span>{{$porcentajeMayores}} %</span>
-                            <i data-feather="arrow-up" class="text-success"></i>
-                        </div>
-                    </div>
-
                 </div>
             </div>
+            <!-- Donut Chart Starts -->
+            <!-- Donut Chart Starts -->
+            <div class="col-lg-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Total Mayores y Menores de Edad Atendidos</h4>
+                    </div>
+                    <div class="card-body">
+                        <canvas class="chartjs" id="mayores-menores" data-height="275"></canvas>
+                        <div class="d-flex justify-content-between mt-3 mb-1">
+                            <div class="d-flex align-items-center">
+                                <i data-feather="calendar" class="font-medium-2 text-primary"></i>
+                                <span class="fw-bold ms-75 me-25">Total Menores de Edad </span>
+                                <span>[ {{$menores}} ]</span>
+                            </div>
+                            <div>
+                                <span>{{$porcentajeMenores}} %</span>
+                                <i data-feather="arrow-up" class="text-success"></i>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between mb-1">
+                            <div class="d-flex align-items-center">
+                                <i data-feather="calendar" class="font-medium-2 text-warning"></i>
+                                <span class="fw-bold ms-75 me-25">Total Mayores de Edad</span>
+                                <span>[ {{$mayores}} ]</span>
+                            </div>
+                            <div>
+                                <span>{{$porcentajeMayores}} %</span>
+                                <i data-feather="arrow-up" class="text-success"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Donut Chart Starts -->
+
         </div>
-        <!-- Donut Chart Starts -->
-
-    </div>
 
 
-</section>
-<!-- ChartJS section end -->
+    </section>
+    <!-- ChartJS section end -->
+@endrole
 </div>
 @endsection
 @push('scripts-vendor')

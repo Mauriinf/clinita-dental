@@ -111,6 +111,9 @@
                                                 </td>
                                                 @endcan
                                                 <td>
+                                                    @can('editar-cita')
+                                                    <a class="btn btn-sm  btn-primary" href="{{ route('cita.edit',$row->id) }}">Editar</a>
+                                                    @endcan
                                                     <a href="javascript:void(0)"  class="btn btn-sm btn-danger" onclick="eliminar(<?php echo $row->id; ?>)"><i data-feather='trash-2' ></i>Eliminar</a>
 
                                                     <form id="delete-form" method="post" class="d-none">
