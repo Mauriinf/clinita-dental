@@ -27,11 +27,17 @@
             border: 1px solid black;
             border-radius: 10px;
         }
+
+        .underline-solid{
+            font-size: .8rem;
+            border-bottom: 1px solid black;
+            margin: 0 1rem 0 1rem;
+        }
     </style>
 </head>
 <body>
     <h3 class="text-center">HISTORIA CLINICA ODONTOLOGICA</h3>
-    <h6 class="text-end">Nº 0001</h6>
+    <h6 class="text-end">Nº {{ $usuario->numero }}</h6>
     <h6 class="text-end">C.I. {{ $usuario->ci }}</h6>
     <h6>Datos Personales</h6>
     <table class="table">
@@ -49,22 +55,22 @@
                 <p class="bottom-underline">Nombres</p>
             </td>
             <td class="text-center">
-                <p class="underline">45</p>
+                <p class="underline">{{ $usuario->edad }}</p>
                 <p class="bottom-underline">Edad</p>
             </td>
         </tr>
         
         <tr>
             <td class="text-center">
-                <p class="underline">25/03/2000</p>
+                <p class="underline">{{ date_format(date_create($usuario->fec_nac), 'd - m - Y') }}</p>
                 <p class="bottom-underline">Fecha de nacimiento</p>
             </td>
             <td class="text-center">
-                <p class="underline">78541236</p>
+                <p class="underline">{{ $usuario->telefono }}</p>
                 <p class="bottom-underline">Telefono</p>
             </td>
             <td class="text-center" colspan="2">
-                <p class="underline">Calle Surco 387</p>
+                <p class="underline">{{ $usuario->direccion }}</p>
                 <p class="bottom-underline">Domicilio</p>
             </td>
         </tr>
@@ -74,85 +80,58 @@
     <table class="table">
         <tr class="text-center">
             <td>
-                <p>
+                <p class="underline-solid">
                     <span>Alergias: </span>
-                    <span>Si</span>
+                    <span>{{ $consulta->alergias ? 'SI' : 'NO'}}</span>
                 </p>
             </td>
             <td>
-                <p>
+                <p class="underline-solid">
                     <span>Enfermedades: </span>
-                    <span>Si</span>
+                    <span>{{ $consulta->enfermedades ? 'SI' : 'NO'}}</span>
                 </p>
             </td>
         </tr>
         <tr>
             <td>
-                
-            </td>
-            <td>
-
-            </td>
-        </tr>
-    </table>
-
-    <h6>Antecedentes Bucodentales</h6>
-    <table class="table">
-        <tr class="text-center">
-            <td>
-                <p>
-                    <span>Fecha de la ultima visita al odontologo: </span>
-                    <span>27/11/2022</span>
+                <p style="margin: 0 1rem 0 1rem;">
+                    {{ $consulta->alergias ? $consulta->alergias : '-- NINGUNA --'}}
                 </p>
             </td>
             <td>
-                <p>
-                    <span>Habitos: </span>
-                    <span>Fuma (x)</span>
-                    <span>Bebe (x)</span>
-                    <p>Otros: ........</p>
+                <p style="margin: 0 1rem 0 1rem;">
+                    {{ $consulta->enfermedades ? $consulta->enfermedades : '-- NINGUNA --'}}
                 </p>
             </td>
         </tr>
     </table>
 
-    <h6>Antecedentes Higiene Oral</h6>
+    <h6>Diagnostico</h6>
+    <table class="table">
+        <tr>
+            <td>
+                <p style="margin: 0 1rem 0 1rem;">
+                    {{ $consulta->diagnostico }}
+                </p>
+            </td>
+        </tr>
+    </table>
+
+    <h6>Tratamiento</h6>
     <table class="table">
         <tr class="text-center">
             <td>
-                <p>
-                    <span>Utiliza cepillo dental: </span>
-                    <span>SI</span>
-                </p>
-            </td>
-            <td>
-                <p>
-                    <span>Utiliza hilo dental: </span>
-                    <span>SI</span>
-                </p>
-            </td>
-            <td>
-                <p>
-                    <span>Utiliza enjuage bucal: </span>
-                    <span>SI</span>
-                </p>
+                <ul>
+                    @foreach ($d_tratamientos as $dt)
+                        <li>
+                            <p>
+                            {{ $dt->numero }} - {{ $dt->nombre }} - {{ $dt->parte_diente }} - {{ $dt->nombre }} - {{ $dt->descripcion }} - {{ $dt->costo }}
+                            </p>
+                        </li>
+                    @endforeach
+                </ul>
             </td>
         </tr>
-        <tr class="text-center">
-            <td>
-                <p>
-                    <span>Frecuencia del cepillado dental: </span>
-                    <span>3 veces al dia</span>
-                </p>
-            </td>
-            <td colspan="2">
-                <p>
-                    <span>Durante el cepillado dental le sangran las encias: </span>
-                    <span>SI</span>
-                </p>
-            </td>
-        </tr>
-
     </table>
     <h6>Observaciones</h6>
     <p>

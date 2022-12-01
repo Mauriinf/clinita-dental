@@ -21,7 +21,9 @@ class CuracionesController extends Controller
     // }
     public function index()
     {
+        
         $consultas=Curaciones::consultas();
+        dd($consultas);
         return view('curaciones.index',compact('consultas'));
     }
     public function lista_consultas(){
