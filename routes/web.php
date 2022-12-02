@@ -32,7 +32,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::group(['middleware' => ['auth']], function() {
-    Route::get('Prueba');
+    Route::get('calendario', [App\Http\Controllers\HomeController::class, 'calendario'])->name('calen');
     Route::resource('roles', RoleController::class);
     Route::delete('roles_mass_destroy', 'Admin\RolesController@massDestroy')->name('roles.mass_destroy');
     Route::resource('users', UserController::class);

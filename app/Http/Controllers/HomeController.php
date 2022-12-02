@@ -27,9 +27,10 @@ class HomeController extends Controller
     public function index()
     {
         $generos=Curaciones::hombres_mujeres_atendidos();
-        $hombres = ((float)$generos[0]->Masculinos * 100) / ($generos[0]->total===0)?1:$generos[0]->total; // Regla de tres
+
+        $hombres = ((float)($generos[0]->Masculinos==0)?1:$generos[0]->Masculinos * 100) / (($generos[0]->total==0)?1:$generos[0]->total); // Regla de tres
         $hombres = round($hombres, 0);  // Quitar los decimales
-        $mujeres = ((float)$generos[0]->Femeninos * 100) / ($generos[0]->total===0)?1:$generos[0]->total; // Regla de tres
+        $mujeres = ((float)($generos[0]->Femeninos===0)?1:$generos[0]->Femeninos * 100) / (($generos[0]->total===0)?1:$generos[0]->total); // Regla de tres
         $mujeres = round($mujeres, 0);  // Quitar los decimales
         $cantmayores= Curaciones::Mayores_de_edad();
         $mayores=0;
@@ -48,5 +49,8 @@ class HomeController extends Controller
         $citas = Cita::all();
         $consultas = Curaciones::all();
         return view('home', compact('users', 'doctores', 'citas', 'consultas', 'generos', 'hombres', 'mujeres', 'mayores', 'menores', 'porcentajeMayores', 'porcentajeMenores'));
+    }
+    public function  calendario(){
+        return view('calendario');
     }
 }

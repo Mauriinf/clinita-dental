@@ -18,6 +18,8 @@ class ReporteController extends Controller
     public function reporte_fechas(Request $request){
         $inicio=substr($request->fecha, 0, 10);
         $fin=substr($request->fecha, 14, 24);
+        if($fin=="")
+        $fin=$inicio;
         $tipo=$request->tipo;
         if($tipo==='ATEDIDOS'){
             $usuarios=Curaciones::atendidos_entre_fechas($inicio,$fin);
