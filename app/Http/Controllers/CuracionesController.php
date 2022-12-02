@@ -23,7 +23,6 @@ class CuracionesController extends Controller
     {
         
         $consultas=Curaciones::consultas();
-        dd($consultas);
         return view('curaciones.index',compact('consultas'));
     }
     public function lista_consultas(){
