@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cita;
+use App\Models\Consulta;
 use App\Models\Curaciones;
 use App\Models\User;
 use PDF;
@@ -12,7 +13,19 @@ class ReporteController extends Controller
 {
     public function historia_clinica(Request $request){
         $usuario = User::find($request->id_paciente);
-        $pdf = PDF::loadView('reportes.historia_clinica', compact('usuario'));
+
+        $nacimiento = date_create($usuario->fec_nac);
+        $ahora = date_create(date("Y-m-d"));
+        $edad = $ahora->diff($nacimiento);
+        $usuario->edad = $edad->format("%y");
+
+        $usuario->numero = substr_replace('00000', $usuario->id, -strlen($usuario->id), 5);
+
+        $consulta = Consulta::where('id_cliente', $request->id_paciente)->first();
+
+        $d_tratamientos = Consulta::d_tratamientos();
+        
+        $pdf = PDF::loadView('reportes.historia_clinica', compact('usuario', 'consulta', 'd_tratamientos'));
         return $pdf->stream('invoice.pdf', $usuario);
     }
     public function reporte_fechas(Request $request){
