@@ -106,4 +106,17 @@ class Cita extends Model
                                             GROUP BY us.id,us.nombres,us.paterno,us.materno,us.ci,us.sexo,us.fec_nac");
         return $query;
     }
+    public static function citas_entre_fechas_doctor($inicio,$fin,$id_doctor){
+        $query=DB::select ("SELECT us.id,us.nombres,us.paterno,us.materno,
+        us.ci,us.sexo,us.fec_nac, COUNT(*) as numero_citas
+                                FROM citas cit INNER JOIN users us
+                                            ON us.id=cit.id_usuario
+                                            INNER JOIN bloque_dia bd
+                                            ON bd.id=cit.id_bloque_dia
+                                            AND bd.id_usuario='$id_doctor'
+                                            WHERE cit.fecha>='$inicio'
+                                            AND cit.fecha<='$fin'
+                                            GROUP BY us.id,us.nombres,us.paterno,us.materno,us.ci,us.sexo,us.fec_nac");
+        return $query;
+    }
 }

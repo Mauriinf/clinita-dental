@@ -42,8 +42,6 @@ class Curaciones extends Model
         return $query;
     }
     public static function cobros_entre_fechas($inicio,$fin){
-        if($fin=="")
-        $fin=$inicio;
         $query=DB::select ("SELECT CONCAT(IFNULL(CONCAT(us.nombres, ' '), ''),IFNULL(CONCAT(us.paterno, ' '), ''),IFNULL(CONCAT(us.materno, ' '), '')) as nombre_paciente,
                         us.ci as ci_paciente,us.sexo,us.fec_nac,co.diagnostico,us.nombres as nom_paciente,us.paterno as pat_paciente,us.materno as mat_paciente,doc.ci as ci_doctor,
                         CONCAT(IFNULL(CONCAT(doc.nombres, ' '), ''),IFNULL(CONCAT(doc.paterno, ' '), ''),IFNULL(CONCAT(doc.materno, ' '), '')) as nombre_doctor ,
@@ -55,14 +53,34 @@ class Curaciones extends Model
                                                             ON doc.id=co.id_doctor");
         return $query;
     }
+    public static function cobros_entre_fechas_doctor($inicio,$fin,$id_doctor){
+        $query=DB::select ("SELECT CONCAT(IFNULL(CONCAT(us.nombres, ' '), ''),IFNULL(CONCAT(us.paterno, ' '), ''),IFNULL(CONCAT(us.materno, ' '), '')) as nombre_paciente,
+                        us.ci as ci_paciente,us.sexo,us.fec_nac,co.diagnostico,us.nombres as nom_paciente,us.paterno as pat_paciente,us.materno as mat_paciente,doc.ci as ci_doctor,
+                        CONCAT(IFNULL(CONCAT(doc.nombres, ' '), ''),IFNULL(CONCAT(doc.paterno, ' '), ''),IFNULL(CONCAT(doc.materno, ' '), '')) as nombre_doctor ,
+                        co.costo_total, ( SELECT SUM(od.pago) from odontograma od where od.id_consulta=co.id AND od.fecha>='$inicio'
+                        AND od.fecha<='$fin') as total_pagado
+                                                FROM consultas co INNER JOIN users us
+                                                            ON us.id=co.id_cliente
+                                                            INNER JOIN users doc
+                                                            ON doc.id=co.id_doctor
+                                                            AND co.id_doctor='$id_doctor'");
+        return $query;
+    }
     public static function atendidos_entre_fechas($inicio,$fin){
-        if($fin=="")
-        $fin=$inicio;
         $query=DB::select ("SELECT DISTINCT us.ci as ci_paciente, CONCAT(IFNULL(CONCAT(us.nombres, ' '), ''),IFNULL(CONCAT(us.paterno, ' '), ''),IFNULL(CONCAT(us.materno, ' '), '')) as nombre_paciente
         FROM consultas co INNER JOIN users us
                     ON us.id=co.id_cliente
                     WHERE co.fecha_creacion>='$inicio'
                     AND co.fecha_creacion<='$fin'");
+        return $query;
+    }
+    public static function atendidos_entre_fechas_doctor($inicio,$fin,$id_doctor){
+        $query=DB::select ("SELECT DISTINCT us.ci as ci_paciente, CONCAT(IFNULL(CONCAT(us.nombres, ' '), ''),IFNULL(CONCAT(us.paterno, ' '), ''),IFNULL(CONCAT(us.materno, ' '), '')) as nombre_paciente
+        FROM consultas co INNER JOIN users us
+                    ON us.id=co.id_cliente
+                    WHERE co.fecha_creacion>='$inicio'
+                    AND co.fecha_creacion<='$fin'
+                    AND co.id_doctor='$id_doctor'");
         return $query;
     }
     public static function hombres_mujeres_atendidos(){

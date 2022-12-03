@@ -8,6 +8,7 @@ use App\Models\Curaciones;
 use App\Models\User;
 use PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReporteController extends Controller
 {
@@ -24,7 +25,7 @@ class ReporteController extends Controller
         $consulta = Consulta::where('id_cliente', $request->id_paciente)->first();
 
         $d_tratamientos = Consulta::d_tratamientos();
-        
+
         $pdf = PDF::loadView('reportes.historia_clinica', compact('usuario', 'consulta', 'd_tratamientos'));
         return $pdf->stream('invoice.pdf', $usuario);
     }
@@ -34,20 +35,42 @@ class ReporteController extends Controller
         if($fin=="")
         $fin=$inicio;
         $tipo=$request->tipo;
+        $user= Auth::user();
         if($tipo==='ATEDIDOS'){
-            $usuarios=Curaciones::atendidos_entre_fechas($inicio,$fin);
-            $pdf = PDF::loadView('reportes.atendidos', compact('usuarios','inicio','fin'));
-            return $pdf->stream('atendidos.pdf');
+            if($user->hasRole('Doctor')){//REPORTE DE UN DOCTOR ESPECIFICO
+                $usuarios=Curaciones::atendidos_entre_fechas_doctor($inicio,$fin,$user->id);
+                $pdf = PDF::loadView('reportes.atendidos_doctor', compact('usuarios','inicio','fin','user'));
+                return $pdf->stream('atendidos.pdf');
+            }
+            else{
+                $usuarios=Curaciones::atendidos_entre_fechas($inicio,$fin);
+                $pdf = PDF::loadView('reportes.atendidos', compact('usuarios','inicio','fin'));
+                return $pdf->stream('atendidos.pdf');
+            }
         }else{
             if($tipo==='GANANCIA'){
-                $pagos=Curaciones::cobros_entre_fechas($inicio,$fin);
-                $pdf = PDF::loadView('reportes.cobros', compact('pagos','inicio','fin'));
-                return $pdf->stream('pagos.pdf');
+                if($user->hasRole('Doctor')){//REPORTE DE UN DOCTOR ESPECIFICO
+                    $pagos=Curaciones::cobros_entre_fechas_doctor($inicio,$fin,$user->id);
+                    $pdf = PDF::loadView('reportes.cobros_doctor', compact('pagos','inicio','fin','user'));
+                    return $pdf->stream('pagos.pdf');
+                }
+                else{
+                    $pagos=Curaciones::cobros_entre_fechas($inicio,$fin);
+                    $pdf = PDF::loadView('reportes.cobros', compact('pagos','inicio','fin'));
+                    return $pdf->stream('pagos.pdf');
+                }
             }else{
                 if($tipo==='CITAS'){
-                    $citas=Cita::citas_entre_fechas($inicio,$fin);
-                    $pdf = PDF::loadView('reportes.citas', compact('citas','inicio','fin'));
-                    return $pdf->stream('citas.pdf');
+                    if($user->hasRole('Doctor')){//REPORTE DE UN DOCTOR ESPECIFICO
+                        $citas=Cita::citas_entre_fechas_doctor($inicio,$fin,$user->id);
+                        $pdf = PDF::loadView('reportes.citas_doctor', compact('citas','inicio','fin','user'));
+                        return $pdf->stream('citas.pdf');
+                    }
+                    else{
+                        $citas=Cita::citas_entre_fechas($inicio,$fin);
+                        $pdf = PDF::loadView('reportes.citas', compact('citas','inicio','fin'));
+                        return $pdf->stream('citas.pdf');
+                    }
                 }else{
                     if($tipo==='HOMBRESMUJERES'){
                         $generos=Curaciones::hombres_mujeres_atendidos($inicio,$fin);
