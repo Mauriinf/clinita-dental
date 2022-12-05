@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Auth;
 class ReporteController extends Controller
 {
     public function historia_clinica(Request $request){
-        $usuario = User::find($request->id_paciente);
+        $consulta = Consulta::find($request->id);
+        $usuario = User::find($consulta->id_cliente);
 
         $nacimiento = date_create($usuario->fec_nac);
         $ahora = date_create(date("Y-m-d"));
@@ -22,9 +23,7 @@ class ReporteController extends Controller
 
         $usuario->numero = substr_replace('00000', $usuario->id, -strlen($usuario->id), 5);
 
-        $consulta = Consulta::where('id_cliente', $request->id_paciente)->first();
-
-        $d_tratamientos = Consulta::d_tratamientos();
+        $d_tratamientos = Consulta::d_tratamientos($request->id);
 
         $pdf = PDF::loadView('reportes.historia_clinica', compact('usuario', 'consulta', 'd_tratamientos'));
         return $pdf->stream('invoice.pdf', $usuario);

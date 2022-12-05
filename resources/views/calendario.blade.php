@@ -43,7 +43,7 @@
 @push('scripts-vendor')
  <!-- BEGIN: Page Vendor JS-->
  <script src="{!! asset('app-assets/vendors/js/calendar/fullcalendar.min.js') !!}"></script>
-
+ <script src="{!! asset('app-assets/vendors/js/calendar/es.js') !!}"></script>
  <!-- END: Page Vendor JS-->
 
  <!-- BEGIN: Page JS-->

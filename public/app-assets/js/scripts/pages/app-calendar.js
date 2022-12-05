@@ -249,6 +249,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
     events: fetchEvents,
+    locale: 'es',
     editable: true,
     dragScroll: true,
     dayMaxEvents: 2,
