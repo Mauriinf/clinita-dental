@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    jQuery('.pagos').on('change', function ()  {
+        this.value = this.value.replace(/[^0-9\.]/g,'');
+    });
     let id_consulta= $('#id_consulta').val();
     const camada1 = document.querySelector('#camada1Odontograma')
     const contexto1 = camada1.getContext('2d')

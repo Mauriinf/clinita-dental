@@ -147,12 +147,16 @@
 $(document).ready( function () {
 
     //let table = $('#tabelaTestesEspecificosForm').DataTable();
-    $('#tabelaTestesEspecificosForm tbody').on( 'focusout', 'input.pagos', function () {
+    $('#tabelaTestesEspecificosForm tbody').on( 'keyup', 'input.pagos', function () {
         //var data = table.row( $(this).parents('tr') ).data();
         var id=$(this).parents('td').find("input.idsPagos")[0].value;
         //$(this)[0].value
         //console.log($(this).parents('tr').find("td:first").html());
-        realizarPago(id, $(this)[0].value);
+        if($(this)[0].value<0)
+        this.value=this.value*-1;
+        else
+        this.value=this.value
+        realizarPago(id, this.value);
     });
 });
 

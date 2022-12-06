@@ -21,7 +21,7 @@ class CuracionesController extends Controller
     // }
     public function index()
     {
-        
+
         $consultas=Curaciones::consultas();
         return view('curaciones.index',compact('consultas'));
     }
@@ -41,7 +41,7 @@ class CuracionesController extends Controller
     }
     public function guardar_consulta(Request $request){
         $roles=[
-            'costo'=>'required',
+            'costo'=>'required|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
             'id_paciente'=>'required|numeric',
            ];
            $mensajes=[

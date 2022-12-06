@@ -215,7 +215,7 @@
                                             <span class="input-group-text">
                                                 Costo Total
                                             </span>
-                                            <input type="text" class="form-control" name="costo" placeholder="Costo Total" value="" />
+                                            <input type="number" class="form-control" name="costo" placeholder="Costo Total" value="" />
                                         </div>
                                     </div>
                                 </div>
