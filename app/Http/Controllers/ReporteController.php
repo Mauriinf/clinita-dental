@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cita;
 use App\Models\Consulta;
 use App\Models\Curaciones;
+use App\Models\Odontograma;
 use App\Models\User;
 use PDF;
 use Illuminate\Http\Request;
@@ -81,9 +82,13 @@ class ReporteController extends Controller
         }
 
     }
-    public function reporte_pacientes(Request $request){
-        $usuarios= User::role('Paciente')->get();
-        $pdf = PDF::loadView('reportes.pacientes', compact('usuarios'));
-        return $pdf->stream('pacientes.pdf');
+    public function consulta_cobros(Request $request){
+        $id=$request->id;
+        $consulta=Curaciones::consulta_det($id);
+        $cobros=Odontograma::consulta_cobros($id);
+        $consulta=$consulta[0];
+        $fecha=date('d-m-Y');
+        $pdf = PDF::loadView('reportes.cobros_consulta', compact('consulta','cobros','fecha'));
+        return $pdf->stream('cobros.pdf');
     }
 }

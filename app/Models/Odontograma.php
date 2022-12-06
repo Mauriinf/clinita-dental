@@ -25,4 +25,12 @@ class Odontograma extends Model
         $query=DB::select ("UPDATE odontograma SET pago = '$pago', fecha = '$fecha' where id='$id' ");
         return $query;
     }
+    public static function consulta_cobros($id){
+        $query=DB::select ("SELECT od.*,tr.descripcion,tr.costo,di.nombre FROM odontograma od
+                        INNER JOIN tratamientos tr
+                        ON tr.id=od.id_tratamiento
+                        INNER JOIN dientes di
+                        ON di.numero=od.id_diente where od.id_consulta='$id' ");
+        return $query;
+    }
 }

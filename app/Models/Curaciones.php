@@ -34,9 +34,9 @@ class Curaciones extends Model
         $user= Auth::user();
         $where='';
         if($user->hasRole('Doctor')){
-            $where.=" WHERE doc.id='$user->id'";
+            $where.=" WHERE co.id_doctor='$user->id'";
         }elseif($user->hasRole('Paciente')){
-            $where.=" WHERE us.id='$user->id'";
+            $where.=" WHERE co.id_cliente='$user->id'";
         }
         $query=DB::select ($consulta.$where);
         return $query;
@@ -113,5 +113,14 @@ class Curaciones extends Model
             GROUP BY cs.id_cliente) HAVING edades BETWEEN 0 AND 18) as cantidad");
         return $query;
     }
-
+    public static function consulta_det($id){
+        $query=DB::select ("SELECT co.*,CONCAT(IFNULL(CONCAT(us.nombres, ' '), ''),IFNULL(CONCAT(us.paterno, ' '), ''),IFNULL(CONCAT(us.materno, ' '), '')) as nombre_paciente,CONCAT(IFNULL(CONCAT(doc.nombres, ' '), ''),IFNULL(CONCAT(doc.paterno, ' '), ''),IFNULL(CONCAT(doc.materno, ' '), '')) as nombre_doctor,us.ci as ci_paciente,doc.ci as ci_doctor,us.email as email_paciente,us.telefono as telefono_paciente,us.direccion as direccion_paciente,doc.email as email_doctor,doc.telefono as telefono_doctor,doc.direccion as direccion_doctor
+                        FROM consultas co
+                            INNER JOIN users us
+                            ON us.id=co.id_cliente
+                            INNER JOIN users doc
+                            ON doc.id=co.id_doctor
+                            WHERE co.id='$id'");
+        return $query;
+    }
 }
