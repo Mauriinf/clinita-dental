@@ -26,7 +26,7 @@
             padding-top: 5;
             padding-left: 10;
         }
-        table{
+        .table{
             border: 1px solid black;
             border-radius: 10px;
         }
@@ -39,6 +39,13 @@
         th, td {
             padding: 5;
             border: 0.5px solid black;
+        }
+        .table-border-none{  
+            width: 100%;         
+            border: 1px solid white;
+        }
+        .table-border-none tr td{
+            border: none;
         }
     </style>
 </head>
@@ -107,11 +114,31 @@
 
 
     </table>
-    <p>Costo Consulta {{$consulta->costo_total}}</p>
-    <p>Subtotal {{sprintf("%.2f",$total_recaudado);}}</p>
-    @php
-        $por_pagar=$consulta->costo_total-$total_recaudado;
-    @endphp
-    <p>Total por pagar {{sprintf("%.2f",$por_pagar);}}</p>
+
+    <table class="table-border-none">
+        <tr>
+            <td width="50%"></td>
+            <td>Costo Consulta:</td>
+            <td>{{$consulta->costo_total}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Subtotal:</td>
+            <td>{{sprintf("%.2f",$total_recaudado);}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Total por pagar:</td>
+            <td>
+                @php
+                    $por_pagar=$consulta->costo_total-$total_recaudado;
+                @endphp
+                {{sprintf("%.2f",$por_pagar);}}
+            </td>
+        </tr>
+    </table>
+    <p> </p>
+    <p> </p>
+    
 </body>
 </html>
