@@ -148,26 +148,38 @@ $(document).ready( function () {
 
     //let table = $('#tabelaTestesEspecificosForm').DataTable();
     $('#tabelaTestesEspecificosForm tbody').on( 'keyup', 'input.pagos', function () {
-        //var data = table.row( $(this).parents('tr') ).data();
-        var id=$(this).parents('td').find("input.idsPagos")[0].value;
-        //$(this)[0].value
-        //console.log($(this).parents('tr').find("td:first").html());
         if($(this)[0].value<0)
         this.value=this.value*-1;
         else
+        this.value=this.value
+    });
+    $('#tabelaTestesEspecificosForm tbody').on( 'focusout', 'input.pagos', function () {
+        var id=$(this).parents('td').find("input.idsPagos")[0].value;
         this.value=this.value
         realizarPago(id, this.value);
     });
 });
 
 function realizarPago(id,pago){
+
     $.ajax({
         type:'POST',
         url:"{{route('actualizar.pago')}}",
         data:{ _token: '{{ csrf_token() }}',id:id,pago:pago},
-        dataType: 'json',
+        dataType: 'html',
         success:function(data){
-
+            if(data==='0'){
+                Swal.fire({
+                    title: 'No se realizó el pago porque sobrepasa el costo total acordado, modifique el monto de pago',
+                    customClass: {
+                    confirmButton: 'btn btn-primary'
+                    },
+                    showClass: {
+                    popup: 'animate__animated animate__tada'
+                    },
+                    buttonsStyling: false
+                });
+            }
         }
     });
 }

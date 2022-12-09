@@ -80,7 +80,7 @@
         <div class="modal-content" >
             <div class="modal-header">
                 <h4 class="modal-title">Nueva consulta</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form onSubmit="return false" id="formAdd" action="{{ route('guardar_consulta') }}">
                 <div class="modal-body">
@@ -225,7 +225,7 @@
                     <hr>
                 </div>
                 <div class="modal-footer">
-                    <a href="javascript:;" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times-circle"></i> Cerrar</a>
+                    <a href="javascript:;" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times-circle"></i> Cerrar</a>
                     <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Guardar</button>
                 </div>
             </form>
@@ -237,7 +237,7 @@
         <div class="modal-content" >
             <div class="modal-header">
                 <h4 class="modal-title">Editar consulta</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form onSubmit="return false" id="formEdit" action="{{ route('editar_consulta') }}">
                 <div class="modal-body">
@@ -398,7 +398,7 @@
                     <hr>
                 </div>
                 <div class="modal-footer">
-                    <a href="javascript:;" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times-circle"></i> Cerrar</a>
+                    <a href="javascript:;" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times-circle"></i> Cerrar</a>
                     <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Guardar</button>
                 </div>
             </form>

@@ -59,10 +59,10 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="mb-1">
                                             <label for="paciente">Paciente</label>
-                                            <select class="form-select" data-live-search="true" name="paciente"  data-style="btn-inverse" required>
+                                            <select class="select2 form-select"  name="paciente"   required>
                                             <option value="">Seleccionar Paciente</option>
                                                 @foreach ($pacientes as $paci)
-                                                    <option value="{{ $paci->id }}" @if(old('paciente') == $paci->id) selected @endif>{{ $paci->nombres }}</option>
+                                                    <option value="{{ $paci->id }}" @if(old('paciente') == $paci->id) selected @endif>{{ $paci->nombres }} {{ $paci->paterno }} {{ $paci->materno }}({{ $paci->ci }})</option>
                                                 @endforeach
                                             </select>
                                             @if ($errors->has('paciente'))
@@ -148,13 +148,11 @@
 </div>
 @endsection
 @push('scripts-vendor')
-
     <!-- BEGIN: Page Vendor JS-->
     <script src="{!! asset('app-assets/vendors/js/forms/select/select2.full.min.js') !!}"></script>
     <!-- END: Page Vendor JS-->
     <!-- BEGIN: Page JS-->
     <script src="{!! asset('app-assets/js/scripts/forms/form-select2.js') !!}"></script>
     <!-- END: Page JS-->
-
     <script src="{{ asset('js/citas/crear.js') }}"></script>
 @endpush

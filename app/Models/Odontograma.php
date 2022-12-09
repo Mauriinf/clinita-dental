@@ -21,9 +21,19 @@ class Odontograma extends Model
 
     }
     public static function pagos($id,$pago){
+        $pagos=DB::select ("SELECT co.costo_total, ( SELECT SUM(od.pago) from odontograma od where od.id_consulta=co.id and od.id<>$id ) as total_pagado
+                                                FROM consultas co
+                                                WHERE co.id in (SELECT odon.id_consulta FROM odontograma odon where odon.id=$id)");
+        if(count($pagos)>0){
+            $costo_total=$pagos[0]->costo_total;
+            $total_pagado=$pagos[0]->total_pagado+$pago;
+            if($total_pagado>$costo_total){
+                return '0';
+            }
+        }
         $fecha = date('Y/m/d');
         $query=DB::select ("UPDATE odontograma SET pago = '$pago', fecha = '$fecha' where id='$id' ");
-        return $query;
+        return '1';
     }
     public static function consulta_cobros($id){
         $query=DB::select ("SELECT od.*,tr.descripcion,tr.costo,di.nombre FROM odontograma od

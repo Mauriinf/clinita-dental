@@ -89,7 +89,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="titulo"><i class="fa fa-file-pdf" ></i> Generar Reporte </h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="alert alert-danger print-error-msg" style="display:none">
@@ -115,7 +115,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="javascript:;" class="btn btn-secondary" data-dismiss="modal">Cancelar</a>
+                <a href="javascript:;" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</a>
                 <button type='button' onclick="f_imprimir()" class="btn btn-success"><i class="fa fa-file-pdf" ></i> Generar</button>
             </div>
         </div>

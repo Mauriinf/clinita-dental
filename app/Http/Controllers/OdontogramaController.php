@@ -26,6 +26,7 @@ class OdontogramaController extends Controller
         $id_consulta=$request->id_consulta;
         $odo=DB::table('odontograma')
                 ->join('tratamientos','odontograma.id_tratamiento','=','tratamientos.id')
+                ->join('consultas','odontograma.id_consulta','=','consultas.id')
                 ->select(
                     'odontograma.id',
                     'odontograma.id_consulta',
@@ -36,7 +37,8 @@ class OdontogramaController extends Controller
                     'tratamientos.descripcion',
                     'tratamientos.costo',
                     'tratamientos.color',
-                    'odontograma.pago'
+                    'odontograma.pago',
+                    'consultas.costo_total'
                 )
                 ->where('id_consulta','=',$id_consulta)
                 ->get();

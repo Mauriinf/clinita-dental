@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }]
 
     let procedimentos = []
+    let bandera_pagos=false;
     let lista=[];
     class Procedimento {
         constructor(nome, cor, numeroDente, faceDente, informacoesAdicionais) {
@@ -379,29 +380,55 @@ document.addEventListener('DOMContentLoaded', () => {
         let trs = ''
         let cont=0;
         procedimentos.filter(prc => prc.numeroDente === procedimento.numeroDente && prc.faceDente === procedimento.faceDente).forEach(item => {
-            const tr = `
-                <tr>
-                    <td>
-                        ${item.nome} (${item.costo_referencial} Bs.)
-                    </td>
-                    <td>
-                        <input type="color" disabled class="form-control form-control-color" value="${item.cor}">
-                    </td>
-                    <td>
-                        ${item.informacoesAdicionais || 'NO CONFIRMADO'}
-                    </td>
-                    <td>
-                        <input id=\'dpago${item.id}\' type=\'number\' step=\'any\' min=\'0\' class=\'pagos form-control input-sm\' style=\'width:100%\' value=\'${item.pago}\'>
-                        <input id=\'dpagoid${item.id}\' type=\'hidden\' step=\'any\' class=\'idsPagos\' value=\'${item.id}\'>
-                    </td>
-                    <td class="eliminarConsulta">
-                        <a onclick="apagar('${item.id}','${item.nome}', ${item.numeroDente}, ${item.faceDente})" class="btn btn-danger btn-sm">
-                            Eliminar
-                        </a>
-                    </td>
-                </tr>
-            `
+            if(bandera_pagos){
+                const tr = `
+                    <tr>
+                        <td>
+                            ${item.nome} (${item.costo_referencial} Bs.)
+                        </td>
+                        <td>
+                            <input type="color" disabled class="form-control form-control-color" value="${item.cor}">
+                        </td>
+                        <td>
+                            ${item.informacoesAdicionais || 'NO CONFIRMADO'}
+                        </td>
+                        <td>
+                            <input id=\'dpago${item.id}\' type=\'number\' step=\'any\' min=\'0\' class=\'pagos form-control input-sm\' style=\'width:100%\' value=\'${item.pago}\' disabled>
+                            <input id=\'dpagoid${item.id}\' type=\'hidden\' step=\'any\' class=\'idsPagos\' value=\'${item.id}\'>
+                        </td>
+                        <td class="eliminarConsulta">
+                            <a onclick="apagar('${item.id}','${item.nome}', ${item.numeroDente}, ${item.faceDente})" class="btn btn-danger btn-sm">
+                                Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                `
             trs += tr
+            }else{
+                const tr = `
+                    <tr>
+                        <td>
+                            ${item.nome} (${item.costo_referencial} Bs.)
+                        </td>
+                        <td>
+                            <input type="color" disabled class="form-control form-control-color" value="${item.cor}">
+                        </td>
+                        <td>
+                            ${item.informacoesAdicionais || 'NO CONFIRMADO'}
+                        </td>
+                        <td>
+                            <input id=\'dpago${item.id}\' type=\'number\' step=\'any\' min=\'0\' class=\'pagos form-control input-sm\' style=\'width:100%\' value=\'${item.pago}\'>
+                            <input id=\'dpagoid${item.id}\' type=\'hidden\' step=\'any\' class=\'idsPagos\' value=\'${item.id}\'>
+                        </td>
+                        <td class="eliminarConsulta">
+                            <a onclick="apagar('${item.id}','${item.nome}', ${item.numeroDente}, ${item.faceDente})" class="btn btn-danger btn-sm">
+                                Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                `
+                trs += tr
+            }
         })
         tbody.innerHTML = trs
     }
@@ -829,6 +856,11 @@ document.addEventListener('DOMContentLoaded', () => {
             data: { id_consulta:id_consulta},
             success: function(data)
             {
+                var total_pagado=0.00;
+                for(var n = 0; n<data.length; n++){
+                    total_pagado+=parseFloat(data[n].pago);
+                }
+                var costo_total=0;
                 for(var n = 0; n<data.length; n++){
                     let obj={};
                     obj ['id']=data[n].id;
@@ -841,8 +873,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     obj ['faceDente']=data[n].parte_diente;
                     obj ['informacoesAdicionais']=data[n].observacion;
                     obj ['pago']=data[n].pago;
+                    costo_total=data[n].costo_total;
                     lista.push(obj);
                 }
+                if(total_pagado===parseFloat(costo_total))
+                bandera_pagos=true;
             },
             async: false // <- esto lo convierte en síncrono
         });

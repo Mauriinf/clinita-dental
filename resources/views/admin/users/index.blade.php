@@ -28,16 +28,7 @@
                         <h4 >
                             Usuarios
                         </h4>
-                        <div class="pull-right">
-                            <div class="input-group-prepend pull-right">
-                                @can('crear-usuarios')
-                                <a href="{{ route("reporte.pacientes") }}" class="dropdown-item mb-1">
-                                    <i data-feather='user-plus'></i>
-                                    Reporte Pacientes
-                                </a>
-                                @endcan
-                            </div>
-                        </div>
+
                         <div class="pull-right">
                             <div class="input-group-prepend pull-right">
                                 @can('crear-usuarios')
