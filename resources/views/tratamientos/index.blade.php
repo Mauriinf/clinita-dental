@@ -41,6 +41,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
+                                    <div class="table-responsive listaregistros">
                                     <table class="table table-striped table-bordered table-td-valign-middle dt-responsive" id="dt-ListaEspec">
                                         <thead class="thead">
                                             <tr>
@@ -103,29 +104,38 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+                                    </div>
                                     <div class="panel-body formregistros">
 
                                         <form action="{{ url('tratamientos') }}" method="post" id="formtratamiento">
                                             @csrf
                                             <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                <label>Descripcion:</label>
-                                                <input type="hidden" name="id" id="id" value="0">
-                                                <input type="text" class="form-control" id="descripcion" name="descripcion"  placeholder="Descripcion" value="{{ old('description') }}">
-                                                <span class="text-danger error-text descripcion_err"></span>
+                                                <div class="mb-1">
+                                                    <label>Descripcion:</label>
+                                                    <input type="hidden" name="id" id="id" value="0">
+                                                    <input type="text" class="form-control" id="descripcion" name="descripcion"  placeholder="Descripcion" value="{{ old('description') }}">
+                                                    <span class="text-danger error-text descripcion_err"></span>
+                                                </div>
                                             </div>
                                             <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                <label>Color:</label>
-                                                <input type="color" id="color" name="color" disabled="true" class="form-control form-control-color" value="#563d7c" >
-                                                <span class="text-danger error-text color_err"></span>
+                                                <div class="mb-1">
+                                                    <label>Color:</label>
+                                                    <input type="color" id="color" name="color" disabled="true" class="form-control form-control-color" value="#563d7c" >
+                                                    <span class="text-danger error-text color_err"></span>
+                                                </div>
                                             </div>
                                             <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                <label>Costo:</label>
-                                                <input type="text" class="form-control" id="costo" name="costo"  placeholder="Costo" required value="{{ old('costo') }}" />
-                                                <span class="text-danger error-text costo_err"></span>
+                                                <div class="mb-1">
+                                                    <label>Costo:</label>
+                                                    <input type="text" class="form-control" id="costo" name="costo"  placeholder="Costo" required value="{{ old('costo') }}" />
+                                                    <span class="text-danger error-text costo_err"></span>
+                                                </div>
                                             </div>
                                             <div class="demo-inline-spacing col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                <button class="btn  btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save"></i> Guardar </button>
-                                                <button class="btn  btn-danger" type="button" onclick="mostrarform(false)"><i class="fa fa-save"></i> Cancelar </button>
+                                                <div class="mb-1">
+                                                    <button class="btn  btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save"></i> Guardar </button>
+                                                    <button class="btn  btn-danger" type="button" onclick="mostrarform(false)"><i class="fa fa-save"></i> Cancelar </button>
+                                                </div>
                                             </div>
                                         </form>
 

@@ -25,71 +25,73 @@
         {!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
+                <div class="mb-1">
                     <strong>Nombres:</strong>
                     {!! Form::text('nombres', null, array('placeholder' => 'Nombres','class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
+                <div class="mb-1">
                     <strong>Ap. Paterno:</strong>
                     {!! Form::text('paterno', null, array('placeholder' => 'Ap. Paterno','class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
+                <div class="mb-1">
                     <strong>Ap. Materno:</strong>
                     {!! Form::text('materno', null, array('placeholder' => 'Ap. Materno','class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
+                <div class="mb-1">
                     <strong>C.I.:</strong>
                     {!! Form::text('ci', null, array('placeholder' => 'C.I.','class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 form-group">
-                <label for="pd-months-year">Fecha Nac.:</label>
-                <input type="text" name="fec_nac" value="{{ $user->fec_nac }}" class="form-control flatpickr-disabled-range" placeholder="YYYY-MM-DD" />
+                <div class="mb-1">
+                    <strong>Fecha Nac.:</strong>
+                    <input type="text" name="fec_nac" value="{{ $user->fec_nac }}" class="form-control flatpickr-disabled-range" placeholder="YYYY-MM-DD" />
+                </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
+                <div class="mb-1">
                     <strong>Dirección:</strong>
                     {!! Form::text('direccion', null, array('placeholder' => 'Dirección','class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
+                <div class="mb-1">
                     <strong>Teléfono:</strong>
                     {!! Form::number('telefono', null, array('placeholder' => 'Telefono','class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
+                <div class="mb-1">
                     <strong>Username:</strong>
                     {!! Form::text('username', null, array('placeholder' => 'UserName','class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
+                <div class="mb-1">
                     <strong>Email:</strong>
                     {!! Form::email('email', null, array('placeholder' => 'Email','class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
+                <div class="mb-1">
                     <strong>Password:</strong>
                     {!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
+                <div class="mb-1">
                     <strong>Confirm Password:</strong>
                     {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
+                <div class="mb-1">
                     <strong>Roles:</strong>
                     <select class="select2 form-control" name="roles[]" id="roles" multiple="multiple" aria-placeholder="Seleccione Rol de Usuario">
                         @if ($roles)
@@ -122,7 +124,7 @@
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
+                <div class="mb-1">
                     <strong>Activo:</strong>
                     <select name="estado" id="estado" class="form-control">
                         <option value="1" >ACTIVO</option>
@@ -131,7 +133,7 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
+                <div class="mb-1">
                     <strong>Sexo:</strong>
                     <div class="form-check my-50">
                         @if ($user->sexo==='M')
@@ -152,7 +154,9 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Guardar</button>
+                <div class="mb-1">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
             </div>
         </div>
         {!! Form::close() !!}

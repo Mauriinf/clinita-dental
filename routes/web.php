@@ -71,6 +71,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('nueva/consulta', [CuracionesController::class,'nuevo'])->name('nueva.consulta');
     //Odontograma
     Route::get('/nuevo/odontograma/{id}',[OdontogramaController::class,'odontograma'])->name('nuevo.odontograma');
+    Route::get('/ver/odontograma/{id}',[OdontogramaController::class,'ver_odontograma'])->name('ver.odontograma');
     Route::get('/lista/odontograma',[OdontogramaController::class,'lista_odontograma'])->name('list.odontograma');
     Route::post('/actualizar/pago',[OdontogramaController::class,'actualizar_pago'])->name('actualizar.pago');;
     Route::post('/guardar/odontograma',[OdontogramaController::class,'guardar_odontograma']);

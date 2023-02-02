@@ -20,7 +20,13 @@ class OdontogramaController extends Controller
     public function odontograma($id){
         $tipos_tratamiento=Tratamiento::select()->where('estado','=','ACTIVO')->get();
         $tratamientos=$tipos_tratamiento;
+        //return view('odontograma.odon');
         return view('odontograma.index',compact('tratamientos','id'));
+    }
+    public function ver_odontograma($id){
+        $tipos_tratamiento=Tratamiento::select()->where('estado','=','ACTIVO')->get();
+        $tratamientos=$tipos_tratamiento;
+        return view('odontograma.ver',compact('tratamientos','id'));
     }
     public function lista_odontograma(Request $request){
         $id_consulta=$request->id_consulta;

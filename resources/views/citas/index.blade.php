@@ -89,6 +89,10 @@
                                                     {{ $row->nombres_doctor }} {{ $row->paterno_doctor }} {{ $row->materno_doctor }}
                                                 </td>
                                                 <td >
+                                                    @php
+                                                        $date_cita = date('d/m/Y H:i:s', strtotime("$row->fecha $row->inicio"));
+                                                        $date_actual = date('d/m/Y H:i:s', time());
+                                                    @endphp
                                                     {{ $row->fecha }}
                                                 </td>
                                                 <td >
@@ -111,11 +115,32 @@
                                                 </td>
                                                 @endcan
                                                 <td>
+                                                    @php
+                                                        date_default_timezone_set('America/La_Paz');
+                                                        $fechahoy = date("Y-m-d");
+                                                        $horahoy = date("H:i:s");
+                                                        //echo (int)$horahoy-(int)$row->inicio;
+                                                    @endphp
                                                     @can('editar-cita')
-                                                    <a class="btn btn-sm  btn-primary" href="{{ route('cita.edit',$row->id) }}">Editar</a>
+                                                        @role('Paciente')
+                                                            @if ($row->fecha==$fechahoy && ((int)$row->inicio-(int)$horahoy)<=3 && ((int)$row->inicio-(int)$horahoy)>=0)
+                                                                <button type="button" onclick="showError()" class="btn btn-sm  btn-primary" > Editar</button>
+                                                            @else
+                                                                <a class="btn btn-sm  btn-primary" href="{{ route('cita.edit',$row->id) }}">Editar</a>
+                                                            @endif
+                                                        @else
+                                                            <a class="btn btn-sm  btn-primary" href="{{ route('cita.edit',$row->id) }}">Editar</a>
+                                                        @endrole
                                                     @endcan
-                                                    <a href="javascript:void(0)"  class="btn btn-sm btn-danger" onclick="eliminar(<?php echo $row->id; ?>)"><i data-feather='trash-2' ></i>Eliminar</a>
-
+                                                    @role('Paciente')
+                                                        @if ($row->fecha==$fechahoy && ((int)$row->inicio-(int)$horahoy)<=3 && ((int)$row->inicio-(int)$horahoy)>=0)
+                                                            <button type="button" onclick="showError()" class="btn btn-warning btn-sm text-white" ><i data-feather='trash-2' ></i> Eliminar</button>
+                                                        @else
+                                                            <a href="javascript:void(0)"  class="btn btn-sm btn-danger" onclick="eliminar(<?php echo $row->id; ?>)"><i data-feather='trash-2' ></i>Eliminar</a>
+                                                        @endif
+                                                    @else
+                                                        <a href="javascript:void(0)"  class="btn btn-sm btn-danger" onclick="eliminar(<?php echo $row->id; ?>)"><i data-feather='trash-2' ></i>Eliminar</a>
+                                                    @endrole
                                                     <form id="delete-form" method="post" class="d-none">
 
                                                     @csrf
@@ -225,6 +250,27 @@
                             </div>
                         </div>
                     </div>
+                    <!-- modal -->
+                    <div class="modal fade" id="ErrorEliminacion">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+
+                                    <h4 class="modal-title">Error de Eliminación Y Modificación</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="alert alert-danger m-b-0">
+                                        <p>No se puede eliminar ni editar porque el lapso de modificaciones es de 3 Horas antes de la cita programada.</p>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end modal -->
                 </div>
             </div>
         </div>
@@ -263,6 +309,9 @@
 @endpush
 @push('scripts-page')
 <script>
+function showError(){
+    $('#ErrorEliminacion').modal('toggle');
+}
                 //dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex mr-0 mr-sm-3"l><"d-block d-lg-inline-flex"B>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>',
 $(document).ready( function () {
     $("#dt-Historial").css("width","100%");
