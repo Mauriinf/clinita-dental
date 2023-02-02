@@ -2,7 +2,7 @@
     <a class="btn btn-primary btn-sm" href="{{ route('ver.odontograma',$id) }}">Odontograma</a>
 @else
     @can('odontograma')
-        <a class="btn btn-primary" href="{{ route('nuevo.odontograma',$id) }}">Curaciones</a>
+        <a class="btn btn-primary btn-sm" href="{{ route('nuevo.odontograma',$id) }}">Curaciones</a>
     @endcan
 @endrole
 @can('editar-curacion')

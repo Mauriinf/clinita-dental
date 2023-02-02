@@ -93,7 +93,7 @@
                                                     @endif
                                                     </td>
                                                     <td>
-                                                    <a class="btn btn-sm btn-info" href="{{ route('users.show',$user->id) }}">Ver</a>
+                                                    <a class="btn btn-sm btn-info " href="{{ route('users.show',$user->id) }}">Ver</a>
                                                     @can('editar-usuarios')
                                                     <a class="btn btn-sm  btn-primary" href="{{ route('users.edit',$user->id) }}">Editar</a>
                                                     @endcan

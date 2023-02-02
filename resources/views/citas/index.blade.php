@@ -67,7 +67,9 @@
                                                 <th>Fecha</th>
                                                 <th>Hora</th>
                                                 @can('editar-cita')
+                                                @role('Doctor|Admin')
                                                 <th>Atendido</th>
+                                                @endrole
                                                 @endcan
                                                 <th >Action</th>
                                             </tr>
@@ -99,6 +101,7 @@
                                                     {{ $row->inicio }} - {{ $row->fin }}
                                                 </td>
                                                 @can('editar-cita')
+                                                @role('Doctor|Admin')
                                                 <td >
                                                     <label class="custom-toggle">
                                                         <form action="{{ route('cita.update.estado',$row->id) }}" id="form-estado{{$row->id}}" method="post">
@@ -113,6 +116,7 @@
                                                     </label>
 
                                                 </td>
+                                                @endrole
                                                 @endcan
                                                 <td>
                                                     @php
@@ -134,7 +138,7 @@
                                                     @endcan
                                                     @role('Paciente')
                                                         @if ($row->fecha==$fechahoy && ((int)$row->inicio-(int)$horahoy)<=3 && ((int)$row->inicio-(int)$horahoy)>=0)
-                                                            <button type="button" onclick="showError()" class="btn btn-warning btn-sm text-white" ><i data-feather='trash-2' ></i> Eliminar</button>
+                                                            <button type="button" onclick="showError()" class="btn btn-danger btn-sm text-white" ><i data-feather='trash-2' ></i> Eliminar</button>
                                                         @else
                                                             <a href="javascript:void(0)"  class="btn btn-sm btn-danger" onclick="eliminar(<?php echo $row->id; ?>)"><i data-feather='trash-2' ></i>Eliminar</a>
                                                         @endif
@@ -314,9 +318,7 @@ function showError(){
 }
                 //dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex mr-0 mr-sm-3"l><"d-block d-lg-inline-flex"B>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>',
 $(document).ready( function () {
-    $("#dt-Historial").css("width","100%");
-    $("#dt-CitasConfirmar").css("width","100%");
-    $("#dt-CitasProximas").css("width","100%");
+
     $('#dt-CitasProximas').DataTable({
 
         dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex mr-0 mr-sm-3"l><"d-block d-lg-inline-flex"B>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>',
