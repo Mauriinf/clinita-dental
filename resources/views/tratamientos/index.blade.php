@@ -109,7 +109,8 @@
 
                                         <form action="{{ url('tratamientos') }}" method="post" id="formtratamiento">
                                             @csrf
-                                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="row">
+                                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
                                                 <div class="mb-1">
                                                     <label>Descripcion:</label>
                                                     <input type="hidden" name="id" id="id" value="0">
@@ -117,19 +118,20 @@
                                                     <span class="text-danger error-text descripcion_err"></span>
                                                 </div>
                                             </div>
-                                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
                                                 <div class="mb-1">
                                                     <label>Color:</label>
                                                     <input type="color" id="color" name="color" disabled="true" class="form-control form-control-color" value="#563d7c" >
                                                     <span class="text-danger error-text color_err"></span>
                                                 </div>
                                             </div>
-                                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
                                                 <div class="mb-1">
                                                     <label>Costo:</label>
                                                     <input type="text" class="form-control" id="costo" name="costo"  placeholder="Costo" required value="{{ old('costo') }}" />
                                                     <span class="text-danger error-text costo_err"></span>
                                                 </div>
+                                            </div>
                                             </div>
                                             <div class="demo-inline-spacing col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                 <div class="mb-1">
@@ -138,9 +140,6 @@
                                                 </div>
                                             </div>
                                         </form>
-
-
-
                                     </div>
                                 </div>
                             </div>

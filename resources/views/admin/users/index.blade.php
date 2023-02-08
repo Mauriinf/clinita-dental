@@ -93,14 +93,14 @@
                                                     @endif
                                                     </td>
                                                     <td>
-                                                    <a class="btn btn-sm btn-info " href="{{ route('users.show',$user->id) }}">Ver</a>
+                                                    <a class="btn btn-sm btn-info " data-toggle="tooltip" title="Ver" href="{{ route('users.show',$user->id) }}"><i data-feather='eye'></i></a>
                                                     @can('editar-usuarios')
-                                                    <a class="btn btn-sm  btn-primary" href="{{ route('users.edit',$user->id) }}">Editar</a>
+                                                    <a class="btn btn-sm  btn-primary" data-toggle="tooltip" title="Editar" href="{{ route('users.edit',$user->id) }}"><i data-feather='edit'></i></a>
                                                     @endcan
                                                     @can('asignar-especialidad-usuario')
                                                         @foreach($user->getRoleNames() as $v)
                                                             @if($v==='Doctor')
-                                                                <button class="btn btn-sm btn-warning" type="button" onclick="f_especialidades({{$user->id}})"> Especialidad </button>
+                                                                <button class="btn btn-sm btn-warning" data-toggle="tooltip" title="Especialidad" type="button" onclick="f_especialidades({{$user->id}})"> <i data-feather='headphones'></i> </button>
                                                                 @php
                                                                     break;
                                                                 @endphp
@@ -109,7 +109,7 @@
                                                     @endcan
                                                     @can('eliminar-usuarios')
                                                         {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-                                                            <button type="submit" class="btn btn-sm  btn-danger">Eliminar</button>
+                                                            <button type="submit" class="btn btn-sm  btn-danger" data-toggle="tooltip" title="Eliminar"><i data-feather='trash-2'></i></button>
                                                         {!! Form::close() !!}
                                                     @endcan
                                                     </td>

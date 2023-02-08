@@ -128,22 +128,22 @@
                                                     @can('editar-cita')
                                                         @role('Paciente')
                                                             @if ($row->fecha==$fechahoy && ((int)$row->inicio-(int)$horahoy)<=3 && ((int)$row->inicio-(int)$horahoy)>=0)
-                                                                <button type="button" onclick="showError()" class="btn btn-sm  btn-primary" > Editar</button>
+                                                                <button type="button" onclick="showError()" class="btn btn-sm  btn-primary" data-toggle="tooltip" title="Editar"> <i data-feather='edit'></i></button>
                                                             @else
-                                                                <a class="btn btn-sm  btn-primary" href="{{ route('cita.edit',$row->id) }}">Editar</a>
+                                                                <a class="btn btn-sm  btn-primary" data-toggle="tooltip" title="Editar" href="{{ route('cita.edit',$row->id) }}"><i data-feather='edit'></i></a>
                                                             @endif
                                                         @else
-                                                            <a class="btn btn-sm  btn-primary" href="{{ route('cita.edit',$row->id) }}">Editar</a>
+                                                            <a class="btn btn-sm  btn-primary" data-toggle="tooltip" title="Editar" href="{{ route('cita.edit',$row->id) }}"><i data-feather='edit'></i></a>
                                                         @endrole
                                                     @endcan
                                                     @role('Paciente')
                                                         @if ($row->fecha==$fechahoy && ((int)$row->inicio-(int)$horahoy)<=3 && ((int)$row->inicio-(int)$horahoy)>=0)
-                                                            <button type="button" onclick="showError()" class="btn btn-danger btn-sm text-white" ><i data-feather='trash-2' ></i> Eliminar</button>
+                                                            <button type="button" onclick="showError()" class="btn btn-danger btn-sm text-white" data-toggle="tooltip" title="Eliminar" ><i data-feather='trash-2'></i></button>
                                                         @else
-                                                            <a href="javascript:void(0)"  class="btn btn-sm btn-danger" onclick="eliminar(<?php echo $row->id; ?>)"><i data-feather='trash-2' ></i>Eliminar</a>
+                                                            <a href="javascript:void(0)"  class="btn btn-sm btn-danger" data-toggle="tooltip" title="Eliminar" onclick="eliminar(<?php echo $row->id; ?>)"><i data-feather='trash-2'></i></a>
                                                         @endif
                                                     @else
-                                                        <a href="javascript:void(0)"  class="btn btn-sm btn-danger" onclick="eliminar(<?php echo $row->id; ?>)"><i data-feather='trash-2' ></i>Eliminar</a>
+                                                        <a href="javascript:void(0)"  class="btn btn-sm btn-danger" data-toggle="tooltip" title="Eliminar" onclick="eliminar(<?php echo $row->id; ?>)"><i data-feather='trash-2'></i></a>
                                                     @endrole
                                                     <form id="delete-form" method="post" class="d-none">
 
@@ -244,7 +244,7 @@
 
                                                 </td>
                                                 <td>
-                                                    <a href="{{url('/citas/'.$row->id.'/show')}}"  class="btn btn-sm btn-info" ><i data-feather='eye' ></i> Ver</a>
+                                                    <a href="{{url('/citas/'.$row->id.'/show')}}"  class="btn btn-sm btn-info" data-toggle="tooltip" title="Ver"><i data-feather='eye' ></i></a>
                                                 </td>
                                                 </tr>
                                             @endforeach

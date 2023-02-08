@@ -56,14 +56,14 @@
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $role->name }}</td>
                                                     <td>
-                                                        <a class="btn btn-info btn-sm" href="{{ route('roles.show',$role->id) }}">Ver</a>
+                                                        <a class="btn btn-info btn-sm" data-toggle="tooltip" title="Ver" href="{{ route('roles.show',$role->id) }}"><i data-feather='eye'></i></a>
                                                         @can('editar-roles')
-                                                            <a class="btn btn-primary btn-sm" href="{{ route('roles.edit',$role->id) }}">Editar</a>
+                                                            <a class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar" href="{{ route('roles.edit',$role->id) }}"><i data-feather='edit'></i></a>
                                                         @endcan
                                                         @can('eliminar-roles')
                                                             {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
 
-                                                                <button type="submit" class="btn btn-sm  btn-danger">Eliminar</button>
+                                                                <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Eliminar"><i data-feather='trash-2'></i></button>
                                                             {!! Form::close() !!}
                                                         @endcan
                                                     </td>
