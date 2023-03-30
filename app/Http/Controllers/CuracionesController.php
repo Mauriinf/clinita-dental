@@ -21,7 +21,6 @@ class CuracionesController extends Controller
     // }
     public function index()
     {
-
         $consultas=Curaciones::consultas();
         return view('curaciones.index',compact('consultas'));
     }
@@ -70,7 +69,6 @@ class CuracionesController extends Controller
             return ($respuesta);
         }else{
             return response()->json(['error'=>$validator->errors()]);
-            //return response()->json($validator->errors()->all());
         }
 
     }
